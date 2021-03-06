@@ -8,7 +8,10 @@ package controller;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SHATTER
  */
-public class register extends HttpServlet {
+public class login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +39,10 @@ public class register extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet register</title>");            
+            out.println("<title>Servlet login</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet register at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,29 +74,41 @@ public class register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String[] data = new String[6];
-        data[0] = request.getParameter("name");
-        data[1] = request.getParameter("email");
-        data[2] = request.getParameter("psw");
-        data[3] = request.getParameter("nic");
-        data[4] = request.getParameter("tp");
-        data[5] = request.getParameter("add");
-        
+
+        String email = request.getParameter("email");
+        String pass = request.getParameter("psw");
         try{
-            user reguser = new user();
-            boolean rslt = reguser.reg(data);
-            if(rslt){
-                out.print("You are successfully registered!!");
-                out.print("<br>Welcome, "+data[0]);
-                 request.getRequestDispatcher("login.html").include(request, response);
+            user users = new user();
+            ResultSet rslt = users.login(email, pass);
+            rslt.next();
+            if(rslt.getInt("id") != 0){
+                //set cookie
+                Cookie ck = new Cookie("id", rslt.getString("id"));
+                ck.setMaxAge(300); //expire in 5min
+                response.addCookie(ck);
+                
+                //read cookie
+                Cookie ck1[] = request.getCookies();
+                if(ck1 != null){
+                    String id = ck1[0].getValue();
+                    if(!id.equals("")){
+                        ResultSet rs = users.udata(id);
+                        rs.next();
+                        out.print("<b>Welcome TO Profile</b>");
+                        out.print("<br>Welcome, " + rs.getString("name"));
+                    }
+                }
+                request.getRequestDispatcher("index.html").include(request, response);
             }else{
-            
+                out.println("NO User");
+                 //RequestDispatcher rs =  request.getRequestDispatcher("index.html");
+                 //rs.include(request, response);
             }
         }catch(Exception e){
             out.println("error : " + e);
+            
         }
     }
 
