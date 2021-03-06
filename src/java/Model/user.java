@@ -6,6 +6,7 @@
 package Model;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 
@@ -13,10 +14,9 @@ import java.util.Calendar;
  *
  * @author SHATTER
  */
-public class reg {
+public class user {
+    dbCon con = new dbCon();
     public boolean reg(String[] d ) throws ClassNotFoundException, SQLException{
-        dbCon con = new dbCon();
-        
         String nic = d[3], gender;
         int year = 0, daytext = 0;
         
@@ -58,5 +58,34 @@ public class reg {
             System.out.println(e);
         }
         return false;
+    }
+    
+    public ResultSet login(String email, String pass) throws ClassNotFoundException, SQLException{
+        ResultSet rs = null;
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("select id from patients where email =  ? and password = ?");
+            ps.setString(1, email);
+            ps.setString(2, pass);
+
+            rs = ps.executeQuery();
+            
+        }catch(Exception e){ 
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+     public ResultSet udata(String id) throws ClassNotFoundException, SQLException{
+        ResultSet rs = null;
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("select * from patients where id =  ?");
+            ps.setString(1,id);
+            
+            rs = ps.executeQuery();
+            
+        }catch(Exception e){ 
+            System.out.println(e);
+        }
+        return rs;
     }
 }
