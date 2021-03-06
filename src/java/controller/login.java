@@ -83,23 +83,18 @@ public class login extends HttpServlet {
             user users = new user();
             ResultSet rslt = users.login(email, pass);
             rslt.next();
+            
             if(rslt.getInt("id") != 0){
                 //set cookie
                 Cookie ck = new Cookie("id", rslt.getString("id"));
                 ck.setMaxAge(300); //expire in 5min
                 response.addCookie(ck);
                 
-                //read cookie
-                Cookie ck1[] = request.getCookies();
-                if(ck1 != null){
-                    String id = ck1[0].getValue();
-                    if(!id.equals("")){
-                        ResultSet rs = users.udata(id);
-                        rs.next();
-                        out.print("<b>Welcome TO Profile</b>");
-                        out.print("<br>Welcome, " + rs.getString("name"));
-                    }
-                }
+                ResultSet rs = users.udata(rslt.getString("id"));
+                rs.next();
+                out.print("<b>Welcome TO Profile</b>");
+                out.print("<br>Welcome, " + rs.getString("name"));
+                        
                 request.getRequestDispatcher("index.html").include(request, response);
             }else{
                 out.println("NO User");
