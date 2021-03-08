@@ -114,8 +114,6 @@
         <form action="book" method="post">
             <input type="hidden" name="doctor" value="<%=doc %>">
             <input type="hidden" name="patient" value="<%=id %>">
-            <h5>doc : <%=doc%> </h5>
-            <h5>pa : <%=id%> </h5>
             <h5>Ongoing Number : <%=no+1%> </h5>
             <br/>
             <input type="hidden" value="<%=no+1%>" name="no">
