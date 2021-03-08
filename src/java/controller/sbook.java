@@ -9,19 +9,16 @@ import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author SHATTER
  */
-public class login extends HttpServlet {
+public class sbook extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,10 @@ public class login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login</title>");            
+            out.println("<title>Servlet book</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet book at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,30 +72,31 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        String email = request.getParameter("email");
-        String pass = request.getParameter("psw");
+        String[] data = new String[3];
+        data[0] = request.getParameter("doctor");
+        String nic = request.getParameter("patient");
+        data[2] = request.getParameter("no");
+        
+        
         try{
-            user users = new user();
-            ResultSet rslt = users.login(email, pass);
-            rslt.next();
+            user getdata = new user();
+            ResultSet rs = getdata.udatanic(nic);
+            rs.next();
             
-            if(rslt.getInt("id") != 0){
-
-                //creating a session
-                HttpSession session = request.getSession();
-                session.setAttribute("id", rslt.getString("id"));
-                
-                ResultSet rs = users.udata(rslt.getString("id"));
-                rs.next();
-                session.setAttribute("name", rs.getString("name"));
-                session.setAttribute("type", rs.getString("type"));
+            data[1] = rs.getString("id");
+        
+            user users = new user();
+            Boolean status = users.book(data);
+            
+            if(status){
+                out.print("Booked Successfull!!");
                         
                 request.getRequestDispatcher("index.jsp").include(request, response);
             }else{
-                out.println("NO User");
+                out.println("Error!!");
                  //RequestDispatcher rs =  request.getRequestDispatcher("index.html");
                  //rs.include(request, response);
             }

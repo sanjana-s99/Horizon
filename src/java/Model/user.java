@@ -90,6 +90,21 @@ public class user {
         return rs;
     }
      
+     
+    public ResultSet udatanic(String nic) throws ClassNotFoundException, SQLException{
+        ResultSet rs = null;
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("select * from users where nic =  ?");
+            ps.setString(1,nic);
+            
+            rs = ps.executeQuery();
+            
+        }catch(Exception e){ 
+            System.out.println(e);
+        }
+        return rs;
+    }
+     
      public boolean book(String[] d ) throws ClassNotFoundException, SQLException{
         try{
             PreparedStatement ps = con.createConnection().prepareStatement("insert into channeling(d_id,p_id,number) values (?,?,?)");

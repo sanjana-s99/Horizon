@@ -27,6 +27,8 @@
         <br/>
         <a href="channel.jsp">channel</a>
         <br/>
+        <a href="staffchannel.jsp">Staff Channel</a>
+        <br/>
         <a href="register.html">register</a>
         <br/>
         <a href="adduser.jsp">Add User</a>
