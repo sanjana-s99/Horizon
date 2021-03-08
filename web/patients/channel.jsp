@@ -4,6 +4,7 @@
     Author     : SHATTER
 --%>
 
+<%@page import="Model.user"%>
 <%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*;" %>
@@ -12,7 +13,7 @@
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
     if(id == null){
-        response.sendRedirect("login.html");
+        response.sendRedirect("../login.html");
     }else{
         out.print("Welcome : " + name );
     }
@@ -73,7 +74,7 @@
                     try {
                         dbCon con = new dbCon();
                         Statement st = con.createConnection().createStatement();
-                        String query = "SELECT id, name FROM doctor where s_id = " + sid ;
+                        String query = "SELECT id, name FROM users where s_id = " + sid + " AND type = 'D'";
                         //get table data
                         ResultSet rs = st.executeQuery(query);
                         //get data one by one
@@ -101,17 +102,15 @@
                     if(rs.getInt("number")>0){
                         no=rs.getInt("number");
                     }
-
-                    Statement st1 = con.createConnection().createStatement();
-                    String query1 = "SELECT name FROM doctor where id =  " + doc;
-                    //get table data
-                    ResultSet rs1 = st.executeQuery(query1);
+                    
+                    user dname = new user();
+                    ResultSet rs1 = dname.udata(doc);
                     //get data one by one
                     rs1.next();
 
             %>
         <h4>Selected : <%=rs1.getString("name")%>   <a href="channel.jsp">reset</a> <h4>
-        <form action="book" method="post">
+        <form action="../book" method="post">
             <input type="hidden" name="doctor" value="<%=doc %>">
             <input type="hidden" name="patient" value="<%=id %>">
             <h5>Ongoing Number : <%=no+1%> </h5>

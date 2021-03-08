@@ -86,7 +86,7 @@ public class book extends HttpServlet {
             if(status){
                 out.print("Booked Successfull!!");
                         
-                request.getRequestDispatcher("channeling.jsp").include(request, response);
+                request.getRequestDispatcher("patients/channeling.jsp").include(request, response);
             }else{
                 out.println("Error!!");
                  //RequestDispatcher rs =  request.getRequestDispatcher("index.html");

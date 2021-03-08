@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="Model.user"%>
 <%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*;" %>
@@ -74,7 +75,7 @@
                     try {
                         dbCon con = new dbCon();
                         Statement st = con.createConnection().createStatement();
-                        String query = "SELECT id, name FROM doctor where s_id = " + sid ;
+                        String query = "SELECT id, name FROM users where s_id = " + sid + " AND type = 'D'";
                         //get table data
                         ResultSet rs = st.executeQuery(query);
                         //get data one by one
@@ -103,10 +104,8 @@
                         no=rs.getInt("number");
                     }
 
-                    Statement st1 = con.createConnection().createStatement();
-                    String query1 = "SELECT name FROM doctor where id =  " + doc;
-                    //get table data
-                    ResultSet rs1 = st.executeQuery(query1);
+                    user dname = new user();
+                    ResultSet rs1 = dname.udata(doc);
                     //get data one by one
                     rs1.next();
 
