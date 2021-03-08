@@ -10,8 +10,9 @@
     session.setMaxInactiveInterval(30);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
+    String type = (String)session.getAttribute("type");
     if(id != null){
-        out.print("Welcome : " + name );
+        out.print("Welcome : " + name + "(" + type + ")" );
     }
 %>
 <!DOCTYPE html>
@@ -27,6 +28,8 @@
         <a href="channel.jsp">channel</a>
         <br/>
         <a href="register.html">register</a>
+        <br/>
+        <a href="adduser.jsp">Add User</a>
         <br/>
         <a href="logout">Logout</a>
     </body>
