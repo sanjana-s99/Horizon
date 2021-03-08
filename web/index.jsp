@@ -25,9 +25,11 @@
         <h1>Horizen</h1>
         <a href="login.html">login</a>
         <br/>
-        <a href="channel.jsp">channel</a>
+        <a href="patients/channel.jsp">channel</a>
         <br/>
-        <a href="staffchannel.jsp">Staff Channel</a>
+        <a href="patients/viewch.jsp">View channel</a>
+        <br/>
+        <a href="staff/staffchannel.jsp">Staff Channel</a>
         <br/>
         <a href="register.html">register</a>
         <br/>
