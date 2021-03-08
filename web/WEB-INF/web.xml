@@ -15,6 +15,10 @@
         <servlet-name>logout</servlet-name>
         <servlet-class>controller.logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>book</servlet-name>
+        <servlet-class>controller.book</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -26,6 +30,10 @@
     <servlet-mapping>
         <servlet-name>logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>book</servlet-name>
+        <url-pattern>/book</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
