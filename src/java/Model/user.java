@@ -40,7 +40,7 @@ public class user {
         int age = Calendar.getInstance().get(Calendar.YEAR) - year;
         
         try{
-            PreparedStatement ps = con.createConnection().prepareStatement("insert into patients(name,email,password,age,gender,telephone,address) values (?,?,?,?,?,?,?)");
+            PreparedStatement ps = con.createConnection().prepareStatement("insert into users(name,email,password,age,gender,telephone,address,nic) values (?,?,?,?,?,?,?,?)");
             ps.setString(1, d[0]);
             ps.setString(2, d[1]);
             ps.setString(3, d[2]);
@@ -48,6 +48,7 @@ public class user {
             ps.setString(5, gender);
             ps.setString(6, d[4]);
             ps.setString(7, d[5]);
+            ps.setString(8, d[3]);
             int i = ps.executeUpdate();
             if(i>0){
                 return true;
@@ -63,7 +64,7 @@ public class user {
     public ResultSet login(String email, String pass) throws ClassNotFoundException, SQLException{
         ResultSet rs = null;
         try{
-            PreparedStatement ps = con.createConnection().prepareStatement("select id from patients where email =  ? and password = ?");
+            PreparedStatement ps = con.createConnection().prepareStatement("select id from users where email =  ? and password = ?");
             ps.setString(1, email);
             ps.setString(2, pass);
 
@@ -78,7 +79,7 @@ public class user {
      public ResultSet udata(String id) throws ClassNotFoundException, SQLException{
         ResultSet rs = null;
         try{
-            PreparedStatement ps = con.createConnection().prepareStatement("select * from patients where id =  ?");
+            PreparedStatement ps = con.createConnection().prepareStatement("select * from users where id =  ?");
             ps.setString(1,id);
             
             rs = ps.executeQuery();
@@ -107,4 +108,49 @@ public class user {
         }
         return false;
     }
+     
+    public boolean adduser(String[] d ) throws ClassNotFoundException, SQLException{
+        String nic = d[3], gender;
+        int year = 0, daytext = 0;
+        
+        // get user birthyear from nic
+        if (nic.length() == 10) {
+            year = Integer.valueOf("19" + (nic.substring(0, 2)));
+            daytext = Integer.valueOf(nic.substring(2, 3));
+        } else {
+            year = Integer.valueOf("19" + (nic.substring(0, 4)));
+            daytext = Integer.valueOf(nic.substring(4, 3));
+        }
+
+        // get user gender from nic
+        if (daytext > 500) {
+            gender = "F";
+        } else {
+            gender = "M";
+        }
+
+        //calculate user age
+        int age = Calendar.getInstance().get(Calendar.YEAR) - year;
+        
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("insert into users(name,email,type,age,gender,telephone,address,nic) values (?,?,?,?,?,?,?,?)");
+            ps.setString(1, d[0]);
+            ps.setString(2, d[1]);
+            ps.setString(3, d[2]);
+            ps.setString(4, String.valueOf(age));
+            ps.setString(5, gender);
+            ps.setString(6, d[4]);
+            ps.setString(7, d[5]);
+            ps.setString(8, d[3]);
+            int i = ps.executeUpdate();
+            if(i>0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    } 
 }
