@@ -8,20 +8,16 @@ package controller;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author SHATTER
  */
-public class login extends HttpServlet {
+public class adduser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +36,10 @@ public class login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login</title>");            
+            out.println("<title>Servlet adduser</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet adduser at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -77,34 +73,25 @@ public class login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
-        String email = request.getParameter("email");
-        String pass = request.getParameter("psw");
+        String[] data = new String[7];
+        data[0] = request.getParameter("name");
+        data[1] = request.getParameter("email");
+        data[2] = request.getParameter("type");
+        data[3] = request.getParameter("nic");
+        data[4] = request.getParameter("tp");
+        data[5] = request.getParameter("add");
+        
         try{
-            user users = new user();
-            ResultSet rslt = users.login(email, pass);
-            rslt.next();
-            
-            if(rslt.getInt("id") != 0){
-
-                //creating a session
-                HttpSession session = request.getSession();
-                session.setAttribute("id", rslt.getString("id"));
-                
-                ResultSet rs = users.udata(rslt.getString("id"));
-                rs.next();
-                session.setAttribute("name", rs.getString("name"));
-                session.setAttribute("type", rs.getString("type"));
-                        
-                request.getRequestDispatcher("index.jsp").include(request, response);
+            user reguser = new user();
+            boolean rslt = reguser.adduser(data);
+            if(rslt){
+                out.print("User Added Successfully");
+                 request.getRequestDispatcher("adduser.jsp").include(request, response);
             }else{
-                out.println("NO User");
-                 //RequestDispatcher rs =  request.getRequestDispatcher("index.html");
-                 //rs.include(request, response);
+            
             }
         }catch(Exception e){
             out.println("error : " + e);
-            
         }
     }
 
