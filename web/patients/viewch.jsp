@@ -30,6 +30,7 @@
             <tr>
                 <th>Doctor</th>
                 <th>number</th>
+                <th>status</th>
             </tr>
             <%    
                 try {
@@ -49,6 +50,7 @@
             <tr>
                 <td><%=doc%></td>
                 <td><%=rs.getInt("number")%></td>
+                <td><%=rs.getString("status")%></td>
             </tr>
             <% }
                 }catch (Exception e){
