@@ -12,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -60,12 +61,11 @@ public class logout extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         
-        Cookie ck = new Cookie("id", "");
-        ck.setMaxAge(0);
-        response.addCookie(ck);
-        
+        HttpSession session=request.getSession();  
+        session.invalidate();  
+
         out.print("you are successfully logged out!");
-        request.getRequestDispatcher("index.html").include(request, response);
+        request.getRequestDispatcher("index.jsp").include(request, response);
     }
 
     /**
