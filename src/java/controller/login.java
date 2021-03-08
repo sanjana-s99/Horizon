@@ -15,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -85,17 +86,16 @@ public class login extends HttpServlet {
             rslt.next();
             
             if(rslt.getInt("id") != 0){
-                //set cookie
-                Cookie ck = new Cookie("id", rslt.getString("id"));
-                ck.setMaxAge(300); //expire in 5min
-                response.addCookie(ck);
+
+                //creating a session
+                HttpSession session = request.getSession();
+                session.setAttribute("id", rslt.getString("id"));
                 
                 ResultSet rs = users.udata(rslt.getString("id"));
                 rs.next();
-                out.print("<b>Welcome TO Profile</b>");
-                out.print("<br>Welcome, " + rs.getString("name"));
+                session.setAttribute("name", rs.getString("name"));
                         
-                request.getRequestDispatcher("index.html").include(request, response);
+                request.getRequestDispatcher("index.jsp").include(request, response);
             }else{
                 out.println("NO User");
                  //RequestDispatcher rs =  request.getRequestDispatcher("index.html");
