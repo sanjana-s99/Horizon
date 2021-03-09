@@ -27,6 +27,10 @@
         <servlet-name>sbook</servlet-name>
         <servlet-class>controller.sbook</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>caction</servlet-name>
+        <servlet-class>controller.caction</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -50,6 +54,10 @@
     <servlet-mapping>
         <servlet-name>sbook</servlet-name>
         <url-pattern>/sbook</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>caction</servlet-name>
+        <url-pattern>/caction</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
