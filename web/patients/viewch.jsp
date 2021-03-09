@@ -30,6 +30,8 @@
             <tr>
                 <th>Doctor</th>
                 <th>number</th>
+                <th>status</th>
+                <th>action</th>
             </tr>
             <%    
                 try {
@@ -44,13 +46,30 @@
                         ResultSet rs1 = data.udata(rs.getString("d_id"));
                         rs1.next();
                         String doc = rs1.getString("name");
+                        String status = rs.getString("status");
+                        if("R".equals(rs.getString("status"))){
+                            status = "Reserved";
+                        }else if("C".equals(rs.getString("status"))){
+                            status = "Checked In";
+                        }
                         
             %>
             <tr>
                 <td><%=doc%></td>
                 <td><%=rs.getInt("number")%></td>
+                <td><%=status%></td>
+            <%
+                if("R".equals(rs.getString("status"))){
+            %>
+                <td><a href="../caction?pid=<%=id%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=in">Checked In</a></td>
+                </tr>
+            <%
+                }else if("C".equals(rs.getString("status"))){
+            %>
+                <td><a href="../caction?pid=<%=id%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=com">Complete</a></td>
             </tr>
             <% }
+                }
                 }catch (Exception e){
 
                 }
