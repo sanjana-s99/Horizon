@@ -74,6 +74,10 @@
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap.rtl.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css"/>
+        
+       
+        
+        
     </head>
     <body>
         <h3>Prescription</h3>
@@ -137,29 +141,52 @@
             <div class="col-sm-8">
                 
                 <div class="panel-body">
-                    <table id="tbl-prescription" class=" table table-responsive table-borderd" cellpadding="0" width="100%">
+                    <table id="tbl-prescription" class="table table-responsive table-bordered" cellpadding="0" width="50%">
                         <thead>
-                            <tr>
-                                <th>Doctor ID</th>
+                            <tr id="mac">
+                                <th >Doctor ID</th>
                                 <th>Patient ID</th>
-                                <th>Drug name</th>
-                                <th>Price</th>
+                                <th>Patient name</th>
+                                <th>Drug name </th>
+                                <th>price</th>
                                 <th>Date</th>
                                 <th>Edit</th>
-                                <th>Delete</th> 
+                                <th>Delete</th>
                             </tr>
+                       </thead>    
+                     <% 
+                            Connection con;
+                            PreparedStatement pst;
+                            ResultSet rs;
+        
+                            Class.forName("com.mysql.jdbc.Driver");
+                            con = DriverManager.getConnection("jdbc:mysql://localhost/prescription","root","");
+                            
+                            String query ="select * from prescription";
+                            Statement st= con.createStatement();
+                            rs=st.executeQuery(query);
+                            
+                            while(rs.next()){
+                                String id=rs.getString("id");
+                                
+                            
+                            
+                               %>
                             
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%=rs.getInt("doc_id")%></td>
+                                <td><%=rs.getInt("pid")%></td>
+                                <td><%=rs.getString("pname")%></td>
+                                <td><%=rs.getString("drug_name")%></td>
+                                <td><%=rs.getDouble("price")%></td>
+                                <td><%=rs.getString("tdate")%></td>
+                                <td><a href="update.jsp?id=<%=id%>">Edit</a></td>
+                                <td><a href="delete.jsp?id=<%=id%>">Delete</a></td>
                             </tr>
+                            
+                            <% }%>
                         
-                        </thead>
+                        
                         
                         
                         

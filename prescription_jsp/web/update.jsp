@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : Mar 9, 2021, 1:23:30 PM
+    Document   : update
+    Created on : Mar 11, 2021, 11:24:04 PM
     Author     : Movini
 --%>
 
@@ -9,6 +9,8 @@
 <%
     if(request.getParameter("submit")!=null)
     {
+        
+        String id=request.getParameter("id");
         int doc_id=Integer.parseInt(request.getParameter("doc_id"));
         int pid=Integer.parseInt(request.getParameter("pid"));
         String pname=request.getParameter("pname");
@@ -22,13 +24,14 @@
         
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost/prescription","root","");
-        pst = con.prepareStatement("insert into prescription(doc_id,pid,pname,drug_name,price,tdate)values(?,?,?,?,?,?)");
+        pst = con.prepareStatement("update prescription set doc_id= ?,pid =?,pname =?,drug_name= ?,price= ?,tdate =? where id=?");
         pst.setInt(1, doc_id);
         pst.setInt(2, pid);
         pst.setString(3, pname);
         pst.setString(4,drug_name );
         pst.setDouble(5, price );
         pst.setString(6, tdate );
+        pst.setString(7, id );
         pst.executeUpdate();
         
         
@@ -49,14 +52,6 @@
 %>
 
 
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -75,53 +70,84 @@
         <link href="bootstrap/css/bootstrap.rtl.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css"/>
         
-       
-        
         
     </head>
     <body>
-        <h3>Prescription</h3>
-        <br>
+        <h3>Update</h3>
+        
         
         <div class="row">
-            <div class="col-sm-4">
+           <div class="col-sm-4">
                 <form  method="post" action="#">
+                    
+                    <%
+                        
+                        
+                       
+                       Connection con;
+                       PreparedStatement pst;
+                       ResultSet rs;
+        
+                       Class.forName("com.mysql.jdbc.Driver");
+                       con = DriverManager.getConnection("jdbc:mysql://localhost/prescription","root","");
+                       
+                       String id=request.getParameter("id");
+                       pst=con.prepareStatement("select * from prescription where id= ?");
+                       
+                       pst.setString(1, id);
+                       rs=pst.executeQuery();
+                       
+        
+                       
+                       while(rs.next()){
+
+                       
+                    
+                    %>
+                    
+                    
+                    
                     
                     <div alight="left">
                         <label class="form-label">Doctor ID</label>
-                        <input type="text" class="form-control" placeholder="" name="doc_id" id="doc_id" required > 
+                        <input type="text" class="form-control" placeholder="" value="<%=rs.getInt("doc_id")%>" name="doc_id" id="doc_id" required > 
                     </div>
                     
             
                     <div alight="left">
                         <label class="form-label">Patient ID</label>
-                        <input type="text" class="form-control" placeholder="" name="pid" id="pid" required > 
+                        <input type="text" class="form-control" placeholder="" value="<%=rs.getInt("pid")%>" name="pid" id="pid" required > 
                     </div>
                     
                        
                     <div alight="left">
                         <label class="form-label">Patient name</label>
-                        <input type="text" class="form-control" placeholder="" name="pname" id="pname" required > 
+                        <input type="text" class="form-control" placeholder="" value="<%=rs.getString("pname")%>" name="pname" id="pname" required > 
                     </div>
                     
             
                     <div alight="left">
                         <label class="form-label">Drug name</label>
-                        <input type="text" class="form-control" placeholder="" name="drug_name" id="drug_name" required > 
+                        <input type="text" class="form-control" placeholder="" value="<%=rs.getString("drug_name")%>" name="drug_name" id="drug_name" required > 
                     </div>
                     
                      
                     <div alight="left">
                         <label class="form-label">Price</label>
-                        <input type="text" class="form-control" placeholder="" name="price" id="price" required > 
+                        <input type="text" class="form-control" placeholder="" value="<%=rs.getDouble("price")%>" name="price" id="price" required > 
                     </div>
                   
                     
                        
                     <div alight="left">
                         <label class="form-label">Date</label>
-                        <input type="text" class="form-control" placeholder="" name="tdate" id="tdate" required > 
-                    </div><br>
+                        <input type="text" class="form-control" placeholder="" value="<%=rs.getString("tdate")%>" name="tdate"  id="tdate" required > 
+                    </div>
+                    
+                   <%} %>
+                    
+                    
+                    <br>
                     
                     
                   
@@ -131,80 +157,17 @@
                          
                     </div>
                     
+                    <div align="right">
+                        
+                        <p><a href="index.jsp"> Click Back</a></p>
+                    </div>
+                    
+                    
                 </form>
-                
-            
-            
-            </div>
-            
-            
-            <div class="col-sm-8">
-                
-                <div class="panel-body">
-                    <table id="tbl-prescription" class="table table-responsive table-bordered" cellpadding="0" width="50%">
-                        <thead>
-                            <tr id="mac">
-                                <th >Doctor ID</th>
-                                <th>Patient ID</th>
-                                <th>Patient name</th>
-                                <th>Drug name </th>
-                                <th>price</th>
-                                <th>Date</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                       </thead>    
-                     <% 
-                            Connection con;
-                            PreparedStatement pst;
-                            ResultSet rs;
-        
-                            Class.forName("com.mysql.jdbc.Driver");
-                            con = DriverManager.getConnection("jdbc:mysql://localhost/prescription","root","");
-                            
-                            String query ="select * from prescription";
-                            Statement st= con.createStatement();
-                            rs=st.executeQuery(query);
-                            
-                            while(rs.next()){
-                                String id=rs.getString("id");
-                                
-                            
-                            
-                               %>
-                            
-                            <tr>
-                                <td><%=rs.getInt("doc_id")%></td>
-                                <td><%=rs.getInt("pid")%></td>
-                                <td><%=rs.getString("pname")%></td>
-                                <td><%=rs.getString("drug_name")%></td>
-                                <td><%=rs.getDouble("price")%></td>
-                                <td><%=rs.getString("tdate")%></td>
-                                <td><a href="update.jsp?id=<%=id%>">Edit</a></td>
-                                <td><a href="delete.jsp?id=<%=id%>">Delete</a></td>
-                            </tr>
-                            
-                            <% }%>
-                        
-                        
-                        
-                        
-                        
-                    </table> 
-                    
-                    
-                </div>
-                
-                
-                
-                
-                
-            </div>
+             </div>
             
             
             
         </div>
-        
-        
     </body>
 </html>

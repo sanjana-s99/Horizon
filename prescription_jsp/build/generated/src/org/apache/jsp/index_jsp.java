@@ -116,6 +116,10 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link href=\"bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
       out.write("        <link href=\"bootstrap/css/bootstrap.rtl.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
       out.write("        <link href=\"bootstrap/css/bootstrap.rtl.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
+      out.write("        \n");
+      out.write("       \n");
+      out.write("        \n");
+      out.write("        \n");
       out.write("    </head>\n");
       out.write("    <body>\n");
       out.write("        <h3>Prescription</h3>\n");
@@ -179,29 +183,72 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <div class=\"col-sm-8\">\n");
       out.write("                \n");
       out.write("                <div class=\"panel-body\">\n");
-      out.write("                    <table id=\"tbl-prescription\" class=\" table table-responsive table-borderd\" cellpadding=\"0\" width=\"100%\">\n");
+      out.write("                    <table id=\"tbl-prescription\" class=\"table table-responsive table-bordered\" cellpadding=\"0\" width=\"50%\">\n");
       out.write("                        <thead>\n");
-      out.write("                            <tr>\n");
-      out.write("                                <th>Doctor ID</th>\n");
+      out.write("                            <tr id=\"mac\">\n");
+      out.write("                                <th >Doctor ID</th>\n");
       out.write("                                <th>Patient ID</th>\n");
-      out.write("                                <th>Drug name</th>\n");
-      out.write("                                <th>Price</th>\n");
+      out.write("                                <th>Patient name</th>\n");
+      out.write("                                <th>Drug name </th>\n");
+      out.write("                                <th>price</th>\n");
       out.write("                                <th>Date</th>\n");
       out.write("                                <th>Edit</th>\n");
-      out.write("                                <th>Delete</th> \n");
+      out.write("                                <th>Delete</th>\n");
       out.write("                            </tr>\n");
+      out.write("                       </thead>    \n");
+      out.write("                     ");
+ 
+                            Connection con;
+                            PreparedStatement pst;
+                            ResultSet rs;
+        
+                            Class.forName("com.mysql.jdbc.Driver");
+                            con = DriverManager.getConnection("jdbc:mysql://localhost/prescription","root","");
+                            
+                            String query ="select * from prescription";
+                            Statement st= con.createStatement();
+                            rs=st.executeQuery(query);
+                            
+                            while(rs.next()){
+                                String id=rs.getString("id");
+                                
+                            
+                            
+                               
+      out.write("\n");
       out.write("                            \n");
       out.write("                            <tr>\n");
-      out.write("                                <td></td>\n");
-      out.write("                                <td></td>\n");
-      out.write("                                <td></td>\n");
-      out.write("                                <td></td>\n");
-      out.write("                                <td></td>\n");
-      out.write("                                <td></td>\n");
-      out.write("                                <td></td>\n");
+      out.write("                                <td>");
+      out.print(rs.getInt("doc_id"));
+      out.write("</td>\n");
+      out.write("                                <td>");
+      out.print(rs.getInt("pid"));
+      out.write("</td>\n");
+      out.write("                                <td>");
+      out.print(rs.getString("pname"));
+      out.write("</td>\n");
+      out.write("                                <td>");
+      out.print(rs.getString("drug_name"));
+      out.write("</td>\n");
+      out.write("                                <td>");
+      out.print(rs.getDouble("price"));
+      out.write("</td>\n");
+      out.write("                                <td>");
+      out.print(rs.getString("tdate"));
+      out.write("</td>\n");
+      out.write("                                <td><a href=\"update.jsp?id=");
+      out.print(id);
+      out.write("\">Edit</a></td>\n");
+      out.write("                                <td><a href=\"delete.jsp?id=");
+      out.print(id);
+      out.write("\">Delete</a></td>\n");
       out.write("                            </tr>\n");
+      out.write("                            \n");
+      out.write("                            ");
+ }
+      out.write("\n");
       out.write("                        \n");
-      out.write("                        </thead>\n");
+      out.write("                        \n");
       out.write("                        \n");
       out.write("                        \n");
       out.write("                        \n");
