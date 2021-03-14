@@ -5,9 +5,11 @@
  */
 package controller;
 
+import Model.SendMail;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -75,18 +77,46 @@ public class book extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String[] data = new String[3];
+        String to = null, drname = null;
         data[0] = request.getParameter("doctor");
         data[1] = request.getParameter("patient");
         data[2] = request.getParameter("no");
+        
+        user userdata = new user();
+        try{
+            ResultSet rs = userdata.udata(data[1]);
+            rs.next();
+            to = rs.getString("email");
+            System.out.println(to);
+        }catch(Exception e){
+            out.println("Error");
+        }
+        
+        try{
+            ResultSet rs = userdata.udata(data[0]);
+            rs.next();
+            drname = rs.getString("name");
+        }catch(Exception e){
+            out.println("Error");
+        }
+        
+        String msg = "Your Channeling For Dr. " + drname + " is confirmed. Please make your payment. <br/> <b>Your Number Is :" + data[2] + "</b><br/><hr/>Horizen Hospitals Channeling Team";
         
         try{
             user users = new user();
             Boolean status = users.book(data);
             
             if(status){
-                out.print("Booked Successfull!!");
+                SendMail mail = new SendMail();
+                try {
+                    mail.send(to , "Chaneling Confirmation", msg);
+                    out.print("Booked Successfull!!");
+                } catch (Exception e) {
+                    out.println("Error");
+                }
+                
                         
-                request.getRequestDispatcher("patients/channeling.jsp").include(request, response);
+                request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
             }else{
                 out.println("Error!!");
                  //RequestDispatcher rs =  request.getRequestDispatcher("index.html");
