@@ -35,6 +35,8 @@
         <br/>
         <a href="adduser.jsp">Add User</a>
         <br/>
+        <a href="forgetpass.html">Forget Password</a>
+        <br/>
         <a href="logout">Logout</a>
     </body>
 </html>

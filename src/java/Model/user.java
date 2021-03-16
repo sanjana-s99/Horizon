@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ import java.util.Calendar;
  */
 public class user {
     dbCon con = new dbCon();
-    public boolean reg(String[] d ) throws ClassNotFoundException, SQLException{
+    public boolean reg(String[] d ) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException{
         String nic = d[3], gender;
         int year = 0, daytext = 0;
         
@@ -39,11 +40,14 @@ public class user {
         //calculate user age
         int age = Calendar.getInstance().get(Calendar.YEAR) - year;
         
+        keygen key = new keygen();
+        String pass = key.generate(d[2]);
+        
         try{
             PreparedStatement ps = con.createConnection().prepareStatement("insert into users(name,email,password,age,gender,telephone,address,nic) values (?,?,?,?,?,?,?,?)");
             ps.setString(1, d[0]);
             ps.setString(2, d[1]);
-            ps.setString(3, d[2]);
+            ps.setString(3, pass);
             ps.setString(4, String.valueOf(age));
             ps.setString(5, gender);
             ps.setString(6, d[4]);
@@ -61,12 +65,14 @@ public class user {
         return false;
     }
     
-    public ResultSet login(String email, String pass) throws ClassNotFoundException, SQLException{
+    public ResultSet login(String email, String pass) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException{
         ResultSet rs = null;
+        keygen key = new keygen();
+        String passs = key.generate(pass);
         try{
             PreparedStatement ps = con.createConnection().prepareStatement("select id from users where email =  ? and password = ?");
             ps.setString(1, email);
-            ps.setString(2, pass);
+            ps.setString(2, passs);
 
             rs = ps.executeQuery();
             
@@ -81,6 +87,20 @@ public class user {
         try{
             PreparedStatement ps = con.createConnection().prepareStatement("select * from users where id =  ?");
             ps.setString(1,id);
+            
+            rs = ps.executeQuery();
+            
+        }catch(Exception e){ 
+            System.out.println(e);
+        }
+        return rs;
+    }
+     
+     public ResultSet udatamail(String email) throws ClassNotFoundException, SQLException{
+        ResultSet rs = null;
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("select * from users where email =  ?");
+            ps.setString(1,email);
             
             rs = ps.executeQuery();
             
