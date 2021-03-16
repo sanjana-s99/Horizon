@@ -1,6 +1,6 @@
 <%-- 
-    Document   : verify
-    Created on : Mar 16, 2021, 7:02:18 PM
+    Document   : resetpass
+    Created on : Mar 16, 2021, 11:17:48 PM
     Author     : SHATTER
 --%>
 
@@ -37,16 +37,14 @@
                     String dbkey = rs.getString("key");
                     
                     if(today.compareTo(expdate)<=0 && key.equals(dbkey)){
-                        
-                        
-                        verifyu v = new verifyu();
-                        if(v.uuser(email)){
-                            SendMail m = new SendMail();
-                            m.send(email, "Succesfully Verified!!", "Your Horizen Hospital User Account Is Successfully Verified!!");
-                            out.println("Successfully verified!!");
-                        }else{
-                            out.println("error in verifing!!");
-                        }
+                        %>
+                        <form action="reset" method="post">
+                            Password:<input type="password" name="pass1"/>
+                            Re-Password:<input type="password" name="pass2"/>
+                            <input type="hidden" value="<%= email %>" name="email"/>
+                            <input type="submit" value="reset"/>
+                        </form>
+                        <%
                     }else{
                         out.println("Link Expired or invalid link!!");
                     }
@@ -62,3 +60,4 @@
         %>
     </body>
 </html>
+

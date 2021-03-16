@@ -188,4 +188,23 @@ public class user {
         }
         return false;
     } 
+    
+    public boolean resetpass(String pass , String email) throws ClassNotFoundException, SQLException{
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("UPDATE users SET password = ? where email = ?");
+            ps.setString(1,pass);
+            ps.setString(2,email);
+
+            int i = ps.executeUpdate();
+            if(i>0){
+                return true;
+            }else{
+                return false;
+            }            
+            
+        }catch(Exception e){ 
+            System.out.println(e);
+        }
+        return false;
+    }
 }
