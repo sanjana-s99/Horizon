@@ -5,6 +5,7 @@
  */
 package controller;
 
+import Model.keygen;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -86,6 +87,9 @@ public class register extends HttpServlet {
             user reguser = new user();
             boolean rslt = reguser.reg(data);
             if(rslt){
+                keygen key = new keygen();
+                String skey = key.verify(data[1]);
+                key.regverify(String.valueOf(skey), data[1]);
                 out.print("You are successfully registered!!");
                 out.print("<br>Welcome, "+data[0]);
                  request.getRequestDispatcher("login.html").include(request, response);
