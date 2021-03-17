@@ -9,6 +9,8 @@ import Model.keygen;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -96,7 +98,7 @@ public class register extends HttpServlet {
             }else{
             
             }
-        }catch(Exception e){
+        }catch(IOException | ClassNotFoundException | NoSuchAlgorithmException | SQLException | ServletException e){
             out.println("error : " + e);
         }
     }

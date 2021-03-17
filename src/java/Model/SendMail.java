@@ -55,8 +55,8 @@ public class SendMail
            
             Transport.send(message);
         }
-        catch(Exception e) {
-    	     e.printStackTrace();
+        catch(MessagingException e) {
+    	       System.out.println(e);
         }
     }  
 }

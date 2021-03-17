@@ -22,13 +22,9 @@ public class channeling {
             ps.setString(3,data[2]);
             
             int i = ps.executeUpdate();
-            if(i>0){
-                return true;
-            }else{
-                return false;
-            }            
+            return i>0;            
             
-        }catch(Exception e){ 
+        }catch(ClassNotFoundException | SQLException e){ 
             System.out.println(e);
         }
         return false;
@@ -42,13 +38,9 @@ public class channeling {
             ps.setString(3,data[2]);
             
             int i = ps.executeUpdate();
-            if(i>0){
-                return true;
-            }else{
-                return false;
-            }            
+            return i>0;            
             
-        }catch(Exception e){ 
+        }catch(ClassNotFoundException | SQLException e){ 
             System.out.println(e);
         }
         return false;

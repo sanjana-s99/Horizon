@@ -10,6 +10,7 @@ import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -88,7 +89,7 @@ public class sbook extends HttpServlet {
             rs.next();
             to = rs.getString("email");
             System.out.println(to);
-        }catch(Exception e){
+        }catch(ClassNotFoundException | SQLException e){
             out.println("Error");
         }
         
@@ -96,7 +97,7 @@ public class sbook extends HttpServlet {
             ResultSet rs = userdata.udata(data[0]);
             rs.next();
             drname = rs.getString("name");
-        }catch(Exception e){
+        }catch(ClassNotFoundException | SQLException e){
             out.println("Error");
         }
         
@@ -115,9 +116,8 @@ public class sbook extends HttpServlet {
             Boolean status = users.book(data);
             
             if(status){
-                SendMail mail = new SendMail();
                 try {
-                    mail.send(to , "Chaneling Confirmation", msg);
+                    SendMail.send(to , "Chaneling Confirmation", msg);
                     out.print("Booked Successfull!!");
                 } catch (Exception e) {
                     out.println("Error");
@@ -129,7 +129,7 @@ public class sbook extends HttpServlet {
                  //RequestDispatcher rs =  request.getRequestDispatcher("index.html");
                  //rs.include(request, response);
             }
-        }catch(Exception e){
+        }catch(IOException | ClassNotFoundException | SQLException | ServletException e){
             out.println("error : " + e);
             
         }

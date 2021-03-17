@@ -24,13 +24,9 @@ public class verifyu {
             
             int i = ps.executeUpdate();
             int x = ps1.executeUpdate();
-            if(i>0 && x>0){
-                return true;
-            }else{
-                return false;
-            }            
+            return i>0 && x>0;            
             
-        }catch(Exception e){ 
+        }catch(ClassNotFoundException | SQLException e){ 
             System.out.println(e);
         }
         return false;
