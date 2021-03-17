@@ -7,7 +7,8 @@ package Model;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -82,14 +83,13 @@ public class reset extends HttpServlet {
             try{
                 user users = new user();
                 keygen k = new keygen();
-                SendMail s = new SendMail();
                 String msg = "Password Reset Successfull!!";
                 if(users.resetpass(k.generate(pass1), email)){
                     out.println("Resetting Done!!");
-                    s.send(email, "Reset Password", msg);
+                    SendMail.send(email, "Reset Password", msg);
                     request.getRequestDispatcher("login.html").include(request, response);
                 }
-            }catch(Exception e){
+            }catch(IOException | ClassNotFoundException | NoSuchAlgorithmException | SQLException | ServletException e){
                 out.println("Something Went Wrong!!");
                 request.getRequestDispatcher("forgetpass.html").include(request, response);
 

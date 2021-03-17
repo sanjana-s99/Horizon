@@ -54,11 +54,7 @@ public class user {
             ps.setString(7, d[5]);
             ps.setString(8, d[3]);
             int i = ps.executeUpdate();
-            if(i>0){
-                return true;
-            }else{
-                return false;
-            }
+            return i>0;
         }catch(Exception e){
             System.out.println(e);
         }
@@ -133,11 +129,7 @@ public class user {
             ps.setString(3, d[2]);
 
             int i = ps.executeUpdate();
-            if(i>0){
-                return true;
-            }else{
-                return false;
-            }
+            return i>0;
         }catch(Exception e){
             System.out.println(e);
         }
@@ -178,11 +170,7 @@ public class user {
             ps.setString(7, d[5]);
             ps.setString(8, d[3]);
             int i = ps.executeUpdate();
-            if(i>0){
-                return true;
-            }else{
-                return false;
-            }
+            return i>0;
         }catch(Exception e){
             System.out.println(e);
         }
@@ -196,11 +184,7 @@ public class user {
             ps.setString(2,email);
 
             int i = ps.executeUpdate();
-            if(i>0){
-                return true;
-            }else{
-                return false;
-            }            
+            return i>0;            
             
         }catch(Exception e){ 
             System.out.println(e);

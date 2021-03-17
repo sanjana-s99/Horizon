@@ -23,7 +23,7 @@ public class dbCon {
         try{
             con = DriverManager.getConnection(url, uname, pass);
             return con;
-        }catch(Exception e){
+        }catch(SQLException e){
             System.out.println(e);
         }
         return con;

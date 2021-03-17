@@ -10,6 +10,7 @@ import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -93,7 +94,7 @@ public class forget extends HttpServlet {
                         
                 request.getRequestDispatcher("forgetpass.html").include(request, response);
             }
-        }catch(Exception e){
+        }catch(IOException | ClassNotFoundException | SQLException | ServletException e){
             out.println("NO User");
             request.getRequestDispatcher("forgetpass.html").include(request, response);
             

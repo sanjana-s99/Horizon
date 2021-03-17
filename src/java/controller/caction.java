@@ -8,6 +8,7 @@ package controller;
 import Model.channeling;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -77,7 +78,7 @@ public class caction extends HttpServlet {
                     out.print("Error!!");
                     request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
                 }
-            }catch(Exception e){
+            }catch(IOException | ClassNotFoundException | SQLException | ServletException e){
                 
             }
         }else if("com".equals(action)){
@@ -91,7 +92,7 @@ public class caction extends HttpServlet {
                     out.print("Error!!");
                     request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
                 }
-            }catch(Exception e){
+            }catch(IOException | ClassNotFoundException | SQLException | ServletException e){
                 
             }
         }

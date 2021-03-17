@@ -8,6 +8,7 @@ package controller;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -90,7 +91,7 @@ public class adduser extends HttpServlet {
             }else{
             
             }
-        }catch(Exception e){
+        }catch(IOException | ClassNotFoundException | SQLException | ServletException e){
             out.println("error : " + e);
         }
     }
