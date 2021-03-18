@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.io.PrintWriter;
 import java.sql.*;
 
 public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
@@ -46,6 +47,8 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
 
     if(request.getParameter("submit")!=null)
     {
@@ -68,7 +71,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
         pst.setString(3, pname);
         pst.setString(4,drug_name );
         pst.setDouble(5, price );
-        pst.setString(6, tdate );
+        pst.setString(6, tdate);
         pst.executeUpdate();
         
         
@@ -100,7 +103,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
-      out.write("<html>\n");
+      out.write("<html >\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>JSP Page</title>\n");
@@ -117,11 +120,23 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link href=\"bootstrap/css/bootstrap.rtl.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
       out.write("        <link href=\"bootstrap/css/bootstrap.rtl.min.css\" rel=\"stylesheet\" type=\"text/css\"/>\n");
       out.write("        \n");
-      out.write("       \n");
-      out.write("        \n");
+      out.write("        <script src=\"http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js\"></script>\n");
+      out.write("        <script>\n");
+      out.write("        var TDataCtrl = function ($scope) {\n");
+      out.write("           \n");
+      out.write("            $scope.tdata = [{'id': '0'}];\n");
+      out.write("            $scope.addRow = function(){\n");
+      out.write("                $scope.tdata[$scope.tdata.length]={'id':$scope.tdata.length};\n");
+      out.write("            };\n");
+      out.write("            $scope.removeRow = function(){\n");
+      out.write("                $scope.tdata.pop();\n");
+      out.write("            };\n");
+      out.write("        };\n");
+      out.write("\n");
+      out.write("        </script>\n");
       out.write("        \n");
       out.write("    </head>\n");
-      out.write("    <body>\n");
+      out.write("    <body data-ng-app>\n");
       out.write("        <h3>Prescription</h3>\n");
       out.write("        <br>\n");
       out.write("        \n");
@@ -142,27 +157,62 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    \n");
       out.write("                       \n");
       out.write("                    <div alight=\"left\">\n");
-      out.write("                        <label class=\"form-label\">Patient name</label>\n");
+      out.write("                        <label  class=\"form-label\">Patient name</label>\n");
       out.write("                        <input type=\"text\" class=\"form-control\" placeholder=\"\" name=\"pname\" id=\"pname\" required > \n");
       out.write("                    </div>\n");
       out.write("                    \n");
-      out.write("            \n");
-      out.write("                    <div alight=\"left\">\n");
-      out.write("                        <label class=\"form-label\">Drug name</label>\n");
-      out.write("                        <input type=\"text\" class=\"form-control\" placeholder=\"\" name=\"drug_name\" id=\"drug_name\" required > \n");
+      out.write("                  <!--  <div class=\"row\">\n");
+      out.write("                   <div class=\"form-group col-md-6\">\n");
+      out.write("                      <label id=\"lblRange\" class=\"form-label\">Drug name</label>\n");
+      out.write("                        <input type=\"text\" class=\"form-control\" placeholder=\"\" name=\"drug_name\" id=\"drug_name\" required aria-labelledby='lblRange'> \n");
+      out.write("                        <input type=\"text\" class=\"form-control\" placeholder=\"\" name=\"drug_name\" id=\"drug_name[]\" required aria-labelledby='lblRange'> \n");
+      out.write("                    </div> \n");
+      out.write("                                       \n");
+      out.write("                    <div  class=\"form-group col-md-6\">\n");
+      out.write("                        <label id=\"x\" class=\"form-label\">Price</label>\n");
+      out.write("                        <input type=\"text\" class=\"form-control\" placeholder=\"\" name=\"price\" id=\"price\" required required aria-labelledby='x' > \n");
+      out.write("                        <input type=\"text\" class=\"form-control\" placeholder=\"\" name=\"price\" id=\"price[]\" required required aria-labelledby='x' > \n");
       out.write("                    </div>\n");
-      out.write("                    \n");
-      out.write("                     \n");
-      out.write("                    <div alight=\"left\">\n");
-      out.write("                        <label class=\"form-label\">Price</label>\n");
-      out.write("                        <input type=\"text\" class=\"form-control\" placeholder=\"\" name=\"price\" id=\"price\" required > \n");
+      out.write("                    </div> -->\n");
+      out.write("                  \n");
+      out.write("                  <div data-ng-controller=\"TDataCtrl\">\n");
+      out.write("                    <table >\n");
+      out.write("                        <tbody data-ng-repeat=\"thisrow in tdata\">\n");
+      out.write("                        <tr>\n");
+      out.write("\n");
+      out.write("                            <td>Drug name</td>\n");
+      out.write("                            <td><input type=\"text\" class=\"form-control\" placeholder=\"\" name=\"drug_name\" id=\"drug_name[]\" required aria-labelledby='lblRange'> </td>\n");
+      out.write("                            <td>Price</td>\n");
+      out.write("                            <td><input type=\"text\" class=\"form-control\" placeholder=\"\" name=\"price\" id=\"price[]\" required required aria-labelledby='x' > </td>\n");
+      out.write("\n");
+      out.write("                        </tr>\n");
+      out.write("                        </tbody>\n");
+      out.write("                    </table>\n");
+      out.write("                    <input type=\"button\" value=\"Add\" data-ng-click=\"addRow()\"/>\n");
+      out.write("                    <input type=\"button\" value=\"Remove\" data-ng-click=\"removeRow()\"/>\n");
       out.write("                    </div>\n");
+      out.write("                  \n");
+      out.write("\n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
+      out.write("                  \n");
       out.write("                  \n");
       out.write("                    \n");
       out.write("                       \n");
       out.write("                    <div alight=\"left\">\n");
-      out.write("                        <label class=\"form-label\">Date</label>\n");
-      out.write("                        <input type=\"text\" class=\"form-control\" placeholder=\"\" name=\"tdate\" id=\"tdate\" required > \n");
+      out.write("                        <label class=\"form-label\">Date & Time</label>\n");
+      out.write("                        <input type=\"datetime-local\" class=\"form-control\" placeholder=\"\" name=\"tdate\" id=\"tdate\" required > \n");
       out.write("                    </div><br>\n");
       out.write("                    \n");
       out.write("                    \n");
@@ -191,7 +241,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                <th>Patient name</th>\n");
       out.write("                                <th>Drug name </th>\n");
       out.write("                                <th>price</th>\n");
-      out.write("                                <th>Date</th>\n");
+      out.write("                                <th>Date & Time</th>\n");
       out.write("                                <th>Edit</th>\n");
       out.write("                                <th>Delete</th>\n");
       out.write("                            </tr>\n");
@@ -209,15 +259,28 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
                             Statement st= con.createStatement();
                             rs=st.executeQuery(query);
                             
+                           /** String strQuery = "SELECT SUM(price) FROM prescription";
+                            ResultSet rss = st.executeQuery(strQuery);
+                            Double t_price=null;
+
+                           while(rs.next()){
+                              while(rss.next()){
+                               }
+
+                            rss.getDouble(t_price);*/
+                            
                             while(rs.next()){
                                 String id=rs.getString("id");
                                 
-                            
-                            
                                
+                               
+                           
       out.write("\n");
+      out.write("                               \n");
       out.write("                            \n");
+      out.write("                         \n");
       out.write("                            <tr>\n");
+      out.write("                              \n");
       out.write("                                <td>");
       out.print(rs.getInt("doc_id"));
       out.write("</td>\n");
@@ -228,11 +291,12 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.print(rs.getString("pname"));
       out.write("</td>\n");
       out.write("                                <td>");
-      out.print(rs.getString("drug_name"));
-      out.write("</td>\n");
+      out.print(rs.getString("drug_name[]"));
+      out.write("</td> \n");
       out.write("                                <td>");
       out.print(rs.getDouble("price"));
       out.write("</td>\n");
+      out.write("                                \n");
       out.write("                                <td>");
       out.print(rs.getString("tdate"));
       out.write("</td>\n");
@@ -244,20 +308,115 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\">Delete</a></td>\n");
       out.write("                            </tr>\n");
       out.write("                            \n");
+      out.write("                            <tr>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td>");
+      out.print(rs.getString("drug_name"));
+      out.write("</td> \n");
+      out.write("                                <td>");
+      out.print(rs.getDouble("price"));
+      out.write("</td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                               \n");
+      out.write("                            </tr>\n");
+      out.write("                            \n");
+      out.write("                             <tr>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td>");
+      out.print(rs.getString("drug_name"));
+      out.write("</td> \n");
+      out.write("                                <td>");
+      out.print(rs.getDouble("price"));
+      out.write("</td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                               \n");
+      out.write("                            </tr>\n");
+      out.write("                            \n");
+      out.write("                             <tr>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td>");
+      out.print(rs.getString("drug_name"));
+      out.write("</td> \n");
+      out.write("                                <td>");
+      out.print(rs.getDouble("price"));
+      out.write("</td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                                <td></td>\n");
+      out.write("                               \n");
+      out.write("                            </tr>\n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                            \n");
       out.write("                            ");
  }
       out.write("\n");
       out.write("                        \n");
       out.write("                        \n");
-      out.write("                        \n");
-      out.write("                        \n");
+      out.write("                  \n");
       out.write("                        \n");
       out.write("                    </table> \n");
+      out.write("                           \n");
       out.write("                    \n");
       out.write("                    \n");
       out.write("                </div>\n");
       out.write("                \n");
-      out.write("                \n");
+      out.write("                            <div>\n");
+      out.write("                                 <form method=\"get\" action=\"doc\">\n");
+      out.write("                                 <lable>Prescription list</lable>\n");
+      out.write("                                 <input type=\"submit\" value=\"By Doctor\" name=\"submit\" >\n");
+      out.write("                                \n");
+      out.write("                                \n");
+      out.write("                            </div>\n");
+      out.write("                            \n");
+      out.write("                            \n");
+      out.write("                                   \n");
+      out.write("                                \n");
+      out.write("                                \n");
+      out.write("                                \n");
+      out.write("                                \n");
+      out.write("                                \n");
+      out.write("                                \n");
+      out.write("                                \n");
+      out.write("                                \n");
+      out.write("                                \n");
+      out.write("                         \n");
       out.write("                \n");
       out.write("                \n");
       out.write("                \n");

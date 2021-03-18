@@ -4,8 +4,10 @@
     Author     : Movini
 --%>
 
+<%@page import="java.io.PrintWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
+
 <%
     if(request.getParameter("submit")!=null)
     {
@@ -28,7 +30,7 @@
         pst.setString(3, pname);
         pst.setString(4,drug_name );
         pst.setDouble(5, price );
-        pst.setString(6, tdate );
+        pst.setString(6, tdate);
         pst.executeUpdate();
         
         
@@ -58,7 +60,7 @@
 
 
 <!DOCTYPE html>
-<html>
+<html >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -75,11 +77,23 @@
         <link href="bootstrap/css/bootstrap.rtl.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css"/>
         
-       
-        
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
+        <script>
+        var TDataCtrl = function ($scope) {
+           
+            $scope.tdata = [{'id': '0'}];
+            $scope.addRow = function(){
+                $scope.tdata[$scope.tdata.length]={'id':$scope.tdata.length};
+            };
+            $scope.removeRow = function(){
+                $scope.tdata.pop();
+            };
+        };
+
+        </script>
         
     </head>
-    <body>
+    <body data-ng-app>
         <h3>Prescription</h3>
         <br>
         
@@ -100,27 +114,62 @@
                     
                        
                     <div alight="left">
-                        <label class="form-label">Patient name</label>
+                        <label  class="form-label">Patient name</label>
                         <input type="text" class="form-control" placeholder="" name="pname" id="pname" required > 
                     </div>
                     
-            
-                    <div alight="left">
-                        <label class="form-label">Drug name</label>
-                        <input type="text" class="form-control" placeholder="" name="drug_name" id="drug_name" required > 
+                  <!--  <div class="row">
+                   <div class="form-group col-md-6">
+                      <label id="lblRange" class="form-label">Drug name</label>
+                        <input type="text" class="form-control" placeholder="" name="drug_name" id="drug_name" required aria-labelledby='lblRange'> 
+                        <input type="text" class="form-control" placeholder="" name="drug_name" id="drug_name[]" required aria-labelledby='lblRange'> 
+                    </div> 
+                                       
+                    <div  class="form-group col-md-6">
+                        <label id="x" class="form-label">Price</label>
+                        <input type="text" class="form-control" placeholder="" name="price" id="price" required required aria-labelledby='x' > 
+                        <input type="text" class="form-control" placeholder="" name="price" id="price[]" required required aria-labelledby='x' > 
                     </div>
-                    
-                     
-                    <div alight="left">
-                        <label class="form-label">Price</label>
-                        <input type="text" class="form-control" placeholder="" name="price" id="price" required > 
+                    </div> -->
+                  
+                  <div data-ng-controller="TDataCtrl">
+                    <table >
+                        <tbody data-ng-repeat="thisrow in tdata">
+                        <tr>
+
+                            <td>Drug name</td>
+                            <td><input type="text" class="form-control" placeholder="" name="drug_name" id="drug_name[]" required aria-labelledby='lblRange'> </td>
+                            <td>Price</td>
+                            <td><input type="text" class="form-control" placeholder="" name="price" id="price[]" required required aria-labelledby='x' > </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <input type="button" value="Add" data-ng-click="addRow()"/>
+                    <input type="button" value="Remove" data-ng-click="removeRow()"/>
                     </div>
+                  
+
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
                   
                     
                        
                     <div alight="left">
-                        <label class="form-label">Date</label>
-                        <input type="text" class="form-control" placeholder="" name="tdate" id="tdate" required > 
+                        <label class="form-label">Date & Time</label>
+                        <input type="datetime-local" class="form-control" placeholder="" name="tdate" id="tdate" required > 
                     </div><br>
                     
                     
@@ -149,7 +198,7 @@
                                 <th>Patient name</th>
                                 <th>Drug name </th>
                                 <th>price</th>
-                                <th>Date</th>
+                                <th>Date & Time</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -166,36 +215,101 @@
                             Statement st= con.createStatement();
                             rs=st.executeQuery(query);
                             
+                           /** String strQuery = "SELECT SUM(price) FROM prescription";
+                            ResultSet rss = st.executeQuery(strQuery);
+                            Double t_price=null;
+
+                           while(rs.next()){
+                              while(rss.next()){
+                               }
+
+                            rss.getDouble(t_price);*/
+                            
                             while(rs.next()){
                                 String id=rs.getString("id");
                                 
+                               
+                               
+                           %>
+                               
                             
-                            
-                               %>
-                            
+                         
                             <tr>
+                              
                                 <td><%=rs.getInt("doc_id")%></td>
                                 <td><%=rs.getInt("pid")%></td>
                                 <td><%=rs.getString("pname")%></td>
-                                <td><%=rs.getString("drug_name")%></td>
+                                <td><%=rs.getString("drug_name")%></td> 
                                 <td><%=rs.getDouble("price")%></td>
+                                
                                 <td><%=rs.getString("tdate")%></td>
                                 <td><a href="update.jsp?id=<%=id%>">Edit</a></td>
                                 <td><a href="delete.jsp?id=<%=id%>">Delete</a></td>
                             </tr>
                             
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><%=rs.getString("drug_name")%></td> 
+                                <td><%=rs.getDouble("price")%></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                               
+                            </tr>
+                            
+                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><%=rs.getString("drug_name")%></td> 
+                                <td><%=rs.getDouble("price")%></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                               
+                            </tr>
+                            
+   
+                            
+                            
+                                                     
+                            
+                            
                             <% }%>
                         
                         
-                        
-                        
+                  
                         
                     </table> 
+                           
                     
                     
                 </div>
                 
-                
+                            <div>
+                                 <form method="get" action="doc">
+                                 <lable>Prescription list</lable>
+                                 <input type="submit" value="By Doctor" name="submit" >
+                                
+                                
+                            </div>
+                            
+                            
+                                   
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                         
                 
                 
                 
