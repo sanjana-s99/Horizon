@@ -9,11 +9,23 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" href="./styles/login.css">
     </head>
     <body>
-        <form action="forget" method="post">
-            Email : <input type="email" name="email" placeholder="Enter Your Email"/>
-            <input type ="submit" value="submit">
-        </form>
+        <div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
+			<div class="inner">
+				<form method ="post" action="login">
+					<h3>Forgot Password?</h3>
+					<div class="form-wrapper">
+						<input type="email" placeholder="Email Address" class="form-control" name="email" id="email" required>
+						<i class="zmdi zmdi-email"></i>
+					</div>
+					<button type="submit">Reset
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+				</form>
+			</div>
+		</div>
     </body>
 </html>
