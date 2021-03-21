@@ -6,38 +6,62 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Registration</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" href="./styles/register.css">
+        <style>
+            /* Chrome, Safari, Edge, Opera */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+            }
+
+            /* Firefox */
+            input[type=number] {
+            -moz-appearance: textfield;
+            }
+		</style>
     </head>
     <body>
-        <div>
-             <form method ="post" action="register">
-                <h1>Register</h1>
-                <p>Please fill in this form to create an account.</p>
-                <hr>
-
-                <label for="name"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="name" id="name" required>
-
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" id="email" required>
-                
-                <label for="psw"><b>telephone</b></label>
-                <input type="text" placeholder="Enter number" name="tp" id="tp" required>
-                
-                <label for="psw"><b>address</b></label>
-                <input type="text" placeholder="Enter address" name="add" id="add" required>
-
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-                
-                <label for="psw"><b>nic</b></label>
-                <input type="text" placeholder="Enter nic" name="nic" id="nic" required>
-
-                <hr>
-                <button type="submit">Register</button>
-              </form>
-        </div>
+		<div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="images/registration-form-1.jpg" alt="">
+				</div>
+				<form method ="post" action="register">
+					<h3>Registration Form</h3>
+					<div class="form-group">
+						<input type="text" placeholder="First Name" class="form-control" name="name" id="name" required>
+						<input type="text" placeholder="Last Name" class="form-control">
+					</div>
+					<div class="form-wrapper">
+						<input type="email" placeholder="Email Address" class="form-control" name="email" id="email" required>
+						<i class="zmdi zmdi-email"></i>
+					</div>
+					<div class="form-wrapper">
+						<input type="password" placeholder="Password" class="form-control" name="psw" id="psw" required>
+						<i class="zmdi zmdi-lock"></i>
+					</div>
+					<div class="form-wrapper">
+						<input type="number" placeholder="Telephone Number" class="form-control" name="tp" id="tp" required>
+						<i class="zmdi zmdi-phone"></i>
+					</div>
+					<div class="form-wrapper">
+						<input type="text" placeholder="Residential Address" class="form-control" name="add" id="add" required>
+						<i class="zmdi zmdi-home"></i>
+					</div>
+					<div class="form-wrapper">
+						<input type="text" placeholder="NIC" class="form-control" name="nic" id="nic" required>
+						<i class="zmdi zmdi-account"></i>
+					</div>
+					<button type="submit">Register
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+				</form>
+			</div>
+		</div>
     </body>
 </html>
