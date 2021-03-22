@@ -33,20 +33,19 @@ and open the template in the editor.
 				</div>
 				<form method ="post" action="register">
 					<h3>Registration Form</h3>
-					<div class="form-group">
+					<div class="form-wrapper">
 						<input type="text" placeholder="First Name" class="form-control" name="name" id="name" required>
-						<input type="text" placeholder="Last Name" class="form-control">
 					</div>
 					<div class="form-wrapper">
-						<input type="email" placeholder="Email Address" class="form-control" name="email" id="email" required>
+						<input type="email" placeholder="Email Address" class="form-control" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
 						<i class="zmdi zmdi-email"></i>
 					</div>
 					<div class="form-wrapper">
-						<input type="password" placeholder="Password" class="form-control" name="psw" id="psw" required>
+						<input type="password" placeholder="Password" class="form-control" name="psw" id="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
 						<i class="zmdi zmdi-lock"></i>
 					</div>
 					<div class="form-wrapper">
-						<input type="number" placeholder="Telephone Number" class="form-control" name="tp" id="tp" required>
+						<input type="tel" placeholder="Telephone Number" class="form-control" name="tp" id="tp" pattern=".{10}" required>
 						<i class="zmdi zmdi-phone"></i>
 					</div>
 					<div class="form-wrapper">
@@ -54,7 +53,7 @@ and open the template in the editor.
 						<i class="zmdi zmdi-home"></i>
 					</div>
 					<div class="form-wrapper">
-						<input type="text" placeholder="NIC" class="form-control" name="nic" id="nic" required>
+						<input type="text" placeholder="NIC" class="form-control" name="nic" id="nic" pattern=".{10,12}" required>
 						<i class="zmdi zmdi-account"></i>
 					</div>
 					<button type="submit">Register

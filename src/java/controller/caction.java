@@ -5,10 +5,15 @@
  */
 package controller;
 
+import Model.SendMail;
 import Model.channeling;
+import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -67,18 +72,35 @@ public class caction extends HttpServlet {
         data[2] = request.getParameter("no");
         String action = request.getParameter("action");
         
+        user u = new user();
+        String mail = null;
+        
+        try {
+            ResultSet rs = u.udata(data[0]);
+            rs.next();
+            mail = rs.getString("email");
+            System.out.println(mail);
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(caction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         if("in".equals(action)){
             channeling ch = new channeling();
             try{
                 boolean verify = ch.cin(data);
                 if(verify){
                     out.print("Done!!");
-                    request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
+                    String msg = "Successfully Checked In!!!";
+                    SendMail.send(mail, "Channeling Status Update", msg);
+                    //request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
+                    response.sendRedirect("patients/viewch.jsp");  
                 }else{
                     out.print("Error!!");
-                    request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
+                    //request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
+                    response.sendRedirect("patients/viewch.jsp");  
                 }
-            }catch(IOException | ClassNotFoundException | SQLException | ServletException e){
+            }catch(IOException | ClassNotFoundException | SQLException e){
                 
             }
         }else if("com".equals(action)){
@@ -87,12 +109,16 @@ public class caction extends HttpServlet {
                 boolean verify = ch.ccom(data);
                 if(verify){
                     out.print("Done!!");
-                    request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
+                    String msg = "Successfully Compleated!!!";
+                    SendMail.send(mail, "Channeling Status Update", msg);
+                    //request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
+                    response.sendRedirect("patients/viewch.jsp");  
                 }else{
                     out.print("Error!!");
-                    request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
+                    // request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
+                    response.sendRedirect("patients/viewch.jsp");  
                 }
-            }catch(IOException | ClassNotFoundException | SQLException | ServletException e){
+            }catch(IOException | ClassNotFoundException | SQLException e){
                 
             }
         }

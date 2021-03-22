@@ -117,13 +117,14 @@ public class book extends HttpServlet {
                 }
                 
                         
-                request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
+                //request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
+                response.sendRedirect("patients/viewch.jsp");  
             }else{
                 out.println("Error!!");
                  //RequestDispatcher rs =  request.getRequestDispatcher("index.html");
                  //rs.include(request, response);
             }
-        }catch(IOException | ClassNotFoundException | SQLException | ServletException e){
+        }catch(IOException | ClassNotFoundException | SQLException e){
             out.println("error : " + e);
             
         }
