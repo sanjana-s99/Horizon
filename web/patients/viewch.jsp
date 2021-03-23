@@ -11,10 +11,16 @@
     session.setMaxInactiveInterval(30);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
-    if(id == null){
-        response.sendRedirect("../login.html");
-    }else{
+    String type = (String)session.getAttribute("type");
+    
+    if(type != null){
+        if(!type.equals("P")){
+            response.sendRedirect("../index.jsp");
+        }else{
         out.print("Welcome : " + name );
+    }
+    }else{
+        response.sendRedirect("../login.html");
     }
 %>
 

@@ -35,13 +35,13 @@
         <br/>
         <a href="register.html">register</a>
         <br/>
-        <a href="adduser.jsp">Add User</a>
+        <a href="admin/adduser.jsp">Add User</a>
         <br/>
         <a href="forgetpass.html">Forget Password</a>
         <br/>
-        <a href="add_amb.jsp">Add Ambulance</a>
+        <a href="staff/add_amb.jsp">Add Ambulance</a>
         <br/>
-        <a href="ambulance.jsp">Request Ambulance</a>
+        <a href="ambulance.jsp">Ongoing Ambulances</a>
         <br/>
         <a href="logout">Logout</a>
     </body>

@@ -7,8 +7,12 @@
 <%
     session.setMaxInactiveInterval(30);
     String type = (String)session.getAttribute("type");
-    if(type != "W"){
-        response.sendRedirect("index.jsp");
+    if(type != null){
+        if(!type.equals("W")){
+            response.sendRedirect("../index.jsp");
+        }
+    }else{
+        response.sendRedirect("../login.html");
     }
 %>
 
@@ -24,7 +28,7 @@
     </head>
     <body>
         <div>
-             <form method ="post" action="adduser">
+             <form method ="post" action="../adduser">
                 <h1>Add User</h1>
                 <p>Please fill in this form to create an account.</p>
                 <hr>
@@ -53,6 +57,12 @@
                 <hr>
                 <button type="submit">Add User</button>
               </form>
+            
+            <form action="../add_amb" method="post">
+            Vehicle number : <input type="text" name="number">
+            <input type="submit" value="add">
+        </form>
+        
         </div>
     </body>
 </html>

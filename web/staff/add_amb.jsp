@@ -3,6 +3,17 @@
     Created on : Mar 23, 2021, 10:29:03 AM
     Author     : SHATTER
 --%>
+<%
+    session.setMaxInactiveInterval(30);
+    String type = (String)session.getAttribute("type");
+    if(type != null){
+        if(!type.equals("S") && !type.equals("W")){
+            response.sendRedirect("../index.jsp");
+        }
+    }else{
+        response.sendRedirect("../login.html");
+    }
+%>
 
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -27,10 +38,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="add_amb" method="post">
-            Vehicle number : <input type="text" name="number">
-            <input type="submit" value="add">
-        </form>
         
         <h1>Ongoing</h1>
         <table>

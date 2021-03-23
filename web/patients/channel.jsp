@@ -4,6 +4,14 @@
     Author     : SHATTER
 --%>
 
+<%
+    session.setMaxInactiveInterval(30);
+    String type = (String)session.getAttribute("type");
+    if(type == null){
+        response.sendRedirect("../login.html");
+    }
+%>
+
 <%@page import="Model.user"%>
 <%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

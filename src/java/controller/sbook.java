@@ -80,12 +80,12 @@ public class sbook extends HttpServlet {
         String[] data = new String[3];
         String to = null, drname = null;
         data[0] = request.getParameter("doctor");
-        String nic = request.getParameter("patient");
+        data[1] = request.getParameter("patient");
         data[2] = request.getParameter("no");
         
         user userdata = new user();
         try{
-            ResultSet rs = userdata.udata(data[1]);
+            ResultSet rs = userdata.udatanic(data[1]);
             rs.next();
             to = rs.getString("email");
             System.out.println(to);
@@ -107,7 +107,7 @@ public class sbook extends HttpServlet {
         
         try{
             user getdata = new user();
-            ResultSet rs = getdata.udatanic(nic);
+            ResultSet rs = getdata.udatanic(data[1]);
             rs.next();
             
             data[1] = rs.getString("id");

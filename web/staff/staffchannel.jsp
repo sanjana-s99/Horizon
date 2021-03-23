@@ -11,12 +11,13 @@
 <%@ page import="java.sql.*;" %>
 <% 
     session.setMaxInactiveInterval(30);
-    String id = (String)session.getAttribute("id");
-    String name = (String)session.getAttribute("name");
-    if(id == null){
-        response.sendRedirect("login.html");
+    String type = (String)session.getAttribute("type");
+    if(type != null){
+        if(!type.equals("S") && !type.equals("W")){
+            response.sendRedirect("../index.jsp");
+        }
     }else{
-        out.print("Welcome : " + name );
+        response.sendRedirect("../login.html");
     }
 %>
 <!DOCTYPE html>
@@ -64,7 +65,7 @@
                     //get data one by one
                     rs.next();
             %>            
-            <h4>Selected : <%=rs.getString("name")%>  <a href="channel.jsp">reset</a> <h4>
+            <h4>Selected : <%=rs.getString("name")%>  <a href="staffchannel.jsp">reset</a> </h4>
             <%
                 }catch (Exception e){
 
@@ -112,8 +113,8 @@
                     rs1.next();
 
             %>
-        <h4>Selected : <%=rs1.getString("name")%>   <a href="channel.jsp">reset</a> <h4>
-        <form action="sbook" method="post">
+        <h4>Selected : <%=rs1.getString("name")%>   <a href="staffchannel.jsp">reset</a> </h4>
+        <form action="../sbook" method="post">
             Nic : <input type="text" name="patient">
             <input type="hidden" name="doctor" value="<%=doc %>">
             <h5>Ongoing Number : <%=no+1%> </h5>
