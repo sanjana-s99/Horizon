@@ -39,6 +39,10 @@
         <br/>
         <a href="forgetpass.html">Forget Password</a>
         <br/>
+        <a href="add_amb.jsp">Add Ambulance</a>
+        <br/>
+        <a href="ambulance.jsp">Request Ambulance</a>
+        <br/>
         <a href="logout">Logout</a>
     </body>
 </html>
