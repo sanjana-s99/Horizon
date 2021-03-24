@@ -101,12 +101,11 @@ pst = con.prepareStatement("update prescription set doc_name = ?,pname = ?,drug_
         
  
 %>
-<<<<<<< HEAD
+
           <script>
               alert("Record Updated");
     
           </script>
-=======
          
 >>>>>>> d083cfca650a84537e925f9abcbeac213cedbf8c
     
