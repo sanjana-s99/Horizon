@@ -3,10 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/GitClone/Horizon/prescription_jsp/src/java/avalues/avlues.java</file>
             <file>file:/D:/GitClone/Horizon/prescription_jsp/web/Doctor.jsp</file>
+            <file>file:/D:/GitClone/Horizon/prescription_jsp/src/java/getdata_doc/SendMail.java</file>
             <file>file:/D:/GitClone/Horizon/prescription_jsp/src/java/getdata_doc/doc.java</file>
+            <file>file:/D:/GitClone/Horizon/prescription_jsp/web/text2.jsp</file>
+            <file>file:/D:/GitClone/Horizon/prescription_jsp/web/email.jsp</file>
+            <file>file:/D:/GitClone/Horizon/prescription_jsp/web/mailProcess.jsp</file>
             <file>file:/D:/GitClone/Horizon/prescription_jsp/web/index.jsp</file>
             <file>file:/D:/GitClone/Horizon/prescription_jsp/web/text.jsp</file>
+            <file>file:/D:/GitClone/Horizon/prescription_jsp/web/update.jsp</file>
             <file>file:/D:/GitClone/Horizon/prescription_jsp/web/delete.jsp</file>
         </group>
     </open-files>

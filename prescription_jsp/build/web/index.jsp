@@ -4,6 +4,7 @@
     Author     : Movini
 --%>
 
+<%@page import="java.lang.String"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
@@ -11,27 +12,91 @@
 <%
     if(request.getParameter("submit")!=null)
     {
-        int doc_id=Integer.parseInt(request.getParameter("doc_id"));
-        int pid=Integer.parseInt(request.getParameter("pid"));
+        String doc_name=request.getParameter("doc_name");
+        
         String pname=request.getParameter("pname");
         String drug_name=request.getParameter("drug_name");
-        double price=Double.parseDouble(request.getParameter("price"));
+       
         String tdate=request.getParameter("tdate");
+        String totalprice=request.getParameter("totalprice");
+        
+      String  test =null;
+        
         
         Connection con;
         PreparedStatement pst;
         ResultSet rs;
         
+        
+ 
+        
         Class.forName("com.mysql.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost/prescription","root","");
-        pst = con.prepareStatement("insert into prescription(doc_id,pid,pname,drug_name,price,tdate)values(?,?,?,?,?,?)");
-        pst.setInt(1, doc_id);
-        pst.setInt(2, pid);
-        pst.setString(3, pname);
-        pst.setString(4,drug_name );
-        pst.setDouble(5, price );
-        pst.setString(6, tdate);
+        
+String[] a = request.getParameterValues("drug_name");
+if(a!=null)
+{
+for(int i=0;i<a.length;i++){
+out.println(a[i]);
+
+}}
+
+
+if(a.length == 1)
+    
+{
+    
+  test  = (a[0]+","+a[1]);   
+    
+}
+if(a.length == 2){
+    
+     test  = (a[0]+","+a[1]);   
+ 
+    
+}
+
+if(a.length == 3){
+    
+     test  = (a[0]+","+a[1]+","+a[2]);  
+    
+}
+
+if(a.length == 4){
+    
+     test  = (a[0]+","+a[1]+","+a[2]+","+a[3]);  
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pst = con.prepareStatement("insert into prescription(doc_name,pname,drug_name,tdate,totalprice)values(?,?,?,?,?)");
+        pst.setString(1, doc_name);
+       
+        pst.setString(2, pname);
+        pst.setString(3,test);
+       
+        pst.setString(4,tdate);
+        pst.setString(5,totalprice);
         pst.executeUpdate();
+
+
+
+
+        
+        
+        
         
         
  
@@ -102,21 +167,102 @@
                 <form  method="post" action="#">
                     
                     <div alight="left">
-                        <label class="form-label">Doctor ID</label>
-                        <input type="text" class="form-control" placeholder="" name="doc_id" id="doc_id" required > 
+                        
+                         <label class="form-label">Doctor name</label>
+                       <select class="form-control" aria-label="Default select example" name="doc_name">  
+                        
+                         <%
+                        
+                         Connection conn;
+                         PreparedStatement pst1;
+                         ResultSet rss;
+       
+                         Class.forName("com.mysql.jdbc.Driver");
+                         conn=DriverManager.getConnection("jdbc:mysql://localhost/prescription","root","");
+                         
+                           String query1 ="select * from doctor";
+                           Statement st1 =conn.createStatement();
+                           
+                            rss =st1.executeQuery( query1);
+                             while(rss.next())
+                             {
+                             
+
+                                
+                            
+                            String name= rss.getString("name");
+                        
+
+
+                        %>
+                         <tr>
+                         <option selected  value="<%=name%>"><%=name%></option>
+                         
+                          
+                        </tr>
+                        <%
+                          
+                          }
+                        
+                        %> 
+                        
+                        
+                        
+                        
+                        
+                       </select>  
+                        
+                        
+                        
                     </div>
                     
             
                     <div alight="left">
-                        <label class="form-label">Patient ID</label>
-                        <input type="text" class="form-control" placeholder="" name="pid" id="pid" required > 
+                        <label class="form-label">Patient name</label>
+                
+                          
+                         <select class="form-control" aria-label="Default select example" name="pname"> 
+                         <%
+                        
+                         Connection conn1;
+                         PreparedStatement pst2;
+                         ResultSet rss1;
+       
+                         Class.forName("com.mysql.jdbc.Driver");
+                         conn=DriverManager.getConnection("jdbc:mysql://localhost/prescription","root","");
+                         
+                           String query2 ="select * from users";
+                           Statement st2 =conn.createStatement();
+                           
+                            rss1 =st2.executeQuery( query2);
+                             while(rss1.next())
+                             {
+                             
+
+                                
+                            
+                            String name= rss1.getString("name");
+                        
+
+
+                        %>
+                        
+                         <option selected  value="<%=name%>"><%=name%></option>
+                          
+                         
+                       
+                        <%
+                          
+                          }
+                        
+                        %> 
+                         </select>
+                        
+                        
                     </div>
                     
                        
-                    <div alight="left">
-                        <label  class="form-label">Patient name</label>
-                        <input type="text" class="form-control" placeholder="" name="pname" id="pname" required > 
-                    </div>
+                   
                     
                   <!--  <div class="row">
                    <div class="form-group col-md-6">
@@ -138,15 +284,62 @@
                         <tr>
 
                             <td>Drug name</td>
-                            <td><input type="text" class="form-control" placeholder="" name="drug_name" id="drug_name[]" required aria-labelledby='lblRange'> </td>
-                            <td>Price</td>
-                            <td><input type="text" class="form-control" placeholder="" name="price" id="price[]" required required aria-labelledby='x' > </td>
+                            
+                            
+                  <td><select class="form-control"  name="drug_name"   size="" multiple="multiple" tabindex="1"> 
+                         <%
+                        
+                         Connection conn11;
+                         PreparedStatement pst21;
+                         ResultSet rss11;
+       
+                         Class.forName("com.mysql.jdbc.Driver");
+                         conn11=DriverManager.getConnection("jdbc:mysql://localhost/prescription","root","");
+                         
+                           String query21 ="select * from records";
+                           Statement st21 =conn.createStatement();
+                           
+                            rss11 =st21.executeQuery( query21);
+                             while(rss11.next())
+                             {
+                             
 
+                                
+                            
+                            String drugsname= rss11.getString("drugsname");
+                            String price= rss11.getString("price");
+                        
+
+
+                        %>
+                        
+                         <option selected  value="<%=drugsname%> /-<%=price%>"><%=drugsname%> </option>
+                         
+                         
+                             
+                              
+                          
+                         
+                       
+                        <%
+                          
+                          }
+                        
+                        %> 
+                         </select></td>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                         </tr>
                         </tbody>
                     </table>
-                    <input type="button" value="Add" data-ng-click="addRow()"/>
-                    <input type="button" value="Remove" data-ng-click="removeRow()"/>
+                    
                     </div>
                   
 
@@ -160,7 +353,10 @@
                   
                   
                   
-                  
+                  <div alight="left">
+                        <label class="form-label">Total price</label>
+                        <input type="text" class="form-control" name="totalprice" > 
+                    </div><br>
                   
                   
                   
@@ -193,14 +389,16 @@
                     <table id="tbl-prescription" class="table table-responsive table-bordered" cellpadding="0" width="50%">
                         <thead>
                             <tr id="mac">
-                                <th >Doctor ID</th>
-                                <th>Patient ID</th>
+                                <th >Doctor name</th>
+                                
                                 <th>Patient name</th>
                                 <th>Drug name </th>
-                                <th>price</th>
+                                 <th>price </th>
+                                
                                 <th>Date & Time</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
+                                <th>Send Email</th>
                             </tr>
                        </thead>    
                      <% 
@@ -227,7 +425,11 @@
                             
                             while(rs.next()){
                                 String id=rs.getString("id");
-                                
+                               String username =rs.getString("pname");
+                               String doctorname =rs.getString("doc_name");
+                               String drugs =rs.getString("drug_name");
+                               String totalprice =rs.getString("totalprice");
+                                String date=rs.getString("tdate");
                                
                                
                            %>
@@ -236,42 +438,20 @@
                          
                             <tr>
                               
-                                <td><%=rs.getInt("doc_id")%></td>
-                                <td><%=rs.getInt("pid")%></td>
+                                <td><%=rs.getString("doc_name")%></td>
+                                
                                 <td><%=rs.getString("pname")%></td>
                                 <td><%=rs.getString("drug_name")%></td> 
-                                <td><%=rs.getDouble("price")%></td>
-                                
+                               
+                                  <td><%=rs.getString("totalprice")%></td>
                                 <td><%=rs.getString("tdate")%></td>
                                 <td><a href="update.jsp?id=<%=id%>">Edit</a></td>
                                 <td><a href="delete.jsp?id=<%=id%>">Delete</a></td>
+                                <td><a href="email.jsp?id=<%=id%>&username=<%=username%>&doctorname=<%=doctorname%>&drugs=<%=drugs%>&date=<%=date%>&price=<%=totalprice%> ">Email</a></td>
+                                
                             </tr>
                             
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><%=rs.getString("drug_name")%></td> 
-                                <td><%=rs.getDouble("price")%></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                               
-                            </tr>
-                            
-                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><%=rs.getString("drug_name")%></td> 
-                                <td><%=rs.getDouble("price")%></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                               
-                            </tr>
+                           
                             
    
                             
