@@ -43,6 +43,8 @@
         <br/>
         <a href="ambulance.jsp">Ongoing Ambulances</a>
         <br/>
+        <a href="Lab/labApo.jsp">Lab</a>
+        <br/>
         <a href="logout">Logout</a>
     </body>
 </html>
