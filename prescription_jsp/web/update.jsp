@@ -100,10 +100,7 @@ pst = con.prepareStatement("insert into prescription(doc_name,pname,drug_name,td
         
  
 %>
-          <script>
-              alert("Record Added");
-    
-          </script>
+         
     
     
     
