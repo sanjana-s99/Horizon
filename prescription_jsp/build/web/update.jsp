@@ -36,7 +36,7 @@ String[] a = request.getParameterValues("drug_name");
 if(a!=null)
 {
 for(int i=0;i<a.length;i++){
-out.println(a[i]);
+//out.println(a[i]);
 
 }}
 
@@ -80,7 +80,7 @@ if(a.length == 4){
 
 
 
-pst = con.prepareStatement("insert into prescription(doc_name,pname,drug_name,tdate,totalprice)values(?,?,?,?,?)");
+pst = con.prepareStatement("update prescription set doc_name = ?,pname = ?,drug_name = ?,tdate = ?,totalprice = ? where id = ?");
         pst.setString(1, doc_name);
        
         pst.setString(2, pname);
@@ -88,6 +88,7 @@ pst = con.prepareStatement("insert into prescription(doc_name,pname,drug_name,td
        
         pst.setString(4,tdate);
         pst.setString(5,totalprice);
+        pst.setString(6,id);
         pst.executeUpdate();
 
 
@@ -101,7 +102,7 @@ pst = con.prepareStatement("insert into prescription(doc_name,pname,drug_name,td
  
 %>
           <script>
-              alert("Record Added");
+              alert("Record Updated");
     
           </script>
     

@@ -79,7 +79,7 @@ String[] a = request.getParameterValues("drug_name");
 if(a!=null)
 {
 for(int i=0;i<a.length;i++){
-out.println(a[i]);
+//out.println(a[i]);
 
 }}
 
@@ -498,12 +498,12 @@ pst = con.prepareStatement("insert into prescription(doc_name,pname,drug_name,td
                             rss.getDouble(t_price);*/
                             
                             while(rs.next()){
-                                String id=rs.getString("id");
+                               String id=rs.getString("id");
                                String username =rs.getString("pname");
                                String doctorname =rs.getString("doc_name");
                                String drugs =rs.getString("drug_name");
                                String totalprice =rs.getString("totalprice");
-                                String date=rs.getString("tdate");
+                               String date=rs.getString("tdate");
                                
                                
                            
