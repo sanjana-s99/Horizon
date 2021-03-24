@@ -14,7 +14,7 @@
 
   <div class="header">
     <h1 class="header__title">Horizon </h1>
-    <h2 class="header__subtitle">with Flexbox</h2>
+    <h2 class="header__subtitle">Pharmacy</h2>
   </div>
     
     
