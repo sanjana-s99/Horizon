@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -78,10 +80,12 @@ public class book extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String[] data = new String[3];
-        String to = null, drname = null;
+        String to = null, drname = null, drtime = null, newTime=null;
         data[0] = request.getParameter("doctor");
         data[1] = request.getParameter("patient");
         data[2] = request.getParameter("no");
+        int time = Integer.valueOf(data[2])*15;
+        
         
         user userdata = new user();
         try{
@@ -99,9 +103,23 @@ public class book extends HttpServlet {
             drname = rs.getString("name");
         }catch(ClassNotFoundException | SQLException e){
             out.println("Error");
+            System.out.println(e);
         }
         
-        String msg = "Your Channeling For Dr. " + drname + " is confirmed. Please make your payment. <br/> <b>Your Number Is :" + data[2] + "</b><br/><hr/>Horizen Hospitals Channeling Team";
+        try{
+            ResultSet rs = userdata.drtime(data[0]);
+            rs.next();
+            drtime = rs.getString("time");
+            
+            DateTimeFormatter df = DateTimeFormatter.ofPattern("HH:mm");
+
+            LocalTime lt = LocalTime.parse(drtime);
+            newTime = df.format(lt.plusMinutes(time));
+        }catch(ClassNotFoundException | SQLException e){
+            out.println("Error");
+        }
+        
+        String msg = "Your Channeling For Dr. " + drname + " is confirmed. Please make your payment. <br/> <b>Your Number Is :" + data[2] + "</b><br/>Time For Your Number : "+newTime+"<br/><hr/>Horizen Hospitals Channeling Team";
         
         try{
             user users = new user();

@@ -5,6 +5,7 @@
  */
 package controller;
 
+import Model.keygen;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -74,20 +75,28 @@ public class adduser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String[] data = new String[7];
+        String[] data = new String[8];
         data[0] = request.getParameter("name");
         data[1] = request.getParameter("email");
         data[2] = request.getParameter("type");
         data[3] = request.getParameter("nic");
         data[4] = request.getParameter("tp");
         data[5] = request.getParameter("add");
+        data[6] = request.getParameter("spe");
+        
+        if(!request.getParameter("type").equals("D")){
+            data[6] = null;
+        }
         
         try{
             user reguser = new user();
             boolean rslt = reguser.adduser(data);
             if(rslt){
+                keygen key = new keygen();
+                String skey = key.verify(data[1]);
+                key.regverifys(String.valueOf(skey), data[1]);
                 out.print("User Added Successfully");
-                 request.getRequestDispatcher("adduser.jsp").include(request, response);
+                 request.getRequestDispatcher("admin/adduser.jsp").include(request, response);
             }else{
             
             }

@@ -106,6 +106,22 @@ public class user {
         return rs;
     }
      
+     public boolean checkexist(String email){
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("select id from users where email =  ?");
+            ps.setString(1,email);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if(!rs.next()){
+                return true;
+            }
+            
+        }catch(Exception e){ 
+            System.out.println(e);
+        }
+        return false;
+     }     
      
     public ResultSet udatanic(String nic) throws ClassNotFoundException, SQLException{
         ResultSet rs = null;
@@ -159,20 +175,44 @@ public class user {
         //calculate user age
         int age = Calendar.getInstance().get(Calendar.YEAR) - year;
         
-        try{
-            PreparedStatement ps = con.createConnection().prepareStatement("insert into users(name,email,type,age,gender,telephone,address,nic) values (?,?,?,?,?,?,?,?)");
-            ps.setString(1, d[0]);
-            ps.setString(2, d[1]);
-            ps.setString(3, d[2]);
-            ps.setString(4, String.valueOf(age));
-            ps.setString(5, gender);
-            ps.setString(6, d[4]);
-            ps.setString(7, d[5]);
-            ps.setString(8, d[3]);
-            int i = ps.executeUpdate();
-            return i>0;
-        }catch(Exception e){
-            System.out.println(e);
+        if(d[6] == null){
+            try{
+                PreparedStatement ps = con.createConnection().prepareStatement("insert into users(name,email,type,age,gender,telephone,address,nic) values (?,?,?,?,?,?,?,?)");
+                ps.setString(1, d[0]);
+                ps.setString(2, d[1]);
+                ps.setString(3, d[2]);
+                ps.setString(4, String.valueOf(age));
+                ps.setString(5, gender);
+                ps.setString(6, d[4]);
+                ps.setString(7, d[5]);
+                ps.setString(8, d[3]);
+                int i = ps.executeUpdate();
+                return i>0;
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        }else{
+            try{
+                PreparedStatement ps = con.createConnection().prepareStatement("insert into users(name,email,type,age,gender,telephone,address,nic) values (?,?,?,?,?,?,?,?)");
+                ps.setString(1, d[0]);
+                ps.setString(2, d[1]);
+                ps.setString(3, d[2]);
+                ps.setString(4, String.valueOf(age));
+                ps.setString(5, gender);
+                ps.setString(6, d[4]);
+                ps.setString(7, d[5]);
+                ps.setString(8, d[3]);
+                int i = ps.executeUpdate();
+                
+                PreparedStatement ps1 = con.createConnection().prepareStatement("UPDATE doctor SET s_id = ? WHERE nic = ?");
+                ps1.setString(1, d[6]);
+                ps1.setString(2, d[3]);                
+                int x = ps1.executeUpdate();
+                
+                return i>0 && x>0;
+            }catch(Exception e){
+                System.out.println(e);
+            }
         }
         return false;
     } 
@@ -191,4 +231,36 @@ public class user {
         }
         return false;
     }
+    
+    public ResultSet drtime(String id) throws ClassNotFoundException, SQLException{
+        ResultSet rs = null;
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("select * from doctor where id =  ?");
+            ps.setString(1,id);
+            
+            rs = ps.executeQuery();
+            
+        }catch(Exception e){ 
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public boolean checkstatus(String email) throws ClassNotFoundException, SQLException{
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("select status from users where email =  ?");
+            ps.setString(1,email);
+            
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            if(rs.getString("status").equals("A")){
+                return true;
+            }
+            
+        }catch(Exception e){ 
+            System.out.println(e);
+        }
+        return false;
+    }
+    
 }

@@ -6,6 +6,7 @@
 package controller;
 
 import Model.keygen;
+import Model.newuser;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -77,6 +78,7 @@ public class register extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        /*
         String[] data = new String[6];
         data[0] = request.getParameter("name");
         data[1] = request.getParameter("email");
@@ -84,19 +86,24 @@ public class register extends HttpServlet {
         data[3] = request.getParameter("nic");
         data[4] = request.getParameter("tp");
         data[5] = request.getParameter("add");
+        */
+        
+        newuser user = new newuser(request.getParameter("name"), request.getParameter("email"), request.getParameter("psw"), request.getParameter("nic"), request.getParameter("tp"), request.getParameter("add"));
         
         try{
             user reguser = new user();
-            boolean rslt = reguser.reg(data);
-            if(rslt){
-                keygen key = new keygen();
-                String skey = key.verify(data[1]);
-                key.regverify(String.valueOf(skey), data[1]);
-                out.print("You are successfully registered!!");
-                out.print("<br>Welcome, "+data[0]);
-                 request.getRequestDispatcher("login.html").include(request, response);
+            if(reguser.checkexist(data[1])){
+                if(reguser.reg(data)){
+                    keygen key = new keygen();
+                    String skey = key.verify(data[1]);
+                    key.regverify(String.valueOf(skey), data[1]);
+                    out.print("You are successfully registered!!");
+                    out.print("<br>Welcome, "+data[0]);
+                    request.getRequestDispatcher("login.html").include(request, response);
+                }
             }else{
-            
+                out.println("User Exists!!");
+                request.getRequestDispatcher("login.html").include(request, response);
             }
         }catch(IOException | ClassNotFoundException | NoSuchAlgorithmException | SQLException | ServletException e){
             out.println("error : " + e);

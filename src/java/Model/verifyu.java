@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class verifyu {
     dbCon con = new dbCon();
-    public boolean uuser(String email) throws ClassNotFoundException, SQLException{
+    public boolean vuser(String email) throws ClassNotFoundException, SQLException{
         try{
             PreparedStatement ps = con.createConnection().prepareStatement("UPDATE users SET status = 'A' where email = ?");
             ps.setString(1,email);
@@ -25,6 +25,20 @@ public class verifyu {
             int i = ps.executeUpdate();
             int x = ps1.executeUpdate();
             return i>0 && x>0;            
+            
+        }catch(ClassNotFoundException | SQLException e){ 
+            System.out.println(e);
+        }
+        return false;
+    }
+    
+    public boolean repass(String email) throws ClassNotFoundException, SQLException{
+        try{            
+            PreparedStatement ps = con.createConnection().prepareStatement("DELETE FROM verify where email = ?");
+            ps.setString(1,email);
+            
+            int i = ps.executeUpdate();
+            return i>0;            
             
         }catch(ClassNotFoundException | SQLException e){ 
             System.out.println(e);

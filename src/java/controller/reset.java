@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package controller;
 
+import Model.SendMail;
+import Model.keygen;
+import Model.user;
+import Model.verifyu;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
@@ -85,9 +89,12 @@ public class reset extends HttpServlet {
                 keygen k = new keygen();
                 String msg = "Password Reset Successfull!!";
                 if(users.resetpass(k.generate(pass1), email)){
-                    out.println("Resetting Done!!");
-                    SendMail.send(email, "Reset Password", msg);
-                    request.getRequestDispatcher("login.html").include(request, response);
+                    verifyu v = new verifyu();
+                    if(v.repass(email)){
+                        out.println("Resetting Done!!");
+                        SendMail.send(email, "Reset Password", msg);
+                        request.getRequestDispatcher("login.html").include(request, response);
+                    }
                 }
             }catch(IOException | ClassNotFoundException | NoSuchAlgorithmException | SQLException | ServletException e){
                 out.println("Something Went Wrong!!");

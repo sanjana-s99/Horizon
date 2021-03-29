@@ -86,17 +86,20 @@ public class login extends HttpServlet {
             rslt.next();
             
             if(rslt.getInt("id") != 0){
+                if(users.checkstatus(email)){
+                    //creating a session
+                    HttpSession session = request.getSession();
+                    session.setAttribute("id", rslt.getString("id"));
 
-                //creating a session
-                HttpSession session = request.getSession();
-                session.setAttribute("id", rslt.getString("id"));
-                
-                ResultSet rs = users.udata(rslt.getString("id"));
-                rs.next();
-                session.setAttribute("name", rs.getString("name"));
-                session.setAttribute("type", rs.getString("type"));
-                        
-                request.getRequestDispatcher("index.jsp").include(request, response);
+                    ResultSet rs = users.udata(rslt.getString("id"));
+                    rs.next();
+                    session.setAttribute("name", rs.getString("name"));
+                    session.setAttribute("type", rs.getString("type"));
+
+                    request.getRequestDispatcher("index.jsp").include(request, response);
+                }else{
+                    out.println("Please Verify Your Email!!");
+                }
             }else{
                 out.println("NO User");
                  //RequestDispatcher rs =  request.getRequestDispatcher("index.html");

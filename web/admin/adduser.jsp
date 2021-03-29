@@ -4,6 +4,9 @@
     Author     : SHATTER
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="Model.dbCon"%>
 <%
     session.setMaxInactiveInterval(30);
     String type = (String)session.getAttribute("type");
@@ -27,10 +30,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     </head>
     <body>
+        <h1>Admin Panel</h1>
         <div>
              <form method ="post" action="../adduser">
-                <h1>Add User</h1>
-                <p>Please fill in this form to create an account.</p>
+                 <h5>Add User</h5>
                 <hr>
 
                 <label for="name"><b>Name</b></label>
@@ -53,15 +56,86 @@
                     <option value="S">Staff</option>
                     <option value="D">Doctor</option>
                 </select>
+                <label for="type"><b>Select Specilized Area</b></label>
+                <select name="spe">
+
+                <%
+                    try {
+                        dbCon con = new dbCon();
+                        Statement st = con.createConnection().createStatement();
+                        String query = "SELECT id, name FROM specelist ";
+                        //get table data
+                        ResultSet rs = st.executeQuery(query);
+                        //get data one by one
+                        while(rs.next()){
+                            %>
+                            <option value="<%=rs.getInt("id")%>"><%=rs.getString("name")%></option>
+
+                            <% }
+                    }catch (Exception e){
+
+                    }
+                %>
+            </select>
 
                 <hr>
                 <button type="submit">Add User</button>
               </form>
-            
+            <hr/>
+            <h1>Add New Ambulance</h1>
             <form action="../add_amb" method="post">
             Vehicle number : <input type="text" name="number">
             <input type="submit" value="add">
         </form>
+            <hr/>
+            <h1>Lab Services</h1>
+            <div>
+                <h6>Pirce Details</h6>
+                <form>
+                    
+                    <table border='1'>
+                        <tr>
+                            <td>ID</td>
+                            <td>Appointment Type</td>
+                            <td>Price</td>
+                            <td>Action</td>
+                        </tr>
+                        <%
+                     try{
+                               
+                              dbCon con = new dbCon();
+                              String query="select * from lab";
+                              Statement st=con. createConnection().createStatement();
+                              ResultSet rs=st.executeQuery(query);
+                              
+                              while(rs.next()){
+                                  String id=rs.getString("id");
+                              
+
+                            %>
+                        <tr>
+                            <td><%=rs.getString("id") %></td>
+                            <td><%=rs.getString("Atype") %></td>
+                            <td><%=rs.getString("price") %></td>
+                            <td><a href="Update?id=<%=id%>">Update</a></td>
+                        </tr>
+                                                    <%
+                               }  
+}
+catch(Exception r){
+System.out.println(r.getMessage());
+}
+                            %>
+                    </table>
+                         
+                </form>
+                    <br>
+                    <form action="" method="post">
+                        Service : <input type="text" name="type" >
+                        Price : <input type="text" name="price">
+                        <input type="submit" value="add">
+                    </form>
+            </div>
         
         </div>
     </body>

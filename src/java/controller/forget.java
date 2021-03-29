@@ -85,8 +85,6 @@ public class forget extends HttpServlet {
             rslt.next();
             
             if(rslt.getString("email") != null){
-
-                out.println("found");
                 keygen k = new keygen();
                 String key = k.verify(email);
                 k.resetpass(key, email);

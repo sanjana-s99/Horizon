@@ -40,7 +40,7 @@
                         
                         
                         verifyu v = new verifyu();
-                        if(v.uuser(email)){
+                        if(v.vuser(email)){
                             SendMail m = new SendMail();
                             m.send(email, "Succesfully Verified!!", "Your Horizen Hospital User Account Is Successfully Verified!!");
                             out.println("Successfully verified!!");

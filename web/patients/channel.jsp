@@ -64,7 +64,7 @@
                     //get data one by one
                     rs.next();
             %>            
-            <h4>Selected : <%=rs.getString("name")%>  <a href="channel.jsp">reset</a> <h4>
+            <h4>Selected : <%=rs.getString("name")%>  <a href="channel.jsp">reset</a> </h4>
             <%
                 }catch (Exception e){
 
@@ -77,17 +77,25 @@
                     try {
                         dbCon con = new dbCon();
                         Statement st = con.createConnection().createStatement();
-                        String query = "SELECT id, name FROM users where s_id = " + sid + " AND type = 'D'";
+                        String query = "SELECT id FROM doctor where s_id = " + sid;
+                        //String query = "SELECT id, name FROM users where s_id = " + sid + " AND type = 'D'";
                         //get table data
                         ResultSet rs = st.executeQuery(query);
                         //get data one by one
                         while(rs.next()){
+                            int did = rs.getInt("id");
+                            Statement st1 = con.createConnection().createStatement();
+                            String query1 = "SELECT id, name FROM users where id = " + did + " AND type = 'D'";
+                            //get table data
+                            ResultSet rs1 = st1.executeQuery(query1);
+                            while(rs1.next()){
                             %>
-                            <option value="<%=rs.getInt("id")%>"><%=rs.getString("name")%></option>
+                            <option value="<%=rs1.getInt("id")%>"><%=rs1.getString("name")%></option>
 
                             <% }
+                                }
                     }catch (Exception e){
-
+                        System.out.println(e);
                     }
                 %>
             </select>
@@ -112,7 +120,7 @@
                     rs1.next();
 
             %>
-        <h4>Selected : <%=rs1.getString("name")%>   <a href="channel.jsp">reset</a> <h4>
+        <h4>Selected : <%=rs1.getString("name")%>   <a href="channel.jsp">reset</a> </h4>
         <form action="../book" method="post">
             <input type="hidden" name="doctor" value="<%=doc %>">
             <input type="hidden" name="patient" value="<%=id %>">
