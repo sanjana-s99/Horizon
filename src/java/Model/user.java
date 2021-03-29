@@ -17,8 +17,8 @@ import java.util.Calendar;
  */
 public class user {
     dbCon con = new dbCon();
-    public boolean reg(String[] d ) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException{
-        String nic = d[3], gender;
+    public boolean reg(newuser d ) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException{
+        String nic = d.getNic(), gender;
         int year = 0, daytext = 0;
         
         // get user birthyear from nic
@@ -41,18 +41,18 @@ public class user {
         int age = Calendar.getInstance().get(Calendar.YEAR) - year;
         
         keygen key = new keygen();
-        String pass = key.generate(d[2]);
+        String pass = key.generate(d.getPassword());
         
         try{
             PreparedStatement ps = con.createConnection().prepareStatement("insert into users(name,email,password,age,gender,telephone,address,nic) values (?,?,?,?,?,?,?,?)");
-            ps.setString(1, d[0]);
-            ps.setString(2, d[1]);
+            ps.setString(1, d.getName());
+            ps.setString(2, d.getEmail());
             ps.setString(3, pass);
             ps.setString(4, String.valueOf(age));
             ps.setString(5, gender);
-            ps.setString(6, d[4]);
-            ps.setString(7, d[5]);
-            ps.setString(8, d[3]);
+            ps.setString(6, d.getTp());
+            ps.setString(7, d.getAdd());
+            ps.setString(8, d.getNic());
             int i = ps.executeUpdate();
             return i>0;
         }catch(Exception e){
@@ -152,8 +152,8 @@ public class user {
         return false;
     }
      
-    public boolean adduser(String[] d ) throws ClassNotFoundException, SQLException{
-        String nic = d[3], gender;
+    public boolean adduser(newstaff d ) throws ClassNotFoundException, SQLException{
+        String nic = d.getNic(), gender;
         int year = 0, daytext = 0;
         
         // get user birthyear from nic
@@ -175,17 +175,17 @@ public class user {
         //calculate user age
         int age = Calendar.getInstance().get(Calendar.YEAR) - year;
         
-        if(d[6] == null){
+        if(d.getSpe() == null){
             try{
                 PreparedStatement ps = con.createConnection().prepareStatement("insert into users(name,email,type,age,gender,telephone,address,nic) values (?,?,?,?,?,?,?,?)");
-                ps.setString(1, d[0]);
-                ps.setString(2, d[1]);
-                ps.setString(3, d[2]);
+                ps.setString(1, d.getName());
+                ps.setString(2, d.getEmail());
+                ps.setString(3, d.getType());
                 ps.setString(4, String.valueOf(age));
                 ps.setString(5, gender);
-                ps.setString(6, d[4]);
-                ps.setString(7, d[5]);
-                ps.setString(8, d[3]);
+                ps.setString(6, d.getTp());
+                ps.setString(7, d.getAdd());
+                ps.setString(8, d.getNic());
                 int i = ps.executeUpdate();
                 return i>0;
             }catch(Exception e){
@@ -194,19 +194,19 @@ public class user {
         }else{
             try{
                 PreparedStatement ps = con.createConnection().prepareStatement("insert into users(name,email,type,age,gender,telephone,address,nic) values (?,?,?,?,?,?,?,?)");
-                ps.setString(1, d[0]);
-                ps.setString(2, d[1]);
-                ps.setString(3, d[2]);
+                ps.setString(1, d.getName());
+                ps.setString(2, d.getEmail());
+                ps.setString(3, d.getType());
                 ps.setString(4, String.valueOf(age));
                 ps.setString(5, gender);
-                ps.setString(6, d[4]);
-                ps.setString(7, d[5]);
-                ps.setString(8, d[3]);
+                ps.setString(6, d.getTp());
+                ps.setString(7, d.getAdd());
+                ps.setString(8, d.getNic());
                 int i = ps.executeUpdate();
                 
                 PreparedStatement ps1 = con.createConnection().prepareStatement("UPDATE doctor SET s_id = ? WHERE nic = ?");
-                ps1.setString(1, d[6]);
-                ps1.setString(2, d[3]);                
+                ps1.setString(1, d.getSpe());
+                ps1.setString(2, d.getNic());                
                 int x = ps1.executeUpdate();
                 
                 return i>0 && x>0;

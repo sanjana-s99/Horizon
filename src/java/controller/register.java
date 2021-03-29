@@ -77,28 +77,18 @@ public class register extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        /*
-        String[] data = new String[6];
-        data[0] = request.getParameter("name");
-        data[1] = request.getParameter("email");
-        data[2] = request.getParameter("psw");
-        data[3] = request.getParameter("nic");
-        data[4] = request.getParameter("tp");
-        data[5] = request.getParameter("add");
-        */
-        
+        PrintWriter out = response.getWriter();        
         newuser user = new newuser(request.getParameter("name"), request.getParameter("email"), request.getParameter("psw"), request.getParameter("nic"), request.getParameter("tp"), request.getParameter("add"));
         
         try{
             user reguser = new user();
-            if(reguser.checkexist(data[1])){
-                if(reguser.reg(data)){
+            if(reguser.checkexist(user.getEmail())){
+                if(reguser.reg(user)){
                     keygen key = new keygen();
-                    String skey = key.verify(data[1]);
-                    key.regverify(String.valueOf(skey), data[1]);
+                    String skey = key.verify(user.getEmail());
+                    key.regverify(String.valueOf(skey), user.getEmail());
                     out.print("You are successfully registered!!");
-                    out.print("<br>Welcome, "+data[0]);
+                    out.print("<br>Welcome, "+user.getName());
                     request.getRequestDispatcher("login.html").include(request, response);
                 }
             }else{

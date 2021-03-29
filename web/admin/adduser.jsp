@@ -8,7 +8,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="Model.dbCon"%>
 <%
-    session.setMaxInactiveInterval(30);
+    session.setMaxInactiveInterval(3000);
     String type = (String)session.getAttribute("type");
     if(type != null){
         if(!type.equals("W")){

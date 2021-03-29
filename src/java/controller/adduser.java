@@ -6,6 +6,7 @@
 package controller;
 
 import Model.keygen;
+import Model.newstaff;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -75,6 +76,7 @@ public class adduser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        /*
         String[] data = new String[8];
         data[0] = request.getParameter("name");
         data[1] = request.getParameter("email");
@@ -83,24 +85,29 @@ public class adduser extends HttpServlet {
         data[4] = request.getParameter("tp");
         data[5] = request.getParameter("add");
         data[6] = request.getParameter("spe");
+        */
+        
+        newstaff user = new newstaff(request.getParameter("name"), request.getParameter("email"), request.getParameter("psw"), request.getParameter("nic"), request.getParameter("tp"), request.getParameter("add"), request.getParameter("type"), request.getParameter("spe"));
         
         if(!request.getParameter("type").equals("D")){
-            data[6] = null;
+            user.setSpe(null);
         }
         
         try{
             user reguser = new user();
-            boolean rslt = reguser.adduser(data);
-            if(rslt){
-                keygen key = new keygen();
-                String skey = key.verify(data[1]);
-                key.regverifys(String.valueOf(skey), data[1]);
-                out.print("User Added Successfully");
-                 request.getRequestDispatcher("admin/adduser.jsp").include(request, response);
+            if(reguser.checkexist(user.getEmail())){
+                if(reguser.adduser(user)){
+                    keygen key = new keygen();
+                    String skey = key.verify(user.getEmail());
+                    key.regverifys(String.valueOf(skey), user.getEmail());
+                    out.print("User Added Successfully");
+                    response.sendRedirect("admin/adduser.jsp"); 
+                }            
             }else{
-            
+                out.println("User Exists! Check Again.");
+                request.getRequestDispatcher("admin/adduser.jsp").include(request, response);
             }
-        }catch(IOException | ClassNotFoundException | SQLException | ServletException e){
+        }catch(IOException | ClassNotFoundException | SQLException e){
             out.println("error : " + e);
         }
     }
