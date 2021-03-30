@@ -14,7 +14,7 @@
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
     if(id == null){
-        response.sendRedirect("../login.html");
+        response.sendRedirect("../login.jsp");
     }else{
         out.print("Welcome : " + name );
     }

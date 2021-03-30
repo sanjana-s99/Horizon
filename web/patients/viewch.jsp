@@ -20,7 +20,7 @@
         out.print("Welcome : " + name );
     }
     }else{
-        response.sendRedirect("../login.html");
+        response.sendRedirect("../login.jsp");
     }
 %>
 

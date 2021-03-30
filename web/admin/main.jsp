@@ -16,7 +16,7 @@
             response.sendRedirect("../index.jsp");
         }
     }else{
-        response.sendRedirect("../login.html");
+        response.sendRedirect("../login.jsp");
     }
 %>
 
@@ -31,6 +31,28 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     </head>
     <body>
+        <%
+            String stat = request.getParameter("status");
+            if(stat!=null){
+                if(stat.equals("error")){
+        %>
+                    <h1>Something Went Wrong!!</h1>
+        <%
+                }else if(stat.equals("addedsuccess")){
+        %>
+                    <h1>Successfully Added User!!</h1>
+        <%
+                }else if(stat.equals("ue")){
+        %>
+                    <h1>User Exists PLease Recheck!!</h1>
+        <%
+                }else if(stat.equals("ambsuc")){
+        %>
+                    <h1>ambulance Added Successfully!!</h1>
+        <%
+                }
+            }
+        %>
         <h1>Admin Panel</h1>
         <div>
              <form method ="post" action="../adduser">

@@ -89,15 +89,13 @@ public class adduser extends HttpServlet {
                     keygen key = new keygen();
                     String skey = key.verify(user.getEmail());
                     key.regverifys(String.valueOf(skey), user.getEmail());
-                    out.print("User Added Successfully");
-                    response.sendRedirect("admin/main.jsp"); 
+                    response.sendRedirect("admin/main.jsp?status=addedsuccess"); 
                 }            
             }else{
-                out.println("User Exists! Check Again.");
-                request.getRequestDispatcher("admin/main.jsp").include(request, response);
+                response.sendRedirect("admin/main.jsp?status=ue"); 
             }
         }catch(IOException | ClassNotFoundException | SQLException e){
-            out.println("error : " + e);
+                response.sendRedirect("admin/main.jsp?status=error"); 
         }
     }
 

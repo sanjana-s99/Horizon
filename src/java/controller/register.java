@@ -92,11 +92,10 @@ public class register extends HttpServlet {
                     request.getRequestDispatcher("login.html").include(request, response);
                 }
             }else{
-                out.println("User Exists!!");
-                request.getRequestDispatcher("login.html").include(request, response);
+                response.sendRedirect("register.jsp?status=ue"); 
             }
         }catch(IOException | ClassNotFoundException | NoSuchAlgorithmException | SQLException | ServletException e){
-            out.println("error : " + e);
+            response.sendRedirect("register.jsp?status=error"); 
         }
     }
 

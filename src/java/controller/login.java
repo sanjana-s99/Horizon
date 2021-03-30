@@ -96,17 +96,13 @@ public class login extends HttpServlet {
                     session.setAttribute("name", rs.getString("name"));
                     session.setAttribute("type", rs.getString("type"));
 
-                    request.getRequestDispatcher("index.jsp").include(request, response);
+                    response.sendRedirect("index.jsp"); 
                 }else{
-                    out.println("Please Verify Your Email!!");
+                    response.sendRedirect("login.jsp?status=nv"); 
                 }
-            }else{
-                out.println("NO User");
-                 //RequestDispatcher rs =  request.getRequestDispatcher("index.html");
-                 //rs.include(request, response);
             }
-        }catch(IOException | ClassNotFoundException | NoSuchAlgorithmException | SQLException | ServletException e){
-            out.println("error : " + e);
+        }catch(IOException | ClassNotFoundException | NoSuchAlgorithmException | SQLException e){
+            response.sendRedirect("login.jsp?status=error"); 
             
         }
     }

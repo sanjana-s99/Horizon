@@ -17,7 +17,7 @@
             response.sendRedirect("../index.jsp");
         }
     }else{
-        response.sendRedirect("../login.html");
+        response.sendRedirect("../login.jsp");
     }
 %>
 <!DOCTYPE html>

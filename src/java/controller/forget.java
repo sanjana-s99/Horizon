@@ -89,11 +89,10 @@ public class forget extends HttpServlet {
                 String key = k.verify(email);
                 k.resetpass(key, email);
                         
-                request.getRequestDispatcher("forgetpass.html").include(request, response);
+                response.sendRedirect("forgetpass.jsp?status=done"); 
             }
-        }catch(IOException | ClassNotFoundException | SQLException | ServletException e){
-            out.println("NO User");
-            request.getRequestDispatcher("forgetpass.html").include(request, response);            
+        }catch(IOException | ClassNotFoundException | SQLException e){
+            response.sendRedirect("forgetpass.jsp?status=nu");           
         }
     }
 

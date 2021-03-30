@@ -20,7 +20,15 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     </head>
     <body>
+         <%
+            String stat = request.getParameter("status");
+            if(stat!=null){
+                if(stat.equals("error")){
+        %>
+                    <h1>Passwords should be same!!</h1>
+                
         <%
+                }}
             if (request.getParameter("mail") != "null") {
                 String email = request.getParameter("mail");
                 String key = request.getParameter("key");
@@ -43,21 +51,28 @@
                         <form action="reset" method="post">
                             Password:<input type="password" name="pass1"/>
                             Re-Password:<input type="password" name="pass2"/>
+                            <input type="hidden" value="<%= key %>" name="key"/>
                             <input type="hidden" value="<%= email %>" name="email"/>
                             <input type="submit" value="reset"/>
                         </form>
                         <%
                     }else{
-                        out.println("Link Expired or invalid link!!");
+%>
+<h1>Link Expired or invalid link!!</h1>
+<%
                     }
 
                 }catch(Exception e){ 
-                    out.println(e);
+                    %>
+<h1>Something Went Wrong</h1>
+<%
                 }
                      
                 
             } else {
-                out.println("invalid link!!");
+%>
+                <h1>invalid link!!</h1>
+<%
             }
         %>
     </body>

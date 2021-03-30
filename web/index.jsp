@@ -25,7 +25,7 @@
     </head>
     <body>
         <h1>Horizen</h1>
-        <a href="login.html">login</a>
+        <a href="login.jsp">login</a>
         <br/>
         <a href="patients/channel.jsp">channel</a>
         <br/>
@@ -33,11 +33,11 @@
         <br/>
         <a href="staff/staffchannel.jsp">Staff Channel</a>
         <br/>
-        <a href="register.html">register</a>
+        <a href="register.jsp">register</a>
         <br/>
         <a href="admin/main.jsp">Admin</a>
         <br/>
-        <a href="forgetpass.html">Forget Password</a>
+        <a href="forgetpass.jsp">Forget Password</a>
         <br/>
         <a href="staff/add_amb.jsp">Add Ambulance</a>
         <br/>

@@ -82,6 +82,8 @@ public class reset extends HttpServlet {
         String pass1 = request.getParameter("pass1");
         String pass2 = request.getParameter("pass2");
         String email = request.getParameter("email");
+        String key = request.getParameter("key");
+        System.out.println(key);
         
         if(pass1.equals(pass2)){
             try{
@@ -93,14 +95,14 @@ public class reset extends HttpServlet {
                     if(v.repass(email)){
                         out.println("Resetting Done!!");
                         SendMail.send(email, "Reset Password", msg);
-                        request.getRequestDispatcher("login.html").include(request, response);
+                        response.sendRedirect("login.jsp?status=rp"); 
                     }
                 }
-            }catch(IOException | ClassNotFoundException | NoSuchAlgorithmException | SQLException | ServletException e){
-                out.println("Something Went Wrong!!");
-                request.getRequestDispatcher("forgetpass.html").include(request, response);
-
+            }catch(IOException | ClassNotFoundException | NoSuchAlgorithmException | SQLException e){
+                response.sendRedirect("forgetpass.jsp?status=error");
             }
+        }else{
+            response.sendRedirect("resetpass.jsp?key="+key+"&mail="+email+"&status=error"); 
         }
     }
 
