@@ -35,7 +35,7 @@
         <br/>
         <a href="register.html">register</a>
         <br/>
-        <a href="admin/adduser.jsp">Admin</a>
+        <a href="admin/main.jsp">Admin</a>
         <br/>
         <a href="forgetpass.html">Forget Password</a>
         <br/>

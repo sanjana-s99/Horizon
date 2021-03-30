@@ -10,7 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*;" %>
 <% 
-    session.setMaxInactiveInterval(30);
+    session.setMaxInactiveInterval(3000);
     String type = (String)session.getAttribute("type");
     if(type != null){
         if(!type.equals("S") && !type.equals("W")){
@@ -134,7 +134,63 @@
             <%  }catch (Exception e){
                     System.out.println(e);
                 }
-            } %>
+                 %>
+            <div>
+                    <hr/>
+                    <h1>Channelings</h1>
+        <table>
+                        <tr>
+                            <td>Patient</td>
+                            <td>Number</td>
+                            <td>Status</td>
+                            <td>Action</td>
+                        </tr>
+                        <%
+                     try{
+                               
+                              dbCon con = new dbCon();
+                              String query1="select * from channeling WHERE d_id = " + doc;
+                              Statement st1=con. createConnection().createStatement();
+                              ResultSet rs2=st1.executeQuery(query1);
+                              rs2.next();
+                              
+                              while(rs2.next()){
+                                    user data = new user();
+                                    ResultSet rs4 = data.udata(rs2.getString("p_id"));
+                                    rs4.next();
+                                    String pat = rs4.getString("name");
+                                    String status = rs2.getString("status");
+                                    if("R".equals(rs2.getString("status"))){
+                                        status = "Reserved";
+                                    }else if("C".equals(rs2.getString("status"))){
+                                        status = "Checked In";
+                                    }
+
+                            %>
+                        <tr>
+                            <td><%=pat %></td>
+                            <td><%=rs2.getString("number") %></td>
+                            <td><%=status %></td>
+            <%
+                if("R".equals(rs2.getString("status"))){
+            %>
+                    <td><a href="../cact?pid=<%=rs2.getString("p_id")%>&did=<%=rs2.getString("d_id")%>&no=<%=rs2.getInt("number")%>&action=in">Checked In</a></td>
+                    <td><a href="../cact?pid=<%=rs2.getString("p_id")%>&did=<%=rs2.getString("d_id")%>&no=<%=rs2.getInt("number")%>&action=can">Cancel</a></td>
+                </tr>
+            <%
+                }else if("C".equals(rs2.getString("status"))){
+            %>
+                <td><a href="../cact?pid=<%=rs2.getString("p_id")%>&did=<%=rs2.getString("d_id")%>&no=<%=rs2.getInt("number")%>&action=com">Complete</a></td>
+                <td><a href="../cact?pid=<%=rs2.getString("p_id")%>&did=<%=rs2.getString("d_id")%>&no=<%=rs2.getInt("number")%>&action=can">Cancel</a></td>
+            </tr>
+            <% }
+                }        
+                }catch(Exception r){
+                System.out.println(r.getMessage());
+                }
+} %>
+                    </table>
+                    </div>
         
         
         <script>

@@ -70,11 +70,13 @@
                 if("R".equals(rs.getString("status"))){
             %>
                 <td><a href="../caction?pid=<%=id%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=in">Checked In</a></td>
+                <td><a href="../cact?pid=<%=id%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=can">Cancel</a></td>
                 </tr>
             <%
                 }else if("C".equals(rs.getString("status"))){
             %>
                 <td><a href="../caction?pid=<%=id%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=com">Complete</a></td>
+                <td><a href="../cact?pid=<%=id%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=can">Cancel</a></td>
             </tr>
             <% }
                 }

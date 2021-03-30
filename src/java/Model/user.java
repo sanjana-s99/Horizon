@@ -19,7 +19,7 @@ public class user {
     dbCon con = new dbCon();
     public boolean reg(newuser d ) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException{
         String nic = d.getNic(), gender;
-        int year = 0, daytext = 0;
+        int year, daytext;
         
         // get user birthyear from nic
         if (nic.length() == 10) {
@@ -154,7 +154,7 @@ public class user {
      
     public boolean adduser(newstaff d ) throws ClassNotFoundException, SQLException{
         String nic = d.getNic(), gender;
-        int year = 0, daytext = 0;
+        int year, daytext;
         
         // get user birthyear from nic
         if (nic.length() == 10) {
@@ -262,5 +262,35 @@ public class user {
         }
         return false;
     }
+    
+    public boolean settime(String id, String time){
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("UPDATE doctor SET time = ? where id = ?");
+            ps.setString(1,time);
+            ps.setString(2,id);
+
+            int i = ps.executeUpdate();
+            return i>0;            
+            
+        }catch(Exception e){ 
+            System.out.println(e);
+        }
+        return false;
+    }
+    
+    public boolean remove(String id){
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("DELETE FROM users where id = ?");
+            ps.setString(1,id);
+
+            int i = ps.executeUpdate();
+            return i>0;            
+            
+        }catch(Exception e){ 
+            System.out.println(e);
+        }
+        return false;
+    }
+    
     
 }

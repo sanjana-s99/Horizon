@@ -5,12 +5,9 @@
  */
 package controller;
 
-import Model.keygen;
-import Model.newstaff;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SHATTER
  */
-public class adduser extends HttpServlet {
+public class changetime extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +36,10 @@ public class adduser extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet adduser</title>");            
+            out.println("<title>Servlet changetime</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet adduser at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet changetime at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,28 +72,16 @@ public class adduser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        newstaff user = new newstaff(request.getParameter("name"), request.getParameter("email"), request.getParameter("psw"), request.getParameter("nic"), request.getParameter("tp"), request.getParameter("add"), request.getParameter("type"), request.getParameter("spe"));
-        
-        if(!request.getParameter("type").equals("D")){
-            user.setSpe(null);
-        }
-        
+        PrintWriter out = response.getWriter();        
+        String id = request.getParameter("id");
+        String time = request.getParameter("time");
         try{
-            user reguser = new user();
-            if(reguser.checkexist(user.getEmail())){
-                if(reguser.adduser(user)){
-                    keygen key = new keygen();
-                    String skey = key.verify(user.getEmail());
-                    key.regverifys(String.valueOf(skey), user.getEmail());
-                    out.print("User Added Successfully");
-                    response.sendRedirect("admin/main.jsp"); 
-                }            
-            }else{
-                out.println("User Exists! Check Again.");
-                request.getRequestDispatcher("admin/main.jsp").include(request, response);
+            user u = new user();
+            if(u.settime(id,time)){
+                out.println("time update successfull");
+                response.sendRedirect("admin/main.jsp");  
             }
-        }catch(IOException | ClassNotFoundException | SQLException e){
+        }catch(IOException e){
             out.println("error : " + e);
         }
     }

@@ -47,6 +47,18 @@
         <servlet-name>lab_add</servlet-name>
         <servlet-class>controller.lab_add</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cact</servlet-name>
+        <servlet-class>controller.cact</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>changetime</servlet-name>
+        <servlet-class>controller.changetime</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteu</servlet-name>
+        <servlet-class>controller.deleteu</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -91,7 +103,19 @@
         <servlet-name>lab_add</servlet-name>
         <url-pattern>/lab_add</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cact</servlet-name>
+        <url-pattern>/cact</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changetime</servlet-name>
+        <url-pattern>/changetime</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteu</servlet-name>
+        <url-pattern>/deleteu</url-pattern>
+    </servlet-mapping>
     <session-config>
-    <session-timeout>15</session-timeout>
-  </session-config>
+        <session-timeout>15</session-timeout>
+    </session-config>
 </web-app>

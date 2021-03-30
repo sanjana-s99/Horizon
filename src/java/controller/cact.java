@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SHATTER
  */
-public class caction extends HttpServlet {
+public class cact extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -82,7 +82,7 @@ public class caction extends HttpServlet {
             System.out.println(mail);
             
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(caction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(cact.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         if(null != action)switch (action) {
@@ -95,11 +95,11 @@ public class caction extends HttpServlet {
                         String msg = "Successfully Checked In!!!";
                         SendMail.send(mail, "Channeling Status Update", msg);
                         //request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
-                        response.sendRedirect("patients/viewch.jsp");
+                        response.sendRedirect("admin/main.jsp");
                     }else{
                         out.print("Error!!");
                         //request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
-                        response.sendRedirect("patients/viewch.jsp");
+                        response.sendRedirect("admin/main.jsp");
                     }
                 }catch(IOException | ClassNotFoundException | SQLException e){
                     
@@ -114,11 +114,11 @@ public class caction extends HttpServlet {
                         String msg = "Successfully Compleated!!!";
                         SendMail.send(mail, "Channeling Status Update", msg);
                         //request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
-                        response.sendRedirect("patients/viewch.jsp");
+                        response.sendRedirect("admin/main.jsp");
                     }else{
                         out.print("Error!!");
                         // request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
-                        response.sendRedirect("patients/viewch.jsp");
+                        response.sendRedirect("admin/main.jsp");
                     }
                 }catch(IOException | ClassNotFoundException | SQLException e){
                       
@@ -130,14 +130,14 @@ public class caction extends HttpServlet {
                     boolean verify = ch.ccom(data);
                     if(verify){
                         out.print("Done!!");
-                        String msg = "Successfully Canceled!!!";
+                        String msg = "Successfully Canceled Your Channeling!!!";
                         SendMail.send(mail, "Channeling Status Update", msg);
                         //request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
-                        response.sendRedirect("patients/viewch.jsp");
+                        response.sendRedirect("admin/main.jsp");
                     }else{
                         out.print("Error!!");
                         // request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
-                        response.sendRedirect("patients/viewch.jsp");
+                        response.sendRedirect("admin/main.jsp");
                     }
                 }catch(IOException | ClassNotFoundException | SQLException e){
                       

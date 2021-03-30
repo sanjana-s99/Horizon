@@ -93,8 +93,7 @@ public class forget extends HttpServlet {
             }
         }catch(IOException | ClassNotFoundException | SQLException | ServletException e){
             out.println("NO User");
-            request.getRequestDispatcher("forgetpass.html").include(request, response);
-            
+            request.getRequestDispatcher("forgetpass.html").include(request, response);            
         }
     }
 

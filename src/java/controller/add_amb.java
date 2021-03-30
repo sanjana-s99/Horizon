@@ -95,6 +95,7 @@ public class add_amb extends HttpServlet {
         try{
             if(amb.add(number)){
                 out.println("Successfully Added!!!");
+                response.sendRedirect("admin/main.jsp"); 
             }else{
                 out.println("Error!!!");
             }
