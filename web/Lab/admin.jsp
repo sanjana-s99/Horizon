@@ -36,17 +36,49 @@
                 </tr>
                 <tr>
                     <td>Doctor ID:</td>
-                    <td><input type="text" name="did"></td>
+                    <td><select name="did">
+
+                <%
+                    try {
+                        dbCon con = new dbCon();
+                        Statement st = con.createConnection().createStatement();
+                        String query = "SELECT * FROM users WHERE type = 'D' ";
+                        //get table data
+                        ResultSet rs = st.executeQuery(query);
+                        //get data one by one
+                        while(rs.next()){
+                            %>
+                            <option value="<%=rs.getString("id")%>"><%=rs.getString("name")%></option>
+
+                            <% }
+                    }catch (Exception e){
+
+                    }
+                %>
+            </select></td>
                 </tr>
                 <tr>
                     <td>Select Appointment Type:</td>
                     <td><select name="type">
-                    <option name="a">ECG</option>
-                    <option name="b">Lab Test(blood or urine)</option>
-                    <option name="c">Container Pick Up/Specimen Drop Off</option>
-                    <option name="d">Lab Test & ECG</option>
-                    <option name="e">Lab Test Pediatric</option>
-                </select></td>
+
+                <%
+                    try {
+                        dbCon con = new dbCon();
+                        Statement st = con.createConnection().createStatement();
+                        String query = "SELECT * FROM lab ";
+                        //get table data
+                        ResultSet rs = st.executeQuery(query);
+                        //get data one by one
+                        while(rs.next()){
+                            %>
+                            <option value="<%=rs.getString("Atype")%>"><%=rs.getString("Atype")%></option>
+
+                            <% }
+                    }catch (Exception e){
+
+                    }
+                %>
+            </select></td>
                 </tr>
                 <tr>
                     <td>Select Date:</td>
@@ -145,7 +177,7 @@
             </table>
         </div>
             
-            <form action="lab.jsp" method="post">
+            <form action="index.jsp" method="post">
                 <input type="submit" value="Back"/>
             </form>
             

@@ -85,9 +85,6 @@ public class lab_add extends HttpServlet {
                 data[3] =request.getParameter("date");
                 data[4] =request.getParameter("time");
                 
-                for(int i=0; i<5; i++){
-                    System.out.println(data[i]);
-                }
                 
                 //Patient e=new Patient();
                
@@ -122,7 +119,7 @@ public class lab_add extends HttpServlet {
                 if(status>0){
                     SendMail.send(to,"Lab Update",msg);
                     out.print("<p>Record saved successfully</p>");
-                    response.sendRedirect("Lab/admin.jsp");  
+                    response.sendRedirect("Lab/myapo.jsp");  
                     //request.getRequestDispatcher("Lab/labApo.jsp").include(request,response);
                 }else{
                     out.println("Sorry!unable to save record");
