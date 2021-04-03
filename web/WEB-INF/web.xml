@@ -59,6 +59,10 @@
         <servlet-name>deleteu</servlet-name>
         <servlet-class>controller.deleteu</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>prescription</servlet-name>
+        <servlet-class>controller.prescription</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -114,6 +118,10 @@
     <servlet-mapping>
         <servlet-name>deleteu</servlet-name>
         <url-pattern>/deleteu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>prescription</servlet-name>
+        <url-pattern>/prescription</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>15</session-timeout>
