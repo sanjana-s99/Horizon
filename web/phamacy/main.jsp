@@ -1,8 +1,7 @@
-<%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%> 
 <%
-    dbCon con = new dbCon();
+
     if (request.getParameter("submit") != null) {
 
         String expdate = request.getParameter("expdate");
@@ -16,10 +15,13 @@
         String price = request.getParameter("price");
 
         //String pID = request.getParameter("pID");
+        Connection con;
         PreparedStatement pst;
+        ResultSet rs;
 
-        
-        pst = con.createConnection().prepareStatement("insert into drugs(drugsname,price,expdate,brands,Mdate,country)values(?,?,?,?,?,?)");
+        Class.forName("com.mysql.jdbc.Driver");
+        con = DriverManager.getConnection("jdbc:mysql://localhost/horizon", "root", "");
+        pst = con.prepareStatement("insert into drugs(drugsname,price,expdate,brands,Mdate,country)values(?,?,?,?,?,?)");
 
         pst.setString(1, name);
         pst.setString(2, price);
@@ -192,16 +194,25 @@
 
                             <%   
                                 
-
+                                Connection con;
+                                PreparedStatement pst;
                                 ResultSet rs;
 
+                                Class.forName("com.mysql.jdbc.Driver");
+                                con = DriverManager.getConnection("jdbc:mysql://localhost/horizon", "root", "");
+
                                 String query = "select * from drugs";
-                                Statement st = con.createConnection().createStatement();
+                                Statement st = con.createStatement();
 
                                 rs = st.executeQuery(query);
                                 while (rs.next()) {
 
                                     String id = rs.getString("id");
+                                  
+
+                                    String drugsname = rs.getString("drugsname");
+                                    String price = rs.getString("price");
+                                    String date = rs.getString("date");
 
 
                             %>
@@ -220,7 +231,7 @@
                                 <td><%=rs.getString("price")%></td>
                                 <td><%=rs.getString("date")%></td>
                                 <td><a href="upd.jsp?id=<%=id%>">Edit</a></td>
-                                <td><a href="../drugdel?id=<%=id%>">Delete</a></td>
+                                <td><a href="dele.jsp?id=<%=id%>">Delete</a></td>
                                 
                             </tr>
                             <%

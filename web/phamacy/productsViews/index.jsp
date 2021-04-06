@@ -1,4 +1,3 @@
-<%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%> 
 <html lang="en" >
@@ -22,21 +21,26 @@
     
     
       <%   
-          dbCon con = new dbCon();
                                 
-            ResultSet rs;
-            String query = "select * from drugs";
-            Statement st = con.createConnection().createStatement();
+                                Connection con;
+                                PreparedStatement pst;
+                                ResultSet rs;
 
-            rs = st.executeQuery(query);
-            while (rs.next()) {
+                                Class.forName("com.mysql.jdbc.Driver");
+                                con = DriverManager.getConnection("jdbc:mysql://localhost/horizon", "root", "");
 
-                String id = rs.getString("id");
+                                String query = "select * from drugs";
+                                Statement st = con.createStatement();
 
+                                rs = st.executeQuery(query);
+                                while (rs.next()) {
 
-                String drugsname = rs.getString("drugsname");
-                String price = rs.getString("price");
-                String date = rs.getString("date");
+                                    String id = rs.getString("id");
+                                  
+
+                                    String drugsname = rs.getString("drugsname");
+                                    String price = rs.getString("price");
+                                    String date = rs.getString("date");
 
 
          %>
