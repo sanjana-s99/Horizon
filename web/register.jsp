@@ -33,7 +33,7 @@
             if(stat!=null){
                 if(stat.equals("error")){
         %>
-                    <h1>Email Or/And Password is Wrong!!</h1>
+                    <h1>Something Went Wrong!!</h1>
         <%
                 }else if(stat.equals("ue")){
         %>

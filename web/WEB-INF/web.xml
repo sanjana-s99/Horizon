@@ -63,6 +63,14 @@
         <servlet-name>prescription</servlet-name>
         <servlet-class>controller.prescription</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>phamacydel</servlet-name>
+        <servlet-class>controller.phamacydel</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>drugdel</servlet-name>
+        <servlet-class>controller.drugdel</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -122,6 +130,14 @@
     <servlet-mapping>
         <servlet-name>prescription</servlet-name>
         <url-pattern>/prescription</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>phamacydel</servlet-name>
+        <url-pattern>/phamacydel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>drugdel</servlet-name>
+        <url-pattern>/drugdel</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>15</session-timeout>
