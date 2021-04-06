@@ -1,7 +1,8 @@
+<%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%> 
 <%
-
+dbCon con = new dbCon();
     if (request.getParameter("submit") != null) {
 
         String expdate = request.getParameter("expdate");
@@ -15,13 +16,8 @@
         String price = request.getParameter("price");
 
         //String pID = request.getParameter("pID");
-        Connection con;
         PreparedStatement pst;
-        ResultSet rs;
-
-        Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost/horizon", "root", "");
-        pst = con.prepareStatement("insert into drugs(drugsname,price,expdate,brands,Mdate,country)values(?,?,?,?,?,?)");
+        pst = con.createConnection().prepareStatement("insert into drugs(drugsname,price,expdate,brands,Mdate,country)values(?,?,?,?,?,?)");
 
         pst.setString(1, name);
         pst.setString(2, price);
@@ -194,15 +190,12 @@
 
                             <%   
                                 
-                                Connection con;
-                                PreparedStatement pst;
+                              
                                 ResultSet rs;
 
-                                Class.forName("com.mysql.jdbc.Driver");
-                                con = DriverManager.getConnection("jdbc:mysql://localhost/horizon", "root", "");
-
+                                
                                 String query = "select * from drugs";
-                                Statement st = con.createStatement();
+                                Statement st = con.createConnection().createStatement();
 
                                 rs = st.executeQuery(query);
                                 while (rs.next()) {

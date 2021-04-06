@@ -4,12 +4,14 @@
     Author     : Movini
 --%>
 
+<%@page import="Model.dbCon"%>
 <%@page import="java.lang.String"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
 
 <%
+    dbCon con = new dbCon();
     if(request.getParameter("submit")!=null)
     {
         String doc_name=request.getParameter("doc_name");
@@ -21,16 +23,8 @@
         
       String  test =null;
         
-        
-        Connection con;
         PreparedStatement pst;
-        ResultSet rs;
         
-        
- 
-        
-        Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost/horizon","root","");
         
 String[] a = request.getParameterValues("drug_name");
 if(a!=null)
@@ -80,7 +74,7 @@ if(a.length == 4){
 
 
 
-pst = con.prepareStatement("insert into prescription(doc_name,pname,drug_name,totalprice)values(?,?,?,?)");
+pst = con.createConnection().prepareStatement("insert into prescription(doc_name,pname,drug_name,totalprice)values(?,?,?,?)");
         pst.setString(1, doc_name);
        
         pst.setString(2, pname);
@@ -170,16 +164,11 @@ pst = con.prepareStatement("insert into prescription(doc_name,pname,drug_name,to
                        <select class="form-control" aria-label="Default select example" name="doc_name">  
                         
                          <%
-                        
-                         Connection conn;
-                         PreparedStatement pst1;
                          ResultSet rss;
        
-                         Class.forName("com.mysql.jdbc.Driver");
-                         conn=DriverManager.getConnection("jdbc:mysql://localhost/horizon","root","");
                          
                            String query1 ="select * from users where type = 'D'";
-                           Statement st1 =conn.createStatement();
+                           Statement st1 =con.createConnection().createStatement();
                            
                             rss =st1.executeQuery( query1);
                              while(rss.next())
@@ -222,15 +211,10 @@ pst = con.prepareStatement("insert into prescription(doc_name,pname,drug_name,to
                          <select class="form-control" aria-label="Default select example" name="pname"> 
                          <%
                         
-                         Connection conn1;
-                         PreparedStatement pst2;
                          ResultSet rss1;
-       
-                         Class.forName("com.mysql.jdbc.Driver");
-                         conn=DriverManager.getConnection("jdbc:mysql://localhost/horizon","root","");
                          
                            String query2 ="select * from users WHERE type = 'P'";
-                           Statement st2 =conn.createStatement();
+                           Statement st2 =con.createConnection().createStatement();
                            
                             rss1 =st2.executeQuery( query2);
                              while(rss1.next())
@@ -286,16 +270,11 @@ pst = con.prepareStatement("insert into prescription(doc_name,pname,drug_name,to
                             
                   <td><select class="form-control"  name="drug_name"   size="" multiple="multiple" tabindex="1"> 
                          <%
-                        
-                         Connection conn11;
-                         PreparedStatement pst21;
                          ResultSet rss11;
-       
-                         Class.forName("com.mysql.jdbc.Driver");
-                         conn11=DriverManager.getConnection("jdbc:mysql://localhost/horizon","root","");
+
                          
                            String query21 ="select * from drugs";
-                           Statement st21 =conn.createStatement();
+                           Statement st21 =con.createConnection().createStatement();
                            
                             rss11 =st21.executeQuery( query21);
                              while(rss11.next())
@@ -396,15 +375,11 @@ pst = con.prepareStatement("insert into prescription(doc_name,pname,drug_name,to
                             </tr>
                        </thead>    
                      <% 
-                            Connection con;
-                            PreparedStatement pst;
                             ResultSet rs;
-        
-                            Class.forName("com.mysql.jdbc.Driver");
-                            con = DriverManager.getConnection("jdbc:mysql://localhost/horizon","root","");
+
                             
                             String query ="select * from prescription";
-                            Statement st= con.createStatement();
+                            Statement st= con.createConnection().createStatement();
                             rs=st.executeQuery(query);
                             
                            /** String strQuery = "SELECT SUM(price) FROM prescription";

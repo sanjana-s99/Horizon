@@ -1,11 +1,12 @@
 
 
 
+<%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 
 <%
-
+dbCon con = new dbCon();
     if (request.getParameter("submit") != null) {
 
         String name = request.getParameter("name");
@@ -18,13 +19,8 @@
 
 
         //String pID = request.getParameter("pID");
-        Connection con;
         PreparedStatement pst;
-        ResultSet rs;
-
-        Class.forName("com.mysql.jdbc.Driver");
-        con = DriverManager.getConnection("jdbc:mysql://localhost/horizon", "root", "");
-        pst = con.prepareStatement("insert into payment(name,CVC,Expires,price,drugname)values(?,?,?,?,?)");
+        pst = con.createConnection().prepareStatement("insert into payment(name,CVC,Expires,price,drugname)values(?,?,?,?,?)");
 
         pst.setString(1, name);
         pst.setString(2, CVC);

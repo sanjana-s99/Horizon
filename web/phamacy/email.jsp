@@ -4,6 +4,7 @@
     Author     : Movini
 --%>
 
+<%@page import="Model.dbCon"%>
 <%@page import="java.sql.*"%> 
 <!DOCTYPE html>
 <html>
@@ -18,20 +19,14 @@
     <%= request.getParameter("username") %>
     
     <%
-                         
+             dbCon con = new dbCon();            
  PreparedStatement pstmt=null; //create statement  
  
  
  
-  Connection conn;
-                    
-       
-                         Class.forName("com.mysql.jdbc.Driver");
-                         conn=DriverManager.getConnection("jdbc:mysql://localhost/horizon","root","");
- 
  String name =request.getParameter("username");
     
-    pstmt=conn.prepareStatement("select * from users where name=?"); // sql select query
+    pstmt=con.createConnection().prepareStatement("select * from users where name=?"); // sql select query
     pstmt.setString(1,name);
     ResultSet rs=pstmt.executeQuery(); // execute query store in resultset object rs.
     

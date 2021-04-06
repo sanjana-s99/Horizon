@@ -1,9 +1,11 @@
 
 
+<%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%> 
 
 <%
+    dbCon con = new dbCon();
     
    if(request.getParameter("submit")!=null)
    {
@@ -18,13 +20,8 @@
        String Mdate  = request.getParameter("Mdate");
       
        
-       Connection con;
        PreparedStatement pst;
-       ResultSet rs;
-       
-       Class.forName("com.mysql.jdbc.Driver");
-       con=DriverManager.getConnection("jdbc:mysql://localhost/horizon","root","");
-       pst=con.prepareStatement("update drugs set drugsname= ?,price= ?,expdate= ?, brands= ?,country= ?,Mdate= ? where id = ?");
+       pst=con.createConnection().prepareStatement("update drugs set drugsname= ?,price= ?,expdate= ?, brands= ?,country= ?,Mdate= ? where id = ?");
        pst.setString(7, idx);
        pst.setString(1,drugsname );
        pst.setString(2, price);
@@ -90,18 +87,13 @@
                 <form  method="POST" action="#">
                     
                     <%
-                    
-                     Connection con;
                      PreparedStatement pst;
                      ResultSet rs;
-       
-                     Class.forName("com.mysql.jdbc.Driver");
-                     con=DriverManager.getConnection("jdbc:mysql://localhost/horizon","root","");
                      
 
                      String idx= request.getParameter("id");
                      
-                   pst= con.prepareStatement("select * from drugs where id = ?");
+                   pst= con.createConnection().prepareStatement("select * from drugs where id = ?");
                    pst.setString(1,idx );
                    rs= pst.executeQuery();
                    

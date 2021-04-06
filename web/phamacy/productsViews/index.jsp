@@ -1,3 +1,4 @@
+<%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%> 
 <html lang="en" >
@@ -21,16 +22,12 @@
     
     
       <%   
+          dbCon con = new dbCon();
                                 
-                                Connection con;
-                                PreparedStatement pst;
                                 ResultSet rs;
 
-                                Class.forName("com.mysql.jdbc.Driver");
-                                con = DriverManager.getConnection("jdbc:mysql://localhost/horizon", "root", "");
-
                                 String query = "select * from drugs";
-                                Statement st = con.createStatement();
+                                Statement st = con.createConnection().createStatement();
 
                                 rs = st.executeQuery(query);
                                 while (rs.next()) {

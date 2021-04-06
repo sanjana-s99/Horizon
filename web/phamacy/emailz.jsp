@@ -1,4 +1,5 @@
 
+<%@page import="Model.dbCon"%>
 <%@page import="java.sql.*"%> 
 <!DOCTYPE html>
 <html>
@@ -22,16 +23,12 @@
                     
                         <select class="form-select" aria-label="Default select example" name="users">    
                                 <%
-                        
-                         Connection con;
-                         PreparedStatement pst;
+                        dbCon con = new dbCon();
                          ResultSet rs;
-       
-                         Class.forName("com.mysql.jdbc.Driver");
-                         con=DriverManager.getConnection("jdbc:mysql://localhost/horizon","root","");
+  
                          
                            String query ="select * from users";
-                           Statement st =con.createStatement();
+                           Statement st =con.createConnection().createStatement();
                            
                             rs =st.executeQuery( query);
                              while(rs.next())
