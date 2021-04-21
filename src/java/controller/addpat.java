@@ -6,10 +6,12 @@
 package controller;
 
 import Model.SendMail;
+import Model.keygen;
+import Model.newuser;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SHATTER
  */
-public class sbook extends HttpServlet {
+public class addpat extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +41,10 @@ public class sbook extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet book</title>");            
+            out.println("<title>Servlet addpat</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet book at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet addpat at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,65 +76,24 @@ public class sbook extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-
-        String[] data = new String[3];
-        String to = null, drname = null;
-        data[0] = request.getParameter("doctor");
-        data[1] = request.getParameter("patient");
-        data[2] = request.getParameter("no");
-        
-        user userdata = new user();
-        try{
-            ResultSet rs = userdata.udatanic(data[1]);
-            if(!rs.next()){
-                response.sendRedirect("staff/staffchannel.jsp?status=nouser&doc="+data[0]);
-            }
-            to = rs.getString("email");
-            System.out.println(to);
-        }catch(ClassNotFoundException | SQLException e){
-            out.println("Error");
-        }
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();        
+        newuser user = new newuser(request.getParameter("name"), request.getParameter("email"), "newuser", request.getParameter("nic"), request.getParameter("tp"), request.getParameter("add"));
         
         try{
-            ResultSet rs = userdata.udata(data[0]);
-            rs.next();
-            drname = rs.getString("name");
-        }catch(ClassNotFoundException | SQLException e){
-            out.println("Error");
-        }
-        
-        String msg = "Your Channeling For Dr. " + drname + " is confirmed. Please make your payment. <br/> <b>Your Number Is :" + data[2] + "</b><br/><hr/>Horizen Hospitals Channeling Team";
-        
-        
-        
-        try{
-            user getdata = new user();
-            ResultSet rs = getdata.udatanic(data[1]);
-            rs.next();
-            
-            data[1] = rs.getString("id");
-        
-            user users = new user();
-            Boolean status = users.book(data);
-            
-            if(status){
-                try {
-                    SendMail.send(to , "Chaneling Confirmation", msg);
-                } catch (Exception e) {
-                    out.println("Error");
+            user reguser = new user();
+            if(reguser.checkexist(user.getEmail())){
+                if(reguser.reg(user)){
+                    keygen key = new keygen();
+                    String skey = key.verify(user.getEmail());
+                    key.regverifyadd(String.valueOf(skey), user.getEmail());
+                    response.sendRedirect("staff/"); 
                 }
-                        
-                 response.sendRedirect("staff/staffchannel.jsp?doc="+data[0]);
             }else{
-                out.println("Error!!");
-                 //RequestDispatcher rs =  request.getRequestDispatcher("index.html");
-                 //rs.include(request, response);
+                response.sendRedirect("staff/addpat.jsp?status=ue"); 
             }
-        }catch(IOException | ClassNotFoundException | SQLException e){
-            out.println("error : " + e);
-            
+        }catch(IOException | ClassNotFoundException | NoSuchAlgorithmException | SQLException e){
+            response.sendRedirect("staff/addpat.jsp?status=error"); 
         }
     }
 

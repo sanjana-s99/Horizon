@@ -31,7 +31,7 @@
         <br/>
         <a href="patients/viewch.jsp">View channel</a>
         <br/>
-        <a href="staff/staffchannel.jsp">Staff Channel</a>
+        <a href="staff/">Staff</a>
         <br/>
         <a href="register.jsp">register</a>
         <br/>
@@ -39,11 +39,9 @@
         <br/>
         <a href="forgetpass.jsp">Forget Password</a>
         <br/>
-        <a href="staff/add_amb.jsp">Add Ambulance</a>
+        <a href="ambulance.jsp">request Ambulances</a>
         <br/>
-        <a href="ambulance.jsp">Ongoing Ambulances</a>
-        <br/>
-        <a href="Lab/labApo.jsp">Lab</a>
+        <a href="Lab/">Lab</a>
         <br/>
         <a href="logout">Logout</a>
     </body>

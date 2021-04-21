@@ -43,7 +43,7 @@
                         if(v.vuser(email)){
                             SendMail m = new SendMail();
                             m.send(email, "Succesfully Verified!!", "Your Horizen Hospital User Account Is Successfully Verified!!");
-                            out.println("Successfully verified!!");
+                            response.sendRedirect("login.jsp?status=sv"); 
                         }else{
                             out.println("error in verifing!!");
                         }

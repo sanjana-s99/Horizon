@@ -4,7 +4,7 @@
     Author     : SHATTER
 --%>
 <%
-    session.setMaxInactiveInterval(30);
+    session.setMaxInactiveInterval(3000);
     String type = (String)session.getAttribute("type");
     if(type != null){
         if(!type.equals("S") && !type.equals("W")){
@@ -58,7 +58,7 @@
                     <th><%=rs.getString("phone")%></th>
                     <th><%=rs.getString("lat")%></th>
                     <th><%=rs.getString("lan")%></th>
-                    <th><a href="add_amb?number=<%=rs.getString("number")%>">Complete</a></th>
+                    <th><a href="../add_amb?number=<%=rs.getString("number")%>">Complete</a></th>
                 </tr>
                 <%
                 }

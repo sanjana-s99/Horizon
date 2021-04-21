@@ -26,6 +26,10 @@
         %>
                     <h1>Email Not Verified!!</h1>
         <%
+                }else if(stat.equals("sv")){
+        %>
+                    <h1>Successfully Verified!!</h1>
+        <%
                 }else if(stat.equals("rp")){
         %>
                     <h1>Password Reset Done!!</h1>

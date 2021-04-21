@@ -101,6 +101,15 @@
                 %>
             </select>
             <% } if(request.getParameter("doc")!=null){
+                    String stat = request.getParameter("status");
+            if(stat!=null){
+                if(stat.equals("nouser")){
+        %>
+                    <h1>No user found!!</h1>
+                    <p>User Different NIC or <a href="addpat.jsp">add user</a> </p>
+        <%
+            }
+            }
                 String doc = request.getParameter("doc");
                 int no = 0;
                 try {

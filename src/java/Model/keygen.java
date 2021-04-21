@@ -47,6 +47,11 @@ public class keygen {
         SendMail.send(mail, "Verification", msg);
     }  
     
+    public void regverifyadd(String key, String mail){
+        String msg = "Your Horizen User Account Is successfully Created. <br/> <hr> Your Default Password Is 'newuser'<br/> <hr>Please change your password imideately<br/>Verify Youer Email : <a href='http://localhost:8080/Horizon/verify.jsp?key="+key+"&mail="+mail+"' target='_blank'>click me</a>";
+        SendMail.send(mail, "Verification", msg);
+    } 
+    
     public void regverifys(String key, String mail){
         String msg = "Your Horizen Staff Account Is successfully Created. <br/> <hr> Your Default Password Is 'admin'<br/> <hr>Please change your password imideately<br/>Verify Youer Email : <a href='http://localhost:8080/Horizon/verify.jsp?key="+key+"&mail="+mail+"' target='_blank'>click me</a>";
         SendMail.send(mail, "Verification", msg);
