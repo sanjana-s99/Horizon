@@ -23,8 +23,8 @@
         <title>Registration</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
-        <link rel="stylesheet" href="./styles/register.css">
+        <link rel="stylesheet" href="../fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" href="../styles/register.css">
         <style>
             /* Chrome, Safari, Edge, Opera */
             input::-webkit-outer-spin-button,
@@ -54,10 +54,10 @@
                 }
             }
         %>
-		<div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
+		<div class="wrapper" style="background-image: url('../images/bg-registration-form-1.jpg');">
 			<div class="inner">
 				<div class="image-holder">
-					<img src="images/registration-form-1.jpg" alt="">
+					<img src="../images/registration-form-1.jpg" alt="">
 				</div>
 				<form method ="post" action="../addpat">
 					<h3>Add NEw Patient</h3>
