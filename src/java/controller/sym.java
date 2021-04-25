@@ -5,11 +5,12 @@
  */
 package controller;
 
-import Model.ambulance;
+import Model.dfind;
+import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SHATTER
  */
-@WebServlet(name = "amb", urlPatterns = {"/amb"})
-public class amb extends HttpServlet {
+public class sym extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +38,10 @@ public class amb extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet amb</title>");            
+            out.println("<title>Servlet sym</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet amb at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet sym at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,26 +76,41 @@ public class amb extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        String[] data = new String[5];
-
-        System.out.println(data[0] = request.getParameter("number"));
-        System.out.println(data[1] = request.getParameter("name"));
-        System.out.println(data[2] = request.getParameter("phone"));
-        System.out.println(data[3] = request.getParameter("lat"));
-        System.out.println(data[4] = request.getParameter("lng"));
+        String symp_1=request.getParameter("symptom1");
+        String symp_2=request.getParameter("symptom2");
+        String symp_3=request.getParameter("symptom3");
         
-        ambulance amb = new ambulance();
         
-        try{
-            if(amb.request(data)){
-                out.println("Successfully Requested!!!");
-            }else{
-                out.println("Error!!!");
+        dfind con = new dfind();
+        try {
+            ResultSet rs = con.symptomCheck(symp_1, symp_2,symp_3);
+            while(rs.next()){
+                String disease = rs.getString("disease");
+                out.println("Possible : "+disease);
+                out.println("<br/>");
+                String sid = rs.getString("specialist_id");
+                ResultSet r=con.getDoctor(sid);
+                while(r.next()){
+                    String id =r.getString("id");
+                    user data = new user();
+                    ResultSet rr = data.udata(id);
+                    if(rr.next()){
+                        out.println(rr.getString("name"));
+                        out.println("   <a href='patients/channel.jsp?doc="+rr.getString("id")+"'>Channel Doctor</a>");
+                    }
+                        
+                    out.println("<br/>");
+                    out.println("<br/>");
+                    
+                }
+                
+                
+                
+                
             }
-        }catch(Exception e){
-            out.println("error : " + e);
-            
-        }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        } 
     }
 
     /**

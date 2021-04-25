@@ -75,6 +75,7 @@ public class changetime extends HttpServlet {
         PrintWriter out = response.getWriter();        
         String id = request.getParameter("id");
         String time = request.getParameter("time");
+        System.out.println(time);
         try{
             user u = new user();
             if(u.settime(id,time)){
