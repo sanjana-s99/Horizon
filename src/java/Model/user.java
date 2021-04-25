@@ -78,7 +78,7 @@ public class user {
         return rs;
     }
     
-     public ResultSet udata(String id) throws ClassNotFoundException, SQLException{
+    public ResultSet udata(String id) throws ClassNotFoundException, SQLException{
         ResultSet rs = null;
         try{
             PreparedStatement ps = con.createConnection().prepareStatement("select * from users where id =  ?");

@@ -27,6 +27,20 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%
+            String stat = request.getParameter("status");
+            if(stat!=null){
+                if(stat.equals("success")){
+        %>
+                    <h1>Successfully Booked!</h1>
+        <%
+                }else if(stat.equals("error")){
+        %>
+                    <h1>Something Went Wrong!!</h1>
+        <%
+                }
+            }
+        %>
         <div>
             <h1>Appointment list</h1>
             <table border="1">

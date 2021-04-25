@@ -25,10 +25,34 @@
         </style>
     </head>
     <body>
+         <%
+            String stat = request.getParameter("status");
+            if(stat!=null){
+                if(stat.equals("nu")){
+        %>
+                   <h1>No user found!!</h1>
+                    <p>User Different NIC or <a href="../staff/addpat.jsp">add user</a> </p>
+        <%
+                }else if(stat.equals("success")){
+        %>
+                    <h1>Successfully Booked!</h1>
+        <%
+                }else if(stat.equals("error")){
+        %>
+                    <h1>Something Went Wrong!!</h1>
+        <%
+                }else if(stat.equals("time")){
+        %>
+                    <h1>Time Slot is not available.</h1>
+        <%
+                }
+            }
+        %>
     <h1>Book Appointment by Admin</h1>
         
      <div class="main">
             <form method="post" action="../lab_add">   
+                <input type ="hidden" name="btype" value="a">
             <table>
                 <tr>
                     <td>Patient NIC:</td>

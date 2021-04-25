@@ -46,9 +46,28 @@
         </style>
     </head>
     <body>
+        <%
+            String stat = request.getParameter("status");
+            if(stat!=null){
+                if(stat.equals("success")){
+        %>
+                    <h1>Successfully Booked!</h1>
+        <%
+                }else if(stat.equals("error")){
+        %>
+                    <h1>Something Went Wrong!!</h1>
+        <%
+                }else if(stat.equals("time")){
+        %>
+                    <h1>Time Slot is not available.</h1>
+        <%
+                }
+            }
+        %>
         <h1>Book Appointment</h1>
         <div class="main">
-            <form method="post" action="../lab_add">   
+            <form method="post" action="../lab_add"> 
+                <input type ="hidden" name="btype" value="u">
             <table>
                 <tr>
                     <td>Doctor ID:</td>

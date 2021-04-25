@@ -84,6 +84,8 @@ public class lab_add extends HttpServlet {
                 data[2] =request.getParameter("type");
                 data[3] =request.getParameter("date");
                 data[4] =request.getParameter("time");
+                String btype = request.getParameter("btype");
+                System.out.println(btype);
                 
                 
                 //Patient e=new Patient();
@@ -93,36 +95,55 @@ public class lab_add extends HttpServlet {
                 String to = null, name = null, drname = null;
                 try{
                     ResultSet rs = userdata.udatanic(data[0]);
-                    rs.next();
-                    data[0] = rs.getString("id");
-                    to = rs.getString("email");
-                    name = rs.getString("name");
-                    System.out.println(to);
+                    if(rs.next()){
+                        data[0] = rs.getString("id");
+                        to = rs.getString("email");
+                        name = rs.getString("name");
+                        System.out.println(to);
+                        
+                    }else{
+                        if(btype.equals("a")){
+                            response.sendRedirect("Lab/admin.jsp?status=nu"); 
+                        }
+                    }                    
                 }catch(ClassNotFoundException | SQLException e){
-                    out.println("Error");
+                    if(btype.equals("a")){
+                        response.sendRedirect("Lab/admin.jsp?status=error"); 
+                    }else{
+                        response.sendRedirect("Lab/labApo.jsp?status=error"); 
+                    }
                 }
                 
-                try{
+                if(lb.checklab(data)){                
                     ResultSet rs = userdata.udata(data[1]);
                     rs.next();
                     drname = rs.getString("name");
-                }catch(ClassNotFoundException | SQLException e){
-                    out.println("Error");
-                }
-                
-                
-                int status= lb.labadd(data);
-                
-                String msg = "Dear "+name+",<br/>   Your Appoiment For "+data[2]+" is confirmed!!<br/>Date : "+data[3]+"<br/>Time : "+data[4]+"<br/>Reffered by Dr."+drname+".";
-                
-                
-                if(status>0){
-                    SendMail.send(to,"Lab Update",msg);
-                    out.print("<p>Record saved successfully</p>");
-                    response.sendRedirect("Lab/myapo.jsp");  
-                    //request.getRequestDispatcher("Lab/labApo.jsp").include(request,response);
+
+                    int status= lb.labadd(data);
+
+                    String msg = "Dear "+name+",<br/>   Your Appoiment For "+data[2]+" is confirmed!!<br/>Date : "+data[3]+"<br/>Time : "+data[4]+"<br/>Reffered by Dr."+drname+".";
+
+
+                    if(status>0){
+                        SendMail.send(to,"Lab Update",msg);
+                        if(btype.equals("a")){
+                            response.sendRedirect("Lab/admin.jsp?status=success"); 
+                        }else{
+                            response.sendRedirect("Lab/myapo.jsp?status=success"); 
+                        }
+                    }else{
+                        if(btype.equals("a")){
+                            response.sendRedirect("Lab/admin.jsp?status=error"); 
+                        }else{
+                            response.sendRedirect("Lab/labApo.jsp?status=error"); 
+                        }
+                    }
                 }else{
-                    out.println("Sorry!unable to save record");
+                    if(btype.equals("a")){
+                            response.sendRedirect("Lab/admin.jsp?status=time"); 
+                    }else{
+                            response.sendRedirect("Lab/labApo.jsp?status=time"); 
+                    }
                 }
                 
                 
