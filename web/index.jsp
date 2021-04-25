@@ -43,6 +43,8 @@
         <br/>
         <a href="Lab/">Lab</a>
         <br/>
+        <a href="finddoc.jsp">Doctor Finder</a>
+        <br/>
         <a href="logout">Logout</a>
     </body>
 </html>

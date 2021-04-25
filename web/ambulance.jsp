@@ -55,8 +55,8 @@
             </select>
             Name : <input type="text" name="name">
             Phone : <input type="text" name="phone">
-            <input type ="hidden" name="lan" value="10.0">
-            <input type="hidden" name="lat" value="22.0">
+                    <input type="hidden" name="lat" id="lat">
+                    <input type="hidden" name="lng" id="lng">
             <input type="submit" value="request">
         </form>
     </body>

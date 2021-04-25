@@ -265,7 +265,6 @@ System.out.println(r.getMessage());
                                         <hr/>
                     <div>
                         <h1>Doctors</h1>
-                        <form action="../changetime" method="post">
                         <table border='1'>
                         <tr>
                             <th>ID</th>
@@ -307,8 +306,8 @@ System.out.println(r.getMessage());
                             <td><%=rs.getString("gender") %></td>
                             <td><%=rs.getString("age") %></td>
                             <td><%=spe %></td>
-                            <td><input type="text" value="<%=rs.getString("time") %>" name="time" pattern=".{5}"/><input type="hidden" name="id" value="<%=rs.getString("id")%>"/></td>
-                            <td><input type="submit" value="update time"/></td>
+                            <td><form action="../changetime" method="post"><input type="text" value="<%=rs.getString("time") %>" name="time" pattern=".{5}"/><input type="hidden" name="id" value="<%=rs.getString("id")%>"/></td>
+                            <td><input type="submit" value="update time"/></form></td>
                             <td><a href="../deleteu?id=<%=rs.getString("id")%>">Remove</a></td>
                         </tr>
                         <%
@@ -319,7 +318,6 @@ System.out.println(r.getMessage());
                              }
                         %>
                     </table>
-                        </form>
                     </div>
                     <hr/>
                                         <div>
