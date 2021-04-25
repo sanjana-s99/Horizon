@@ -13,6 +13,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
         <link rel="stylesheet" href="./styles/register.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="scripts/nav.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <style>
             /* Chrome, Safari, Edge, Opera */
             input::-webkit-outer-spin-button,
@@ -33,15 +36,28 @@
             if(stat!=null){
                 if(stat.equals("error")){
         %>
-                    <h1>Email Or/And Password is Wrong!!</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Email Or/And Password is Wrong'})</script>
         <%
                 }else if(stat.equals("ue")){
         %>
-                    <h1>User Exists!!</h1>
+                    <script>Swal.fire({icon: 'info',title: 'Umm..',text: 'User already exists'})</script>
         <%
                 }
             }
         %>
+        <div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="index.jsp">Home</a>
+            <a href="patients/channel.jsp">Channel</a>
+            <a href="Lab/">Lab</a>
+            <a href="#">Pharmacy</a>
+            <a href="register.jsp" style="float:right" class="active">Register</a>
+            <a href="login.jsp" style="float:right">Login</a>
+            <a href="logout" style="float:right">Logout</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
 		<div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
 			<div class="inner">
 				<div class="image-holder">

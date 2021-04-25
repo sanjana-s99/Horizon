@@ -25,13 +25,38 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+        <script src="scripts/nav.js"></script>
+        <link rel="stylesheet" href="../styles/staffchannel.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+        </script>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="index.jsp">Home</a>
+            <a href="patients/channel.jsp">Channel</a>
+            <a href="Lab/">Lab</a>
+            <a href="#">Pharmacy</a>
+            <a href="register.jsp" style="float:right">Register</a>
+            <a href="login.jsp" style="float:right" class="active">Login</a>
+            <a href="logout" style="float:right">Logout</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        
+        <h2 class="center-text">Channel a doctor for the patient</h2>
             <% if(request.getParameter("spe")==null && request.getParameter("doc")==null){ %>
-            <select name="doc" onchange="GetSelectedValue()" id="doc">
+            <div class="flex-container">
+            <select  class="js-example-basic-single" name="state" style="width: 50%" name="doc" onchange="GetSelectedValue()" id="doc">
                 <option>Select Doctor</option>
 
                 <%
@@ -52,7 +77,12 @@
                     }
                 %>
             </select>
-            <a href="channel.jsp">reset</a>
+            </div>
+            
+            <div class="center-text">
+                <a href="channel.jsp">reset</a>
+            </div>
+            
             <% }if(request.getParameter("spe")!=null){ %>
             <%
                 String sid = request.getParameter("spe");
@@ -65,13 +95,15 @@
                     //get data one by one
                     rs.next();
             %>            
-            <h4>Selected : <%=rs.getString("name")%>  <a href="staffchannel.jsp">reset</a> </h4>
+            <h4 class="center-text">Selected : <%=rs.getString("name")%>  <br><a href="staffchannel.jsp">reset</a> </h4>
             <%
                 }catch (Exception e){
 
                 }
             %>
-            <select name="doc1" onchange="GetSelectedValue1()" id="doc1">
+            
+            <div class="flex-container">
+            <select  class="js-example-basic-single" name="state" style="width: 50%" name="doc1" onchange="GetSelectedValue1()" id="doc1">
                 <option>Select Doctor</option>
 
                 <%
@@ -100,6 +132,9 @@
                     }
                 %>
             </select>
+            </div>
+            
+            
             <% } if(request.getParameter("doc")!=null){
                     String stat = request.getParameter("status");
             if(stat!=null){
@@ -130,16 +165,18 @@
                     rs1.next();
 
             %>
-        <h4>Selected : <%=rs1.getString("name")%>   <a href="staffchannel.jsp">reset</a> </h4>
-        <form action="../sbook" method="post">
-            Nic : <input type="text" name="patient">
-            <input type="hidden" name="doctor" value="<%=doc %>">
-            <h5>Ongoing Number : <%=no+1%> </h5>
-            <input type="hidden" value="<%=no+1%>" name="no">
-            <input type="submit" value="channel">
-            <br/>
             
-        </form>
+            
+            <h4 class="center-text">Selected : <%=rs1.getString("name")%>   <br><a href="staffchannel.jsp">reset</a> </h4>
+            <div class="flex-container">
+            <form action="../sbook" method="post">
+                Nic : <input type="text" name="patient">
+                <input type="hidden" name="doctor" value="<%=doc %>">
+                <h5 class="center-text">Ongoing Number : <%=no+1%> </h5>
+                <input type="hidden" value="<%=no+1%>" name="no">
+                <input type="submit" value="channel" class="inputbutt">
+            </form>
+            </div>
             <%  }catch (Exception e){
                     System.out.println(e);
                 }

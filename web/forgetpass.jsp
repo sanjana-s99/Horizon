@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Forgot Password</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
@@ -33,7 +33,7 @@
                 }
             }
         %>
-        <div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
+        <div class="wrapper" style="background-image: url('images/bg-reset-form-1.jpg');">
 			<div class="inner">
 				<form method ="post" action="forget">
 					<h3>Forgot Password?</h3>

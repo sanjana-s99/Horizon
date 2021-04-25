@@ -7,17 +7,7 @@ and open the template in the editor.
     Created on : 20-Mar-2021, 22:36:34
     Author     : cmman
 */
-
-@font-face {
-  font-family: "Poppins-Regular";
-  src: url("../fonts/poppins/Poppins-Regular.ttf"); }
-@font-face {
-  font-family: "Poppins-SemiBold";
-  src: url("../fonts/poppins/Poppins-SemiBold.ttf"); }
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }
+@import "nav.css";
 
 body {
   font-family: "Poppins-Regular";
