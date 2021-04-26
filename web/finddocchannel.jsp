@@ -25,7 +25,9 @@
             dfind con = new dfind();
             try {
                 ResultSet rs = con.symptomCheck(symp_1, symp_2,symp_3);
+                int i=0;
                 while(rs.next()){
+                    i++;
                     String disease = rs.getString("disease");
                 %>
                 <h2>Possible : <%=disease%></h2>
@@ -44,15 +46,17 @@
                 <%
                             }
 
-                        out.println("<br/>");
-                        out.println("<br/>");
-
                     }
 
 
 
 
                 }
+if(i==0){
+%>
+not found!!
+<%
+}
             } catch (Exception ex) {
                 System.out.println(ex);
             } 
