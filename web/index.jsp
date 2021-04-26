@@ -92,7 +92,7 @@
         <div class="flex-container">
             <div class="flex-contact-one">
                 <div class="flex-text-head">Call</div>
-                <div class="flex-text">+94 77 999 8989</div>
+                <div class="flex-text">+94 81 999 8989</div>
             </div>
             <div class="flex-contact-two">
                 <div class="flex-text-head">Email</div>
