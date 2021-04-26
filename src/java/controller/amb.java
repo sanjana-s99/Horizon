@@ -88,12 +88,12 @@ public class amb extends HttpServlet {
         
         try{
             if(amb.request(data)){
-                out.println("Successfully Requested!!!");
+                response.sendRedirect("ambulance.jsp?status=success"); 
             }else{
-                out.println("Error!!!");
+                response.sendRedirect("ambulance.jsp?status=error"); 
             }
         }catch(Exception e){
-            out.println("error : " + e);
+            response.sendRedirect("ambulance.jsp?status=error"); 
             
         }
     }

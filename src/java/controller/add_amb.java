@@ -65,12 +65,12 @@ public class add_amb extends HttpServlet {
         
         try{
             if(amb.update(number)){
-                out.println("Successfully Compleated!!!");
+                response.sendRedirect("staff/onamb.jsp?status=success"); 
             }else{
-                out.println("Error!!!");
+                response.sendRedirect("staff/onamb.jsp?status=error"); 
             }
         }catch(Exception e){
-            out.println("error : " + e);
+            response.sendRedirect("staff/onamb.jsp?status=error"); 
             
         }
     }

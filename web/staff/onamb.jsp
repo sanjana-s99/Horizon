@@ -38,15 +38,27 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
+        <%
+            String stat = request.getParameter("status");
+            if(stat!=null){
+                if(stat.equals("success")){
+        %>
+                    compleated
+        <%
+                }else if(stat.equals("error")){
+        %>
+                    error
+        <%
+                }
+            }
+        %>
         <h1>Ongoing</h1>
         <table>
             <tr>
                 <th>Number</th>
                 <th>Name</th>
                 <th>Phone</th>
-                <th>Lat</th>
-                <th>Lan</th>
+                <th>Running Location</th>
                 <th>Action</th>
             </tr>
             <%
@@ -56,8 +68,7 @@
                     <th><%=rs.getString("number")%></th>
                     <th><%=rs.getString("name")%></th>
                     <th><%=rs.getString("phone")%></th>
-                    <th><%=rs.getString("lat")%></th>
-                    <th><%=rs.getString("lan")%></th>
+                    <th><a href="https://www.google.com/maps/@<%=rs.getString("lat")%>,<%=rs.getString("lan")%>,15z">Open Gmaps</a></th>
                     <th><a href="../add_amb?number=<%=rs.getString("number")%>">Complete</a></th>
                 </tr>
                 <%
