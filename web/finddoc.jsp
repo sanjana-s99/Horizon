@@ -4,18 +4,15 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 <% 
-    session.setMaxInactiveInterval(30);
+    session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
+    String type = (String)session.getAttribute("type");
     String name = (String)session.getAttribute("name");
     if(id == null){
         response.sendRedirect("login.jsp");
-    }else{
-        //out.print("Welcome : " + name );
     }
-%>
-<%
-    session.setMaxInactiveInterval(5000);
-    String type = (String)session.getAttribute("type");
+    
+
 %>
 <!DOCTYPE html>
 <!--
@@ -76,6 +73,7 @@ and open the template in the editor.
         <div class="flex-container">
             Enter symptom one :
             <select class="js-example-basic-single" name="symptom1" style="width: 30%" >
+                <option>Select Symptom</option>
 
                 <%
                     dbCon con = new dbCon();
@@ -99,7 +97,7 @@ and open the template in the editor.
             <div class="flex-container">
             Enter symptom two : 
             <select class="js-example-basic-single" name="symptom2" style="width: 30%" >
-
+                <option>Select Symptom</option>
                 <%
                     try {
                         Statement st = con.createConnection().createStatement();
@@ -121,7 +119,7 @@ and open the template in the editor.
             <div class="flex-container">
             Enter symptom three : 
             <select class="js-example-basic-single" style="width: 30%" name="symptom3">
-
+                <option>Select Symptom</option>
                 <%try{
                         Statement st = con.createConnection().createStatement();
                         String query = "SELECT symptom FROM symptoms ";

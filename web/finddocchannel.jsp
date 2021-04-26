@@ -8,6 +8,15 @@
 <%@page import="Model.dfind"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% 
+    session.setMaxInactiveInterval(5000);
+    String id = (String)session.getAttribute("id");
+    String type = (String)session.getAttribute("type");
+    String name = (String)session.getAttribute("name");
+    if(id == null){
+        response.sendRedirect("login.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,9 +44,9 @@
                     String sid = rs.getString("specialist_id");
                     ResultSet r=con.getDoctor(sid);
                     while(r.next()){
-                        String id =r.getString("id");
+                        String iid =r.getString("id");
                         user data = new user();
-                        ResultSet rr = data.udata(id);
+                        ResultSet rr = data.udata(iid);
                         if(rr.next()){
                             
                 %>
