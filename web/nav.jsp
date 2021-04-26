@@ -19,14 +19,15 @@
     <a href="Lab/">Lab</a>
     <a href="#">Pharmacy</a>
     
-    <%
-        if(type!=null){
-        if(type.equals("S") || type.equals("W")){
-    %>
-        <a href="staff/">Staff Dashboard</a>
-    <%}}else{%>
-        <a href="admin/main.jsp">Admin Dashboard</a>
-    <%}%>
+  <%
+                if(type!=null){
+                    if(type.equals("S")){
+            %>
+            <a href="staff/">Staff Dashboard</a>
+            <%}else if(type.equals("W")){%>
+            <a href="staff/">Staff Dashboard</a>
+            <a href="admin/main.jsp">Admin Dashboard</a>
+            <%}}%>
     
     <%
         if(id != null){
