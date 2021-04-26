@@ -44,7 +44,7 @@
         <h2 class="center-text">Channel a doctor for the patient</h2>
             <% if(request.getParameter("spe")==null && request.getParameter("doc")==null){ %>
             <div class="flex-container">
-            <select  class="js-example-basic-single" name="state" style="width: 50%" name="doc" onchange="GetSelectedValue()" id="doc">
+            <select  class="js-example-basic-single" style="width: 50%" name="doc" onchange="GetSelectedValue()" id="doc">
                 <option>Select Doctor</option>
 
                 <%
@@ -91,7 +91,7 @@
             %>
             
             <div class="flex-container">
-            <select  class="js-example-basic-single" name="state" style="width: 50%" name="doc1" onchange="GetSelectedValue1()" id="doc1">
+            <select  class="js-example-basic-single" style="width: 50%" name="doc1" onchange="GetSelectedValue1()" id="doc1">
                 <option>Select Doctor</option>
 
                 <%

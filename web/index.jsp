@@ -55,7 +55,7 @@
             <a href="logout" style="float:right">Logout</a>
             <%
                 }else{
-%>
+            %>
             <a href="register.jsp" style="float:right">Register</a>
             <a href="login.jsp" style="float:right">Login</a>
             <%}%>

@@ -12,7 +12,7 @@ and open the template in the editor.
 
 body {font-family: Poppins-Regular;}
 
- .flex-container {
+.flex-container {
   display: flex;
   align-items: center;
   justify-content: center;
