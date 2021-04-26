@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 24, 2021 at 05:41 PM
+-- Generation Time: Apr 26, 2021 at 12:39 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -44,7 +44,8 @@ CREATE TABLE `admit` (
 
 INSERT INTO `admit` (`id`, `nic`, `did`, `type`, `bno`, `gname`, `gtp`, `time`) VALUES
 (20, '993581089V', 4, 'room', 1, 'SANJANA', 771994147, '2021-04-21 10:31:28'),
-(21, '993581089V', 5, 'room', 4, 'SANJANA', 771994147, '2021-04-24 15:34:11');
+(21, '993581089V', 5, 'room', 4, 'SANJANA', 771994147, '2021-04-24 15:34:11'),
+(22, '993581089V', 4, 'ward', 4, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, '2021-04-25 08:54:36');
 
 -- --------------------------------------------------------
 
@@ -63,9 +64,9 @@ CREATE TABLE `ambulance` (
 
 INSERT INTO `ambulance` (`number`, `status`) VALUES
 ('CAM-8811', 'N'),
-('HU-5690', 'N'),
-('KA-8841', 'N'),
-('KD-8841', 'N'),
+('HU-5690', 'A'),
+('KA-8841', 'A'),
+('KD-8841', 'A'),
 ('KK-8841', 'N');
 
 -- --------------------------------------------------------
@@ -89,7 +90,7 @@ INSERT INTO `beds` (`bid`, `wid`, `bno`, `status`) VALUES
 (1, 1, 1, 'F'),
 (2, 1, 2, 'F'),
 (3, 2, 1, 'F'),
-(4, 2, 2, 'F');
+(4, 2, 2, 'B');
 
 -- --------------------------------------------------------
 
@@ -111,6 +112,7 @@ CREATE TABLE `channeling` (
 
 INSERT INTO `channeling` (`p_id`, `d_id`, `number`, `status`, `timestamp`) VALUES
 (0, 0, 0, 'S', '2021-03-25 13:59:43'),
+(1, 45, 1, 'R', '2021-04-25 18:33:43'),
 (3, 4, 5, 'R', '2021-03-23 15:40:21'),
 (3, 4, 6, 'R', '2021-03-25 15:12:14'),
 (3, 4, 7, 'R', '2021-03-25 16:08:15'),
@@ -134,12 +136,52 @@ INSERT INTO `channeling` (`p_id`, `d_id`, `number`, `status`, `timestamp`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `diseases`
+--
+
+CREATE TABLE `diseases` (
+  `id` int(11) NOT NULL,
+  `disease` varchar(100) NOT NULL,
+  `symptom_1` varchar(100) NOT NULL,
+  `symptom_2` varchar(100) NOT NULL,
+  `symptom_3` varchar(100) NOT NULL,
+  `symptom_4` varchar(100) NOT NULL,
+  `symptom_5` varchar(100) NOT NULL,
+  `symptom_6` varchar(100) NOT NULL,
+  `symptom_7` varchar(100) NOT NULL,
+  `symptom_8` varchar(100) NOT NULL,
+  `symptom_9` varchar(100) NOT NULL,
+  `symptom_10` varchar(100) NOT NULL,
+  `specialist_id` varchar(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `diseases`
+--
+
+INSERT INTO `diseases` (`id`, `disease`, `symptom_1`, `symptom_2`, `symptom_3`, `symptom_4`, `symptom_5`, `symptom_6`, `symptom_7`, `symptom_8`, `symptom_9`, `symptom_10`, `specialist_id`) VALUES
+(1, 'heart disease', 'Fluttering in your chest', 'Racing heartbeat ', 'Slow heartbeat', 'Chest pain', 'Shortness of breath', 'Lightheadedness', 'Dizziness', 'Fainting', '', '', '4'),
+(2, 'diabetes', 'Urinate (pee) a lot', 'very thirsty', 'Lose weight', 'very hungry', 'blurry vision', 'very tired', 'dry skin', '', '', '', '5'),
+(3, 'cancer', 'Pain', 'loss weight', 'Fatigue', 'Fever', 'Changes in your skin', 'Sores that don\'t heal', 'Cough', 'Unusual bleeding', '', '', '6'),
+(4, 'stroke', 'Sudden numbness or weakness in the face, arm, or leg, especially on one side of the body', 'Sudden confusion, trouble speaking, or difficulty understanding speech', 'Sudden trouble seeing in one or both eyes', 'Sudden trouble walking, dizziness, loss of balance, or lack of coordination', '', '', '', '', '', '', '7'),
+(5, 'respiratory disease', 'Difficulty Breathing', 'Stubborn Cough', 'Breathing Noisily', 'Lingering Chest Pain', 'Chronic Mucus', 'Coughing Up Blood', 'Asthma', 'Pneumonia', '', '', '8'),
+(6, 'COVID-19', 'fever', 'dry cough', 'tiredness', 'aches and pains', 'sore throat', 'diarrhoea', 'conjunctivitis', 'headache', 'loss of taste or smell', 'difficulty breathing or shortness of breath', '9'),
+(7, 'gastritis', 'Stomach upset or pain', 'Belching and hiccups', 'Belly (abdominal) bleeding', 'Nausea and vomiting', 'Feeling of fullness or burning in your stomach', 'Loss of appetite', 'Blood in your vomit or stool', '', '', '', '10'),
+(8, 'Kidney disease', 'loss weight', 'swollen ankles, feet or hands', 'shortness of breath', 'tiredness', 'blood in your pee', 'an increased need to pee', 'difficulty sleeping', 'itchy skin', '', '', '11'),
+(9, 'cholesterol', 'chest pain', 'nausea', 'extreme fatigue', 'shortness of breath', 'pain in the neck, jaw, upper abdomen, or back', '', '', '', '', '', '12'),
+(10, 'pregnancy', 'Missed period', 'Tender, swollen breasts', 'Nausea with or without vomiting', 'Increased urination', 'Fatigue', '', '', '', '', '', '13'),
+(11, 'respiratory disease', 'Difficulty Breathing', 'Stubborn Cough', 'Breathing Noisily', 'Lingering Chest Pain', 'Chronic Mucus', 'Coughing Up Blood', 'Asthma', 'Pneumonia', '', '', '8');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `doctor`
 --
 
 CREATE TABLE `doctor` (
   `id` int(11) NOT NULL,
-  `time` varchar(5) DEFAULT NULL,
+  `nic` varchar(15) NOT NULL,
+  `time` varchar(5) DEFAULT '16:00',
   `s_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -147,10 +189,12 @@ CREATE TABLE `doctor` (
 -- Dumping data for table `doctor`
 --
 
-INSERT INTO `doctor` (`id`, `time`, `s_id`) VALUES
-(4, '16:30', 3),
-(5, '17:00', 2),
-(33, '15:30', 2);
+INSERT INTO `doctor` (`id`, `nic`, `time`, `s_id`) VALUES
+(4, '00000000000', '20:40', 3),
+(5, '00000000000', '17:00', 5),
+(33, '981372940v', '20:30', 2),
+(45, '993581089V', '15:30', 4),
+(53, '728131048v', '16:00', 6);
 
 -- --------------------------------------------------------
 
@@ -230,7 +274,14 @@ INSERT INTO `lab_apo` (`id`, `pid`, `did`, `type`, `date`, `time`) VALUES
 (19, 3, 33, 'Container Pick Up/Specimen Drop Off', '2021-03-24', '19:45:00'),
 (20, 3, 35, 'Lab Test & ECG', '2021-04-19', '10:44:00'),
 (21, 3, 35, 'Lab Test & ECG', '2021-04-19', '10:44:00'),
-(22, 3, 35, 'Container Pickup / Specimens Drop Off', '2021-04-06', '13:50:00');
+(22, 3, 35, 'Container Pickup / Specimens Drop Off', '2021-04-06', '13:50:00'),
+(23, 3, 33, 'ECG', '2021-03-24', '18:01:00'),
+(24, 1, 5, 'Lab Test(Blood or Urine)', '2021-04-25', '23:45:00'),
+(25, 1, 5, 'Lab Test(Blood or Urine)', '2021-04-25', '23:47:00'),
+(26, 1, 4, 'ECG', '2021-04-25', '12:03:00'),
+(27, 3, 5, 'ECG', '2021-03-24', '18:01:00'),
+(28, 3, 5, 'ECG', '2021-03-24', '18:01:00'),
+(29, 3, 5, 'ECG', '2021-03-24', '18:01:00');
 
 -- --------------------------------------------------------
 
@@ -293,6 +344,15 @@ CREATE TABLE `provide_amb` (
   `lat` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `provide_amb`
+--
+
+INSERT INTO `provide_amb` (`number`, `name`, `phone`, `lan`, `lat`) VALUES
+('HU-5690', 'SANJANA', 771994147, 10, 22),
+('KA-8841', 'SANJANA', 771994147, 80.0331, 6.827),
+('KD-8841', 'SANJANA', 771994147, 80.0668, 6.82865);
+
 -- --------------------------------------------------------
 
 --
@@ -339,7 +399,102 @@ CREATE TABLE `specelist` (
 INSERT INTO `specelist` (`id`, `name`) VALUES
 (1, 'Allergy and immunologyAnesthesiology'),
 (2, 'Anesthesiology'),
-(3, 'Dermatology');
+(3, 'Dermatology'),
+(4, 'Cardiologist'),
+(5, 'Endocrinologists'),
+(6, 'oncologist'),
+(7, 'Neurologist'),
+(8, 'Pulmonologist '),
+(9, 'Infectious Disease Specialist'),
+(10, 'gastroenterologist'),
+(11, 'Nephrologists'),
+(12, 'Lipidologists'),
+(13, 'Obstetrician');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `symptoms`
+--
+
+CREATE TABLE `symptoms` (
+  `symptom` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `symptoms`
+--
+
+INSERT INTO `symptoms` (`symptom`) VALUES
+('Fluttering in your chest'),
+('Racing heartbeat '),
+('Slow heartbeat'),
+('Chest pain'),
+('Shortness of breath'),
+('Lightheadedness'),
+('Dizziness'),
+('Fainting'),
+('Urinate (pee) a lot'),
+('very thirsty'),
+('Loss weight'),
+('very hungry'),
+('blurry vision'),
+('very tired'),
+('dry skin'),
+('Pain'),
+('Fatigue'),
+('Fever'),
+('Changes in your skin'),
+('Sores that don\'t heal'),
+('Cough'),
+('Unusual bleeding'),
+('Difficulty Breathing'),
+('Stubborn Cough'),
+('Breathing Noisily'),
+('Lingering Chest Pain'),
+('Chronic Mucus'),
+('Coughing Up Blood'),
+('Asthma'),
+('Pneumonia'),
+('fever'),
+('dry cough'),
+('tiredness'),
+('aches'),
+('sore throat'),
+('diarrhoea'),
+('conjunctivitis'),
+('headache'),
+('Stomach upset or pain'),
+('Belching and hiccups'),
+('Belly (abdominal) bleeding'),
+('Nausea and vomiting'),
+('Loss of appetite'),
+('Blood in your vomit or stool'),
+('swollen ankles, feet or hands'),
+('shortness of breath'),
+('tiredness'),
+('blood in your pee'),
+('an increased need to pee'),
+('difficulty sleeping'),
+('itchy skin'),
+('chest pain'),
+('nausea'),
+('extreme fatigue'),
+('shortness of breath'),
+('Missed period'),
+('Tender, swollen breasts'),
+('Nausea with or without vomitin'),
+('Increased urination'),
+('Fatigue'),
+('respiratory disease'),
+('Difficulty Breathing'),
+('Stubborn Cough'),
+('Breathing Noisily'),
+('Lingering Chest Pain'),
+('Chronic Mucus'),
+('Coughing Up Blood'),
+('Asthma'),
+('Pneumonia');
 
 -- --------------------------------------------------------
 
@@ -368,7 +523,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `telephone`, `email`, `password`, `nic`, `gender`, `age`, `address`, `type`, `status`) VALUES
 (1, 'webmaster', 0, 'webmaster@horizen.lk', '21232F297A57A5A743894A0E4A801FC3', '0', 'M', 0, '0', 'W', 'A'),
 (2, 'manuja', 777833833, 'manuja@gmail.com', 'A6A279ABE0B97FF31094A6B074DAFBC5', '997603346V', 'M', 22, '15/1, Sellige Watta, Ampitiya, Kandy, Sri Lanka.', 'S', 'N'),
-(3, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 'sanjanasulakshanawitharanage@gmail.com', 'C5990A201E678B5FF2D3AD5091753F2F', '993581089V', 'M', 22, '15/1, Sellige Wattha', 'P', 'A'),
+(3, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 'sanjanasulakshanawitharanage@gmail.com', '47E68A6A7F8C3F0589C37C68237880EB', '993581089V', 'M', 22, '15/1, Sellige Wattha', 'P', 'A'),
 (4, 'D M Munasinghe', 778162644, 'munasinge@horizon.lk', '3E932C5349BA40C139A6EBE0B20ADC35', '00000000000', 'M', 37, 'lovers steet, peradeniya', 'D', 'A'),
 (5, 'M Rajapakshe', 0, 'mahinda@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '00000000000', 'M', 78, 'hambanthota', 'D', 'A'),
 (33, 'Indula Bandara', 771876223, 'indulabandara73@gmail.com', 'C01DAE268A171DEF88259463739BD8FE', '981372940v', 'M', 23, '1st lane, kurunagala.', 'D', 'N'),
@@ -377,7 +532,8 @@ INSERT INTO `users` (`id`, `name`, `telephone`, `email`, `password`, `nic`, `gen
 (45, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 'sswitharanage@students.nsbm.lk', '21232F297A57A5A743894A0E4A801FC3', '897603346V', 'M', 32, '15/1, Sellige Wattha', 'D', 'N'),
 (46, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 'sswitharanage@students.nsbm.ac.lk', '21232F297A57A5A743894A0E4A801FC3', '897603346V', 'M', 32, '15/1, Sellige Wattha', 'S', 'N'),
 (48, 'Kavindya', 771994147, 'kavindyasandeepani1999@gmail.com', '82D747399B8A509BC86A01F2DF898755', '997581089V', 'M', 22, '1st lane, aswaddum uyana, millavitiya', 'P', 'N'),
-(52, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 's.witharanage@yahoo.com', '0354D89C28EC399C00D3CB2D094CF093', '993581089V', 'M', 22, '15/1', 'P', 'A');
+(52, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 's.witharanage@yahoo.com', '0354D89C28EC399C00D3CB2D094CF093', '993581089V', 'M', 22, '15/1', 'P', 'A'),
+(53, 'Dayamanthi Pieris', 771364147, 'dayamanthi@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '728131048v', 'M', 49, '1st lane, pallegama para ,galagedara', 'D', 'N');
 
 --
 -- Triggers `users`
@@ -418,7 +574,8 @@ CREATE TABLE `verify` (
 --
 
 INSERT INTO `verify` (`email`, `key`, `exp`) VALUES
-('sanjanaefeflakshanawitharanage@gmail.com', '88A591C87D5582F725FC031A71270096', '2021-04-22');
+('sanjanaefeflakshanawitharanage@gmail.com', '88A591C87D5582F725FC031A71270096', '2021-04-22'),
+('dayamanthi@horizon.lk', '5179A34444AEBB8F3E77079212E6E3DA', '2021-04-26');
 
 -- --------------------------------------------------------
 
@@ -471,6 +628,12 @@ ALTER TABLE `beds`
 --
 ALTER TABLE `channeling`
   ADD PRIMARY KEY (`p_id`,`d_id`,`number`);
+
+--
+-- Indexes for table `diseases`
+--
+ALTER TABLE `diseases`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `doctor`
@@ -549,7 +712,7 @@ ALTER TABLE `ward_types`
 -- AUTO_INCREMENT for table `admit`
 --
 ALTER TABLE `admit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `beds`
@@ -561,7 +724,7 @@ ALTER TABLE `beds`
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `drugs`
@@ -573,7 +736,7 @@ ALTER TABLE `drugs`
 -- AUTO_INCREMENT for table `lab_apo`
 --
 ALTER TABLE `lab_apo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `payment`
@@ -597,13 +760,13 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT for table `specelist`
 --
 ALTER TABLE `specelist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `ward_types`
