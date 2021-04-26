@@ -16,6 +16,7 @@ body {font-family: Poppins-Regular;}
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   margin-top: 10px;
 }
 
@@ -24,7 +25,7 @@ body {font-family: Poppins-Regular;}
 }
 
 .inputbutt{
-  background-color: #ff0000; /* Green */
+  background-color: #009a69; /* Green */
   border: none;
   color: white;
   padding: 5px 10px;
@@ -36,7 +37,14 @@ body {font-family: Poppins-Regular;}
   cursor: pointer; 
 }
 
-.inputbutt:hover{
-   transition-duration: 0.2s;
-   background-color: #009a69; 
+.w3-table,.w3-table-all{border-collapse:collapse;border-spacing:0;width:100%;display:table}.w3-table-all{border:1px solid #ccc}
+.w3-bordered tr,.w3-table-all tr{border-bottom:1px solid #ddd}.w3-striped tbody tr:nth-child(even){background-color:#f1f1f1}
+.w3-table-all tr:nth-child(odd){background-color:#fff}.w3-table-all tr:nth-child(even){background-color:#f1f1f1}
+.w3-hoverable tbody tr:hover,.w3-ul.w3-hoverable li:hover{background-color:#ccc}.w3-centered tr th,.w3-centered tr td{text-align:center}
+.w3-table td,.w3-table th,.w3-table-all td,.w3-table-all th{padding:8px 8px;display:table-cell;text-align:left;vertical-align:top}
+.w3-table th:first-child,.w3-table td:first-child,.w3-table-all th:first-child,.w3-table-all td:first-child{padding-left:16px}
+
+.tablehead{
+    background-color: #009a69 !important;
+    color: #fff;
 }

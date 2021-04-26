@@ -45,19 +45,9 @@
                 }
             }
         %>
-        <div class="topnav" id="myTopnav">
-            <div class="toptitle">Horizon Hospitals</div>
-            <a href="index.jsp">Home</a>
-            <a href="patients/channel.jsp">Channel</a>
-            <a href="Lab/">Lab</a>
-            <a href="#">Pharmacy</a>
-            <a href="register.jsp" style="float:right" class="active">Register</a>
-            <a href="login.jsp" style="float:right">Login</a>
-            <a href="logout" style="float:right">Logout</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-               <i class="fa fa-bars"></i>
-            </a>
-        </div>
+        
+        <!--NAV-->
+        
 		<div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
 			<div class="inner">
 				<div class="image-holder">
