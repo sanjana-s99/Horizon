@@ -42,12 +42,12 @@
             <a href="#">Pharmacy</a>
             <%
                 if(type!=null){
-                    if(type.equals("S") || type.equals("W")){
+                    if(type.equals("S")){
             %>
             <a href="staff/">Staff Dashboard</a>
-            <%}}else{%>
+            <%}else if(type.equals("W")){%>
             <a href="admin/main.jsp">Admin Dashboard</a>
-            <%}%>
+            <%}}%>
             <%if(id != null){
                 %>
             <a style="float:right">Welcome <%=name%></a>
