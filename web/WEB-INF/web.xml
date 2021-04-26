@@ -79,10 +79,6 @@
         <servlet-name>addpat</servlet-name>
         <servlet-class>controller.addpat</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>sym</servlet-name>
-        <servlet-class>controller.sym</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -158,10 +154,6 @@
     <servlet-mapping>
         <servlet-name>addpat</servlet-name>
         <url-pattern>/addpat</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>sym</servlet-name>
-        <url-pattern>/sym</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>15</session-timeout>
