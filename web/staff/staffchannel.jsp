@@ -39,19 +39,7 @@
         </script>
     </head>
     <body>
-        <div class="topnav" id="myTopnav">
-            <div class="toptitle">Horizon Hospitals</div>
-            <a href="index.jsp">Home</a>
-            <a href="patients/channel.jsp">Channel</a>
-            <a href="Lab/">Lab</a>
-            <a href="#">Pharmacy</a>
-            <a href="register.jsp" style="float:right">Register</a>
-            <a href="login.jsp" style="float:right" class="active">Login</a>
-            <a href="logout" style="float:right">Logout</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-               <i class="fa fa-bars"></i>
-            </a>
-        </div>
+        <!--NAV-->
         
         <h2 class="center-text">Channel a doctor for the patient</h2>
             <% if(request.getParameter("spe")==null && request.getParameter("doc")==null){ %>
@@ -168,13 +156,13 @@
             
             
             <h4 class="center-text">Selected : <%=rs1.getString("name")%>   <br><a href="staffchannel.jsp">reset</a> </h4>
-            <div class="flex-container">
-            <form action="../sbook" method="post">
+            <div >
+            <form action="../sbook" method="post" class="flex-container">
                 Nic : <input type="text" name="patient">
                 <input type="hidden" name="doctor" value="<%=doc %>">
                 <h5 class="center-text">Ongoing Number : <%=no+1%> </h5>
                 <input type="hidden" value="<%=no+1%>" name="no">
-                <input type="submit" value="channel" class="inputbutt">
+                <input type="submit" value="Channel" class="inputbutt">
             </form>
             </div>
             <%  }catch (Exception e){
@@ -183,9 +171,9 @@
                  %>
             <div>
                     <hr/>
-                    <h1>Channelings</h1>
-        <table>
-                        <tr>
+                    <h2>Channelings</h2>
+                    <table class="w3-table-all">
+                        <tr class="tablehead">
                             <td>Patient</td>
                             <td>Number</td>
                             <td>Status</td>
