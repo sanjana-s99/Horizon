@@ -6,17 +6,16 @@
 package controller;
 
 import Model.SendMail;
+import Model.drprescription;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -93,14 +92,17 @@ public class prescription extends HttpServlet {
             rslt1.next();
             String dname = rslt1.getString("name");
             
+            drprescription pr = new drprescription();
+            if(pr.send(pid, did, pres)){
 
-            String message = "Dear "+name+",<br/> Here is the Presctiption sent by Dr. "+dname+".<br/>"+pres;
-            SendMail.send(email, "Prescription", message);
-            
-            response.sendRedirect("doctor/mychanneling.jsp"); 
+                String message = "Dear "+name+",<br/> Here is the Presctiption sent by Dr. "+dname+".<br/>"+pres;
+                SendMail.send(email, "Prescription", message);
+
+                response.sendRedirect("doctor/index.jsp?status=success"); 
+            }
                 
         }catch(IOException | ClassNotFoundException | SQLException e){
-            response.sendRedirect("doctor/mychanneling.jsp"); 
+            response.sendRedirect("doctor/index.jsp?status=error"); 
         }
     }
 

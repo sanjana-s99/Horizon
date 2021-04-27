@@ -137,7 +137,7 @@ public class user {
         return rs;
     }
      
-     public boolean book(String[] d ) throws ClassNotFoundException, SQLException{
+    public boolean book(String[] d ) throws ClassNotFoundException, SQLException{
         try{
             PreparedStatement ps = con.createConnection().prepareStatement("insert into channeling(d_id,p_id,number) values (?,?,?)");
             ps.setString(1, d[0]);

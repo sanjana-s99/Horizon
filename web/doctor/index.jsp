@@ -30,6 +30,19 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%
+            String stat = request.getParameter("status");
+            if(stat!=null){
+                if(stat.equals("success")){
+        %>
+                    Pres Sent!!
+        <%
+                }else if(stat.equals("error")){
+        %>
+                    ERROR!
+        <%
+            }}
+        %>
         <div>
                     <hr/>
                     <h1>Channelings</h1>
@@ -114,7 +127,7 @@
                         function GetSelectedValue(){
                             var e = document.getElementById("doc");
                             var result = e.options[e.selectedIndex].value;
-                            window.location.replace("mychanneling.jsp?no="+result);
+                            window.location.replace("index.jsp?no="+result);
 
                         }
                     </script>

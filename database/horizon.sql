@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 26, 2021 at 12:39 PM
+-- Generation Time: Apr 27, 2021 at 11:43 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -63,10 +63,10 @@ CREATE TABLE `ambulance` (
 --
 
 INSERT INTO `ambulance` (`number`, `status`) VALUES
-('CAM-8811', 'N'),
+('CAM-8811', 'A'),
 ('HU-5690', 'A'),
 ('KA-8841', 'A'),
-('KD-8841', 'A'),
+('KD-8841', 'N'),
 ('KK-8841', 'N');
 
 -- --------------------------------------------------------
@@ -112,7 +112,6 @@ CREATE TABLE `channeling` (
 
 INSERT INTO `channeling` (`p_id`, `d_id`, `number`, `status`, `timestamp`) VALUES
 (0, 0, 0, 'S', '2021-03-25 13:59:43'),
-(1, 45, 1, 'R', '2021-04-25 18:33:43'),
 (3, 4, 5, 'R', '2021-03-23 15:40:21'),
 (3, 4, 6, 'R', '2021-03-25 15:12:14'),
 (3, 4, 7, 'R', '2021-03-25 16:08:15'),
@@ -131,7 +130,9 @@ INSERT INTO `channeling` (`p_id`, `d_id`, `number`, `status`, `timestamp`) VALUE
 (3, 5, 16, 'R', '2021-03-20 14:01:59'),
 (3, 5, 17, 'R', '2021-03-25 15:29:31'),
 (3, 5, 18, 'R', '2021-04-21 11:20:45'),
-(3, 5, 19, 'R', '2021-04-21 11:24:56');
+(3, 5, 19, 'R', '2021-04-21 11:24:56'),
+(3, 6, 1, 'R', '2021-04-27 07:51:13'),
+(3, 6, 2, 'R', '2021-04-27 07:57:33');
 
 -- --------------------------------------------------------
 
@@ -190,11 +191,36 @@ CREATE TABLE `doctor` (
 --
 
 INSERT INTO `doctor` (`id`, `nic`, `time`, `s_id`) VALUES
-(4, '00000000000', '20:40', 3),
+(4, '40000000000', '20:40', 3),
 (5, '00000000000', '17:00', 5),
+(6, '721048012v', '16:00', 1),
+(7, '621048012v', '16:00', 4),
+(8, '721788012v', '16:00', 4),
+(9, '821048012v', '16:00', 3),
 (33, '981372940v', '20:30', 2),
+(35, '883581099v', '16:00', 2),
 (45, '993581089V', '15:30', 4),
 (53, '728131048v', '16:00', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `drprescription`
+--
+
+CREATE TABLE `drprescription` (
+  `id` int(11) NOT NULL,
+  `pid` int(11) NOT NULL,
+  `did` int(11) NOT NULL,
+  `pres` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `drprescription`
+--
+
+INSERT INTO `drprescription` (`id`, `pid`, `did`, `pres`) VALUES
+(1, 3, 4, 'drug 1\r\ndrug 2');
 
 -- --------------------------------------------------------
 
@@ -218,7 +244,6 @@ CREATE TABLE `drugs` (
 --
 
 INSERT INTO `drugs` (`id`, `drugsname`, `price`, `date`, `expdate`, `brands`, `country`, `Mdate`) VALUES
-(1, 'Abacavir', '220', '2021-03-25 15:04:00', '13/03/2021', 'mero', 'England', '13/03/2021'),
 (2, 'Atovaquone', '300', '2021-03-25 15:04:00', '13/03/2021', 'Sun Text', 'Japan', '13/03/2021'),
 (4, 'test2', '70,000', '2021-04-03 04:30:10', '2021-04-03T09:57', 'Test', 'Sri Lanka', '2021-04-03T09:57');
 
@@ -349,9 +374,9 @@ CREATE TABLE `provide_amb` (
 --
 
 INSERT INTO `provide_amb` (`number`, `name`, `phone`, `lan`, `lat`) VALUES
+('CAM-8811', 'SANJANA', 771994147, 80.1444, 6.81981),
 ('HU-5690', 'SANJANA', 771994147, 10, 22),
-('KA-8841', 'SANJANA', 771994147, 80.0331, 6.827),
-('KD-8841', 'SANJANA', 771994147, 80.0668, 6.82865);
+('KA-8841', 'SANJANA', 771994147, 80.0331, 6.827);
 
 -- --------------------------------------------------------
 
@@ -524,15 +549,19 @@ INSERT INTO `users` (`id`, `name`, `telephone`, `email`, `password`, `nic`, `gen
 (1, 'webmaster', 0, 'webmaster@horizen.lk', '21232F297A57A5A743894A0E4A801FC3', '0', 'M', 0, '0', 'W', 'A'),
 (2, 'manuja', 777833833, 'manuja@gmail.com', 'A6A279ABE0B97FF31094A6B074DAFBC5', '997603346V', 'M', 22, '15/1, Sellige Watta, Ampitiya, Kandy, Sri Lanka.', 'S', 'N'),
 (3, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 'sanjanasulakshanawitharanage@gmail.com', '47E68A6A7F8C3F0589C37C68237880EB', '993581089V', 'M', 22, '15/1, Sellige Wattha', 'P', 'A'),
-(4, 'D M Munasinghe', 778162644, 'munasinge@horizon.lk', '3E932C5349BA40C139A6EBE0B20ADC35', '00000000000', 'M', 37, 'lovers steet, peradeniya', 'D', 'A'),
-(5, 'M Rajapakshe', 0, 'mahinda@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '00000000000', 'M', 78, 'hambanthota', 'D', 'A'),
+(4, 'Damitha Munasinghe', 778162644, 'munasinge@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '40000000000', 'M', 37, 'lovers steet, peradeniya', 'D', 'A'),
+(5, 'Mahinda Rajapakshe', 0, 'mahinda@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '00000000000', 'M', 78, 'hambanthota', 'D', 'A'),
+(6, 'Pavithra Wanniarchchi', 778389389, 'pavithra@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '721048012v', 'F', 60, '712/4, cross street, eheliyagoda.', 'D', 'A'),
+(7, 'Maithreepala Sirisena', 726267983, 'maithri@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '621048012v', 'M', 65, '16, flowers street, polonnaruwa.', 'D', 'A'),
+(8, 'Kasun Kalhara', 746782561, 'kasun@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '721788012v', 'M', 39, '172, Main Street, Kandy', 'D', 'A'),
+(9, 'Hirunika Premachandra', 775628261, 'hirunka@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '821048012v', 'F', 36, '93, bakers street, colombo', 'D', 'A'),
 (33, 'Indula Bandara', 771876223, 'indulabandara73@gmail.com', 'C01DAE268A171DEF88259463739BD8FE', '981372940v', 'M', 23, '1st lane, kurunagala.', 'D', 'N'),
-(35, 'Namal Rajapaksha', 771191191, 'namal@gmail.com', '21232F297A57A5A743894A0E4A801FC3', '893581099v', 'M', 39, '1st lane, madamulana, hambanthota', 'D', 'A'),
-(44, 'Sulakshana Witharanage', 771994147, 's.witharanddage@yahoo.com', '2DE5BC15BD50896C961E6C0246675E65', '993581089V', 'M', 22, '15/1, Sellige Wattha', 'P', 'A'),
+(35, 'Namal Rajapaksha', 771191191, 'namal@gmail.com', '21232F297A57A5A743894A0E4A801FC3', '883581099v', 'M', 39, '1st lane, madamulana, hambanthota', 'D', 'A'),
+(44, 'Sulakshana Witharanage', 771994147, 's.witharanddage@yahoo.com', '2DE5BC15BD50896C961E6C0246675E65', '993581049V', 'M', 22, '15/1, Sellige Wattha', 'P', 'A'),
 (45, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 'sswitharanage@students.nsbm.lk', '21232F297A57A5A743894A0E4A801FC3', '897603346V', 'M', 32, '15/1, Sellige Wattha', 'D', 'N'),
-(46, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 'sswitharanage@students.nsbm.ac.lk', '21232F297A57A5A743894A0E4A801FC3', '897603346V', 'M', 32, '15/1, Sellige Wattha', 'S', 'N'),
+(46, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 'sswitharanage@students.nsbm.ac.lk', '21232F297A57A5A743894A0E4A801FC3', '899603346V', 'M', 32, '15/1, Sellige Wattha', 'S', 'N'),
 (48, 'Kavindya', 771994147, 'kavindyasandeepani1999@gmail.com', '82D747399B8A509BC86A01F2DF898755', '997581089V', 'M', 22, '1st lane, aswaddum uyana, millavitiya', 'P', 'N'),
-(52, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 's.witharanage@yahoo.com', '0354D89C28EC399C00D3CB2D094CF093', '993581089V', 'M', 22, '15/1', 'P', 'A'),
+(52, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 's.witharanage@yahoo.com', '0354D89C28EC399C00D3CB2D094CF093', '993566089V', 'M', 22, '15/1', 'P', 'A'),
 (53, 'Dayamanthi Pieris', 771364147, 'dayamanthi@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '728131048v', 'M', 49, '1st lane, pallegama para ,galagedara', 'D', 'N');
 
 --
@@ -609,7 +638,9 @@ INSERT INTO `ward_types` (`wid`, `wtype`, `price`) VALUES
 -- Indexes for table `admit`
 --
 ALTER TABLE `admit`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nic` (`nic`,`did`),
+  ADD KEY `did` (`did`);
 
 --
 -- Indexes for table `ambulance`
@@ -641,6 +672,12 @@ ALTER TABLE `diseases`
 ALTER TABLE `doctor`
   ADD PRIMARY KEY (`id`),
   ADD KEY `s_id` (`s_id`);
+
+--
+-- Indexes for table `drprescription`
+--
+ALTER TABLE `drprescription`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `drugs`
@@ -696,7 +733,17 @@ ALTER TABLE `specelist`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nic` (`nic`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `nic_2` (`nic`),
+  ADD KEY `email_2` (`email`);
+
+--
+-- Indexes for table `verify`
+--
+ALTER TABLE `verify`
+  ADD KEY `email` (`email`);
 
 --
 -- Indexes for table `ward_types`
@@ -725,6 +772,12 @@ ALTER TABLE `beds`
 --
 ALTER TABLE `doctor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT for table `drprescription`
+--
+ALTER TABLE `drprescription`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `drugs`
@@ -777,6 +830,13 @@ ALTER TABLE `ward_types`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `admit`
+--
+ALTER TABLE `admit`
+  ADD CONSTRAINT `admit_ibfk_1` FOREIGN KEY (`nic`) REFERENCES `users` (`nic`),
+  ADD CONSTRAINT `admit_ibfk_2` FOREIGN KEY (`did`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `doctor`
