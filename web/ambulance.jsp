@@ -1,7 +1,7 @@
 <%-- 
     Document   : ambulance
     Created on : Mar 23, 2021, 9:48:38 AM
-    Author     : SHATTER
+    Author     : Indula
 --%>
 
 <%@page import="java.sql.ResultSet"%>

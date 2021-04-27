@@ -1,7 +1,7 @@
 <%-- 
     Document   : add_amb
     Created on : Mar 23, 2021, 10:29:03 AM
-    Author     : SHATTER
+    Author     : Indula
 --%>
 <%
     session.setMaxInactiveInterval(5000);
