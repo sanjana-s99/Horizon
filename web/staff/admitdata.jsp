@@ -44,6 +44,10 @@
         %>
                     <h1>Something Went Wrong!!</h1>
         <%
+                }else if(stat.equals("sc")){
+        %>
+                    <h1>Successfully room changed!!</h1>
+        <%
                 }
             }
         %>
@@ -51,12 +55,13 @@
         <h1>Rooms</h1>
         <table border="1">
             <tr>
-                <th>Room No</th>
                 <th>Patient</th>
                 <th>Doctor</th>
                 <th>Guardians Name</th>
                 <th>Guardians Telephone</th>
                 <th>Admition Time</th>
+                <th>Room No</th>
+                <th>Change Room</th>
                 <th>action</th>
             </tr>
             <%    
@@ -78,12 +83,13 @@
                         
             %>
             <tr>
-                <td><%=rs.getInt("bno")%></td>
-                <td><%=pat%></td>
+                 <td><%=pat%></td>
                 <td><%=doc%></td>
                 <td><%=rs.getString("gname")%></td>
                 <td><%=rs.getString("gtp")%></td>
                 <td><%=rs.getString("time")%></td>
+                <td><%=rs.getString("bno")%></td>
+                <td><form action="../changeroom" method="post"><input type="text" name="nbno" value="<%=rs.getInt("bno")%>"><input type="hidden" name="id" value="<%=rs.getInt("id")%>"><input type="hidden" name="bno" value="<%=rs.getInt("bno")%>"><input type="submit" value="Update"></form></td>
                 <th><a href="discharge.jsp?type=room&id=<%=rs.getInt("id")%>">Discharge</a></th>
             </tr>
             <% 

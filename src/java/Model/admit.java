@@ -105,5 +105,27 @@ public class admit {
         return false;
     }
     
+    public boolean roomup(String id, String nbno, String bno){
+        try{
+            PreparedStatement ps = con.createConnection().prepareStatement("UPDATE room SET status = 'F' WHERE id = ?");
+            ps.setString(1, bno);             
+            int x = ps.executeUpdate();
+            
+            PreparedStatement ps1 = con.createConnection().prepareStatement("UPDATE admit SET bno = ? WHERE id = ?");
+            ps1.setString(1, nbno); 
+            ps1.setString(2, id);              
+            int i = ps1.executeUpdate();
+            
+            PreparedStatement ps2 = con.createConnection().prepareStatement("UPDATE room SET status = 'B' WHERE id = ?");
+            ps2.setString(1, nbno);             
+            int z = ps2.executeUpdate();
+            
+            return i>0 && x>0 && z>0;
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+    
     
 }
