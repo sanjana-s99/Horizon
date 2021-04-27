@@ -51,6 +51,8 @@
             <%}else if(type.equals("W")){%>
             <a href="staff/">Staff</a>
             <a href="admin/main.jsp">Admin Dashboard</a>
+            <%}else if(type.equals("D")){%>
+            <a href="doctor/">Doctor</a>
             <%}}%>
             <%if(id != null){
                 %>
