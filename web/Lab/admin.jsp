@@ -39,16 +39,7 @@
                 $('.js-example-basic-single').select2();
             });
         </script>
-        <style type="text/css">
-            
-               
-            
-            .main{
-                padding: 5px;
-                margin: 5px;
-                border: solid 1px black;
-            }
-        </style>
+
     </head>
     <body>
          <%
