@@ -73,6 +73,7 @@
                <i class="fa fa-bars"></i>
             </a>
         </div>
+            <br/><br/><br/>
         <%
             String stat = request.getParameter("status");
             if(stat!=null){
@@ -92,7 +93,7 @@
             if(request.getParameter("type")!=null){
         %>
         <div class="flex-container">
-        Admission Type :  <%=request.getParameter("type")%>
+            <h1>Admission Type :  <%=request.getParameter("type")%></h1>
         </div>
         <br/>
         
@@ -185,7 +186,7 @@
 <br/>
 <br/>
 <div class="flex-container">
-<%=request.getParameter("ward")%>
+    <h1><%=request.getParameter("ward")%></h1>
 
 
     <form action="../wadmit" method="post">
@@ -247,6 +248,7 @@
 }else{
         %>
         <div class="flex-container">
+            <h1>Select Admission Type</h1>
         <select name="type" onchange="GetSelectedValue()" id="type"  class="js-example-basic-single" style="width: 30%">
             <option>Select Admission Type</option>
             <option value="ward">Ward</option>

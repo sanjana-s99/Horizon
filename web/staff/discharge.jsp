@@ -63,6 +63,7 @@
                <i class="fa fa-bars"></i>
             </a>
         </div>
+            <div class="flex-container">
         <h1>Discharge</h1>
          <%    
             if(request.getParameter("id")!=null){
@@ -199,5 +200,6 @@
 }
 }
             %>
+            </div>
     </body>
 </html>

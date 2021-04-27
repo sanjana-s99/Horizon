@@ -52,6 +52,7 @@
                <i class="fa fa-bars"></i>
             </a>
         </div>
+            <br/><br/><br/>
         <h1 class="txtcent">Staff Dashboard</h1>
         <div class="flex-container">
         <a href="admit.jsp" class="inputbutt">Admit</a>

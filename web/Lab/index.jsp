@@ -51,6 +51,7 @@
                <i class="fa fa-bars"></i>
             </a>
         </div>
+            <br/><br/><br/>
         <div class="flex-container">
             <h1>Online Hospital Laboratory System</h1>
             <a href="labApo.jsp" class="inputbutt">Make Appointment</a><br/>

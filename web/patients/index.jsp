@@ -53,7 +53,9 @@
                <i class="fa fa-bars"></i>
             </a>
         </div>
+            <br/><br/><br/>
         <div class="flex-container">
+            <h1>Online Hospital Channeling System</h1>
             <a href="channel.jsp" class="inputbutt">Make Channeling</a><br>
             <a href="viewch.jsp" class="inputbutt">View My Channelings</a>
         </div>

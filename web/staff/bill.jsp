@@ -51,7 +51,7 @@
                <i class="fa fa-bars"></i>
             </a>
         </div>
-            
+            <div class="flex-container">
         <h1>Discharge Ticket</h1>
         
         <%
@@ -86,7 +86,7 @@
             <br/>
             Ward : <%=ward%>
             <br/>
-            Bed : <%=bed%>
+            <%=bed%>
             <br/>
             Patient : <%=pat%>
             <br/>
@@ -121,10 +121,9 @@
                     other =  request.getParameter("other");
                     tot = Float.valueOf(price)+Float.valueOf(dfee)+Float.valueOf(pbill)+Float.valueOf(other);
 %>
-
             Admition id : <%=index%>
             <br/>
-            Bed : <%=bed%>
+            <%=bed%>
             <br/>
             Patient : <%=pat%>
             <br/>
@@ -162,5 +161,6 @@
             <input type="hidden" name="tot" value="<%=tot%>">
             <input type="submit" value="Discharge" class="inputbutt">
         </form>
+            </div>
     </body>
 </html>
