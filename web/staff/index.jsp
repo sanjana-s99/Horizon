@@ -62,7 +62,7 @@
         <br/>
         <a href="addpat.jsp" class="inputbutt">Add Patient</a>
         <br/>
-        <a href="lab/admin.jsp" class="inputbutt">Lab</a>
+        <a href="../lab/admin.jsp" class="inputbutt">Lab</a>
         <br/>
         <a href="onamb.jsp" class="inputbutt">Active Ambulances</a>
         </div>
