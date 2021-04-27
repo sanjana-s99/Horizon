@@ -20,6 +20,11 @@
         response.sendRedirect("../login.jsp");
     }
 %>
+<%
+    session.setMaxInactiveInterval(5000);
+    String id = (String)session.getAttribute("id");
+    String name = (String)session.getAttribute("name");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,7 +44,36 @@
         </script>
     </head>
     <body>
-        <!--NAV-->
+        <div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="../index.jsp">Home</a>
+            <a href="../patients/channel.jsp">Channel</a>
+            <a href="../Lab/index.jsp">Lab</a>
+            <a href="../phamacy/index.jsp">Pharmacy</a>
+            <%
+                if(type!=null){
+                    if(type.equals("S")){
+            %>
+            <a href="index.jsp">Staff Dashboard</a>
+            <%}else if(type.equals("W")){%>
+            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../admin/main.jsp">Admin Dashboard</a>
+            <%}}%>
+            <%if(id != null){
+                %>
+            <a style="float:right">Welcome <%=name%></a>
+            <a href="../logout" style="float:right">Logout</a>
+            <%
+                }else{
+        %>
+            <a href="../register.jsp" style="float:right">Register</a>
+            <a href="../login.jsp" style="float:right">Login</a>
+            <%}%>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
         
         <h2 class="center-text">Channel a doctor for the patient</h2>
             <% if(request.getParameter("spe")==null && request.getParameter("doc")==null){ %>
@@ -128,8 +162,9 @@
             if(stat!=null){
                 if(stat.equals("nouser")){
         %>
-                    <h1>No user found!!</h1>
-                    <p>User Different NIC or <a href="addpat.jsp">add user</a> </p>
+                    <script>Swal.fire({icon: 'error',title: 'No user found!!',html: 'User Different NIC or <a href="addpat.jsp">Add User</a> '})</script>
+
+  
         <%
             }
             }

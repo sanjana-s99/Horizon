@@ -39,7 +39,7 @@
             <a href="index.jsp" class="active">Home</a>
             <a href="patients/channel.jsp">Channel</a>
             <a href="Lab/">Lab</a>
-            <a href="#">Pharmacy</a>
+            <a href="phamacy/">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
@@ -71,6 +71,10 @@
         
         <div class="ab">
             <button class="abbutt"><a href="ambulance.jsp" class="buttlink">Request Ambulance</a></button>
+        </div>
+            
+         <div class="ab2">
+            <button class="abbutt2"><a href="finddoc.jsp" class="buttlink">Help Me Find A Doctor</a></button>
         </div>
         
         <h2 style="text-align: center;">Our Services</h2>

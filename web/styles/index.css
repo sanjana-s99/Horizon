@@ -37,6 +37,11 @@ body {font-family: Poppins-Regular;}
     justify-content: center;
  }
  
+  .ab2{
+    display: flex;
+    justify-content: center;
+ }
+ 
  .abbutt{
   background-color: #ff0000; /* Green */
   border: none;
@@ -52,6 +57,23 @@ body {font-family: Poppins-Regular;}
  .abbutt:hover{
     transition-duration: 0.2s;
     background-color: #009a69;
+ }
+ 
+ .abbutt2{
+  background-color: #0088f2; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  font-family: Poppins-SemiBold;
+  cursor: pointer;
+ }
+ .abbutt2:hover{
+    transition-duration: 0.2s;
+    background-color: #3354b4;
  }
  
  .buttlink{

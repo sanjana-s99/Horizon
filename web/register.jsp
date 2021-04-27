@@ -58,7 +58,7 @@
             <a href="index.jsp">Home</a>
             <a href="patients/channel.jsp">Channel</a>
             <a href="Lab/">Lab</a>
-            <a href="#">Pharmacy</a>
+            <a href="phamacy/">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){

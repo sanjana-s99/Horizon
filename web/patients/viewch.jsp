@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*;" %>
  <%
-    session.setMaxInactiveInterval(30);
+    session.setMaxInactiveInterval(3000);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
     String type = (String)session.getAttribute("type");
@@ -17,7 +17,7 @@
         if(!type.equals("P")){
             response.sendRedirect("../index.jsp");
         }else{
-        out.print("Welcome : " + name );
+        //out.print("Welcome : " + name );
     }
     }else{
         response.sendRedirect("../login.jsp");
@@ -29,13 +29,48 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../styles/staffchannel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="../scripts/nav.js"></script>
     </head>
     <body>
+                <div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="../index.jsp">Home</a>
+            <a href="../patients/channel.jsp" class="active">Channel</a>
+            <a href="../Lab/index.jsp">Lab</a>
+            <a href="../phamacy/index.jsp">Pharmacy</a>
+            <%
+                if(type!=null){
+                    if(type.equals("S")){
+            %>
+            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <%}else if(type.equals("W")){%>
+            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../admin/main.jsp">Admin Dashboard</a>
+            <%}}%>
+            <%if(id != null){
+                %>
+            <a style="float:right">Welcome <%=name%></a>
+            <a href="../logout" style="float:right">Logout</a>
+            <%
+                }else{
+        %>
+            <a href="../register.jsp" style="float:right">Register</a>
+            <a href="../login.jsp" style="float:right">Login</a>
+            <%}%>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
         <h1>channelings</h1>
-        <table>
-            <tr>
+        <table class="w3-table-all">
+            <tr class="tablehead">
                 <th>Doctor</th>
                 <th>number</th>
                 <th>status</th>
