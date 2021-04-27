@@ -10,9 +10,6 @@
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
     String type = (String)session.getAttribute("type");
-    if(name!=null){
-        name = name.substring(0, name.indexOf(' '));
-    }
 %>
 <!DOCTYPE html>
 <html>

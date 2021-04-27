@@ -23,9 +23,6 @@
     session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
-    if(name!=null){
-        name = name.substring(0, name.indexOf(' '));
-    }
 %>
 <!DOCTYPE html>
 <html>
@@ -184,8 +181,12 @@
     }
             }else if(request.getParameter("ward")!=null){
 %>
-<%=request.getParameter("ward")%>
 <br/>
+<br/>
+<br/>
+<div class="flex-container">
+<%=request.getParameter("ward")%>
+
 
     <form action="../wadmit" method="post">
         
@@ -211,6 +212,7 @@
             %>
         </select>
             Petient NIC : <input type="text" name ="nic">
+            <br/><br/>
         <select name="doc"  class="js-example-basic-single" style="width: 30%">
             <option>Select Doctor</option>
 
@@ -240,7 +242,7 @@
         telephone : <input type="text" name="gtp">
         <input type="submit" value="admit">
     </form>
-
+</div>
 <%
 }else{
         %>
