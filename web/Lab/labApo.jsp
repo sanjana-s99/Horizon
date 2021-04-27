@@ -25,25 +25,30 @@
     if(id == null){
         response.sendRedirect("../login.jsp");
     }else{
-        out.print("Welcome : " + name );
+        //out.print("Welcome : " + name );
     }
 %>
-
+<%
+    session.setMaxInactiveInterval(5000);
+    String type = (String)session.getAttribute("type");
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Book Appointment</title>
-        <style type="text/css">
-            
-               
-            
-            .main{
-                padding: 5px;
-                margin: 5px;
-                border: solid 1px black;
-            }
-        </style>
+        <link rel="stylesheet" href="../styles/staffchannel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="../scripts/nav.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+        </script>
+
     </head>
     <body>
         <%
@@ -64,14 +69,44 @@
                 }
             }
         %>
+        <div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="../index.jsp">Home</a>
+            <a href="channel.jsp">Channel</a>
+            <a href="../Lab/">Lab</a>
+            <a href="../phamacy/index.jsp">Pharmacy</a>
+            <%
+                if(type!=null){
+                    if(type.equals("S")){
+            %>
+            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <%}else if(type.equals("W")){%>
+            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../admin/main.jsp">Admin Dashboard</a>
+            <%}}%>
+            <%if(id != null){
+                %>
+            <a style="float:right">Welcome <%=name%></a>
+            <a href="../logout" style="float:right">Logout</a>
+            <%
+                }else{
+        %>
+            <a href="../register.jsp" style="float:right">Register</a>
+            <a href="../login.jsp" style="float:right">Login</a>
+            <%}%>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
         <h1>Book Appointment</h1>
-        <div class="main">
+        <div class="">
             <form method="post" action="../lab_add"> 
                 <input type ="hidden" name="btype" value="u">
-            <table>
+                <table class="w3-table-all" style="width:60% !important">
                 <tr>
                     <td>Doctor ID:</td>
-                    <td><select name="did">
+                    <td><select name="did"  class="js-example-basic-single" style="width: 50%" >
 
                 <%
                     try {
@@ -94,7 +129,7 @@
                 </tr>
                 <tr>
                     <td>Select Appointment Type:</td>
-                    <td><select name="type">
+                    <td><select name="type"  class="js-example-basic-single" style="width: 50%" >
 
                 <%
                     try {
@@ -126,7 +161,7 @@
                 
                 <tr>
                     <td><input type="hidden" name="pid" value="<%=nic%>"></td>
-                    <td><input type="submit" name="submit" value="Book"/></td>
+                    <td><input type="submit" name="submit" value="Book" class="inputbutt"/></td>
                 </tr>
                 
                 
