@@ -140,8 +140,6 @@ and open the template in the editor.
             <div class="flex-container">
                 <input type="submit" value="enter" class="inputbutt">
             </div>
-        </form>
-
-        
-        </body>
+        </form>        
+    </body>
 </html>
