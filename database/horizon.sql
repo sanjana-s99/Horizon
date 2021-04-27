@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 27, 2021 at 11:43 AM
+-- Generation Time: Apr 27, 2021 at 11:46 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -212,15 +212,16 @@ CREATE TABLE `drprescription` (
   `id` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
   `did` int(11) NOT NULL,
-  `pres` text NOT NULL
+  `pres` text NOT NULL,
+  `cno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `drprescription`
 --
 
-INSERT INTO `drprescription` (`id`, `pid`, `did`, `pres`) VALUES
-(1, 3, 4, 'drug 1\r\ndrug 2');
+INSERT INTO `drprescription` (`id`, `pid`, `did`, `pres`, `cno`) VALUES
+(1, 3, 4, 'drug 1\r\ndrug 2', 0);
 
 -- --------------------------------------------------------
 
