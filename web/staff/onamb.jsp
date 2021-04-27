@@ -4,7 +4,7 @@
     Author     : SHATTER
 --%>
 <%
-    session.setMaxInactiveInterval(3000);
+    session.setMaxInactiveInterval(5000);
     String type = (String)session.getAttribute("type");
     if(type != null){
         if(!type.equals("S") && !type.equals("W")){

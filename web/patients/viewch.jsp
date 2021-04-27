@@ -11,6 +11,9 @@
     session.setMaxInactiveInterval(3000);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
+    if(name!=null){
+        name = name.substring(0, name.indexOf(' '));
+    }
     String type = (String)session.getAttribute("type");
     
     if(type != null){
@@ -41,8 +44,8 @@
                 <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="../patients/channel.jsp" class="active">Channel</a>
-            <a href="../Lab/index.jsp">Lab</a>
+            <a href="index.jsp" class="active">Channel</a>
+            <a href="../Lab/">Lab</a>
             <a href="../phamacy/index.jsp">Pharmacy</a>
             <%
                 if(type!=null){
@@ -75,6 +78,7 @@
                 <th>number</th>
                 <th>status</th>
                 <th>action</th>
+                <th>Cancel</th>
             </tr>
             <%    
                 try {

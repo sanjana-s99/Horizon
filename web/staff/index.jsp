@@ -10,6 +10,9 @@
     session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
+    if(name!=null){
+        name = name.substring(0, name.indexOf(' '));
+    }
     String type = (String)session.getAttribute("type");
 %>
 <!DOCTYPE html>
@@ -25,8 +28,8 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="../patients/channel.jsp">Channel</a>
-            <a href="../Lab/index.jsp">Lab</a>
+            <a href="../patients/">Channel</a>
+            <a href="../Lab/">Lab</a>
             <a href="../phamacy/index.jsp">Pharmacy</a>
             <%
                 if(type!=null){
@@ -54,13 +57,15 @@
         </div>
         <h1 class="txtcent">Staff Dashboard</h1>
         <div class="flex-container">
-            <a href="admit.jsp" class="inputbutt">Admit</a>
+        <a href="admit.jsp" class="inputbutt">Admit</a>
         <br/>
         <a href="admitdata.jsp" class="inputbutt">View Admit</a>
         <br/>
         <a href="staffchannel.jsp" class="inputbutt">Staff Channel</a>
         <br/>
         <a href="addpat.jsp" class="inputbutt">Add Patient</a>
+        <br/>
+        <a href="lab/admin.jsp" class="inputbutt">Lab</a>
         <br/>
         <a href="onamb.jsp" class="inputbutt">Active Ambulances</a>
         </div>

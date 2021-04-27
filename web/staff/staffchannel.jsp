@@ -10,7 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*;" %>
 <% 
-    session.setMaxInactiveInterval(3000);
+    session.setMaxInactiveInterval(5000);
     String type = (String)session.getAttribute("type");
     if(type != null){
         if(!type.equals("S") && !type.equals("W")){
@@ -21,9 +21,9 @@
     }
 %>
 <%
-    session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
+    name = name.substring(0, name.indexOf(' '));
 %>
 <!DOCTYPE html>
 <html>
@@ -47,8 +47,8 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="../patients/channel.jsp">Channel</a>
-            <a href="../Lab/index.jsp">Lab</a>
+            <a href="../patients/">Channel</a>
+            <a href="../Lab/">Lab</a>
             <a href="../phamacy/index.jsp">Pharmacy</a>
             <%
                 if(type!=null){
@@ -213,6 +213,7 @@
                             <td>Number</td>
                             <td>Status</td>
                             <td>Action</td>
+                            <td>Cancel</td>
                         </tr>
                         <%
                      try{
@@ -221,7 +222,6 @@
                               String query1="select * from channeling WHERE d_id = " + doc;
                               Statement st1=con. createConnection().createStatement();
                               ResultSet rs2=st1.executeQuery(query1);
-                              rs2.next();
                               
                               while(rs2.next()){
                                     user data = new user();
@@ -255,7 +255,7 @@
             <% }
                 }        
                 }catch(Exception r){
-                System.out.println(r.getMessage());
+                System.out.println(r);
                 }
 } %>
                     </table>

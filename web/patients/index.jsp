@@ -12,8 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <h1>Online Hospital Laboratory System</h1>
-         <a href="labApo.jsp">Make Appoinment</a>
-         <a href="myapo.jsp">View Apoinment</a>
+         <h1>Online Hospital channeling  System</h1>
+         <a href="channel.jsp">Make Channeling</a>
+         <a href="viewch.jsp">View My Channelings</a>
     </body>
 </html>
