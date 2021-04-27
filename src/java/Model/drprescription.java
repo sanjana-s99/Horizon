@@ -16,14 +16,22 @@ public class drprescription {
     dbCon con = new dbCon();
     public boolean send(String cid, String pid, String did, String pres ) throws ClassNotFoundException, SQLException{
         try{
-            PreparedStatement ps = con.createConnection().prepareStatement("insert into drprescription(cid,pid,did,pres) values (?,?,?,?)");
+            PreparedStatement ps = con.createConnection().prepareStatement("insert into drprescription(cno,pid,did,pres) values (?,?,?,?)");
             ps.setString(1, cid);
             ps.setString(2, pid);
             ps.setString(3, did);
             ps.setString(4, pres);
-
+            
             int i = ps.executeUpdate();
-            return i>0;
+            
+            PreparedStatement ps1 = con.createConnection().prepareStatement("UPDATE channeling SET status = 'D' where p_id = ? AND d_id = ? AND number = ?");
+            ps1.setString(1, pid);
+            ps1.setString(2, did);
+            ps1.setString(3, cid);
+            
+            int x = ps1.executeUpdate();
+            
+            return i>0 && x>0;
         }catch(Exception e){
             System.out.println(e);
         }

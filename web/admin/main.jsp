@@ -189,6 +189,8 @@ System.out.println(r.getMessage());
                                         status = "Reserved";
                                     }else if("C".equals(rs.getString("status"))){
                                         status = "Checked In";
+                                    }else if("D".equals(rs.getString("status"))){
+                                        status = "Doctor Commented";
                                     }
 
                             %>
@@ -208,6 +210,10 @@ System.out.println(r.getMessage());
             %>
                 <td><a href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=com">Complete</a></td>
                 <td><a href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=can">Cancel</a></td>
+            </tr>
+            <% }else if("D".equals(rs.getString("status"))){
+            %>
+                <td> <a href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=com">Complete</a></td>
             </tr>
             <% }
                 }        

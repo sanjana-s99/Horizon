@@ -13,9 +13,6 @@
     String id = (String)session.getAttribute("id");
     String type = (String)session.getAttribute("type");
     String name = (String)session.getAttribute("name");
-    if(name!=null){
-        name = name.substring(0, name.indexOf(' '));
-    }
     if(id == null){
         response.sendRedirect("login.jsp");
     }

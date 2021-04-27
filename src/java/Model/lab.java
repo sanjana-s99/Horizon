@@ -36,14 +36,13 @@ public class lab {
     
     
     public boolean checklab(String[] data){
-        ResultSet rs = null;
         try{
             PreparedStatement ps = con.createConnection().prepareStatement("SELECT * FROM lab_apo WHERE type = ? AND date = ? AND time = ?");
             ps.setString(1, data[2]);
             ps.setString(2, data[3]);
             ps.setString(3, data[4]);
             
-            rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 return false;
             }

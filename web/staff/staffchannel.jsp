@@ -13,9 +13,6 @@
     session.setMaxInactiveInterval(5000);
     String type = (String)session.getAttribute("type");
     if(type != null){
-        if(!type.equals("S") && !type.equals("W")){
-            response.sendRedirect("../index.jsp");
-        }
     }else{
         response.sendRedirect("../login.jsp");
     }
@@ -23,7 +20,6 @@
 <%
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
-    name = name.substring(0, name.indexOf(' '));
 %>
 <!DOCTYPE html>
 <html>
@@ -233,6 +229,8 @@
                                         status = "Reserved";
                                     }else if("C".equals(rs2.getString("status"))){
                                         status = "Checked In";
+                                    }else if("D".equals(rs2.getString("status"))){
+                                        status = "Doctor Commented";
                                     }
 
                             %>
@@ -251,6 +249,10 @@
             %>
                 <td><a href="../cact?pid=<%=rs2.getString("p_id")%>&did=<%=rs2.getString("d_id")%>&no=<%=rs2.getInt("number")%>&action=com">Complete</a></td>
                 <td><a href="../cact?pid=<%=rs2.getString("p_id")%>&did=<%=rs2.getString("d_id")%>&no=<%=rs2.getInt("number")%>&action=can">Cancel</a></td>
+            </tr>
+            <% }else if("D".equals(rs2.getString("status"))){
+            %>
+                <td><a href="../cact?pid=<%=rs2.getString("p_id")%>&did=<%=rs2.getString("d_id")%>&no=<%=rs2.getInt("number")%>&action=com">Complete</a></td>
             </tr>
             <% }
                 }        

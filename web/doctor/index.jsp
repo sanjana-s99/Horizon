@@ -31,6 +31,8 @@
     </head>
     <body>
         <%
+                                String pid = null;
+                    String cid = null;
             String stat = request.getParameter("status");
             if(stat!=null){
                 if(stat.equals("success")){
@@ -44,34 +46,6 @@
             }}
         %>
         <div>
-                    <hr/>
-                    <h1>Channelings</h1>
-                    <select name="doc" onchange="GetSelectedValue()" id="doc">
-                <option>Select Petient</option>
-
-                <%
-                    String pid = null;
-                    String cid = null;
-                    try {
-                        dbCon con = new dbCon();
-                        Statement st = con.createConnection().createStatement();
-                        String query = "select * from channeling WHERE d_id = " + did;
-                        //get table data
-                        ResultSet rs = st.executeQuery(query);
-                        //get data one by one
-                        while(rs.next()){
-                                user data = new user();
-                                ResultSet rs6 = data.udata(rs.getString("p_id"));
-                                rs6.next();
-                            %>
-                            <option value="<%=rs.getInt("number")%>"><%=rs6.getString("name")%></option>
-
-                            <% }
-                    }catch (Exception e){
-
-                    }
-                %>
-            </select>
             <%
                  if( request.getParameter("no")!=null){ 
             %>
@@ -89,7 +63,7 @@
                             ResultSet rs2=st1.executeQuery(query1);
                             rs2.next();
                             pid = rs2.getString("p_id");
-                            cid = rs2.getString("id");
+                            cid = rs2.getString("number");
                             user data = new user();
                             ResultSet rs4 = data.udata(rs2.getString("p_id"));
                             rs4.next();
@@ -112,6 +86,7 @@
                 } 
 %>
                     </table>
+                    <a href="index.jsp">Reset</a>
                     <form action="../prescription" method="post" id="usrform">
                         <textarea rows="4" cols="50" name="pres" form="usrform"></textarea>
                         <input type="hidden" name="pid" value="<%=pid%>"/>
@@ -122,7 +97,33 @@
                         <input type="reset" value="reset"/>
                     </form>
                     
-                    <%}%>
+                    <%}else{%>
+                                        <h1>Channelings</h1>
+                    <select name="doc" onchange="GetSelectedValue()" id="doc">
+                <option>Select Petient</option>
+
+                <%
+                    try {
+                        dbCon con = new dbCon();
+                        Statement st = con.createConnection().createStatement();
+                        String query = "select * from channeling WHERE status <> 'D' AND d_id = " + did;
+                        //get table data
+                        ResultSet rs = st.executeQuery(query);
+                        //get data one by one
+                        while(rs.next()){
+                                user data = new user();
+                                ResultSet rs6 = data.udata(rs.getString("p_id"));
+                                rs6.next();
+                            %>
+                            <option value="<%=rs.getInt("number")%>"><%=rs.getInt("number")%> - <%=rs6.getString("name")%></option>
+
+                            <% }
+                    }catch (Exception e){
+
+                    }
+                %>
+            </select>
+            <%}%>
                     </div>
                     
                     <script>
