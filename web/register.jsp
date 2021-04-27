@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="./styles/register.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="scripts/nav.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <style>
             /* Chrome, Safari, Edge, Opera */
             input::-webkit-outer-spin-button,

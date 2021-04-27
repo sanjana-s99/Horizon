@@ -68,7 +68,7 @@
                <i class="fa fa-bars"></i>
             </a>
         </div>
-        <h1>Channelings</h1>
+        <h1>channelings</h1>
         <table class="w3-table-all">
             <tr class="tablehead">
                 <th>Doctor</th>

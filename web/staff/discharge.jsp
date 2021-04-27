@@ -17,55 +17,13 @@
 <%@page import="Model.dbCon"%>
 <%@page import="java.sql.Statement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    session.setMaxInactiveInterval(5000);
-    String id = (String)session.getAttribute("id");
-    String name = (String)session.getAttribute("name");
-    String type = (String)session.getAttribute("type");
-    if(name!=null){
-        name = name.substring(0, name.indexOf(' '));
-    }
-%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="../styles/staffchannel.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="../scripts/nav.js"></script>
     </head>
     <body>
-        <div class="topnav" id="myTopnav">
-            <div class="toptitle">Horizon Hospitals</div>
-            <a href="../index.jsp">Home</a>
-            <a href="channel.jsp">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
-            <%
-                if(type!=null){
-                    if(type.equals("S")){
-            %>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
-            <%}else if(type.equals("W")){%>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
-            <a href="../admin/main.jsp">Admin Dashboard</a>
-            <%}}%>
-            <%if(id != null){
-                %>
-            <a style="float:right">Welcome <%=name%></a>
-            <a href="../logout" style="float:right">Logout</a>
-            <%
-                }else{
-        %>
-            <a href="../register.jsp" style="float:right">Register</a>
-            <a href="../login.jsp" style="float:right">Login</a>
-            <%}%>
-
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-               <i class="fa fa-bars"></i>
-            </a>
-        </div>
         <h1>Discharge</h1>
          <%    
             if(request.getParameter("id")!=null){
@@ -126,10 +84,10 @@
                 <input type="hidden" name="atime" value="<%=time1%>">
                 <input type="hidden" name="dtime" value="<%=time2%>">
                 <input type="hidden" name="price" value="<%=price%>">
-                Doctor Fee : <input type="text" name="dfee"><br/>
-                Pharmacy Bill : <input type="text" name="pbill"><br/>
-                other fees : <input type="text" name="other"><br/>
-                <input  class="inputbutt" type="submit" value="confirm">
+                Doctor Fee : <input type="text" name="dfee">
+                Pharmacy Bill : <input type="text" name="pbill">
+                other fees : <input type="text" name="other">
+                <input type="submit" value="confirm">
             </form>
 <%
     }
@@ -190,10 +148,10 @@
                 <input type="hidden" name="atime" value="<%=time1%>">
                 <input type="hidden" name="dtime" value="<%=time2%>">
                 <input type="hidden" name="price" value="<%=price%>">
-                Doctor Fee : <input type="text" name="dfee"><br/>
-                Pharmacy Bill : <input type="text" name="pbill"><br/>
+                Doctor Fee : <input type="text" name="dfee">
+                Pharmacy Bill : <input type="text" name="pbill">
                 other fees : <input type="text" name="other">
-                <input type="submit" value="confirm" class="inputbutt">
+                <input type="submit" value="confirm">
             </form>
 <%
     }

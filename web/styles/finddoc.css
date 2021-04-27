@@ -33,11 +33,6 @@ body {font-family: Poppins-Regular;}
   cursor: pointer; 
 }
 
-.inputbutt:hover{
-  background-color: #0088f2;
-}
-
 .txtcent{
      text-align: center;
  }
- 
