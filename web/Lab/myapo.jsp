@@ -38,6 +38,10 @@
         %>
                     <h1>Something Went Wrong!!</h1>
         <%
+                }else if(stat.equals("delete")){
+        %>
+                    <h1>Delete Success!!</h1>
+        <%
                 }
             }
         %>
@@ -84,7 +88,7 @@
                                 <td><%=rs.getString("date") %></td>
                                 <td><%=rs.getString("time") %></td>
                                 
-                                <td><a href="Delete.jsp?id=<%=id%>" >Delete</a></td>
+                                <td><a href="Delete.jsp?tar=u&id=<%=id%>" >Delete</a></td>
                             </tr>
                             <%
                                }  

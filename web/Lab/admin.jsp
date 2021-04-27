@@ -9,8 +9,9 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.sql.*" %>
 
+
 <% 
-    session.setMaxInactiveInterval(5000);
+    session.setMaxInactiveInterval(3000);
     String type = (String)session.getAttribute("type");
     if(type != null){
         if(!type.equals("S") && !type.equals("W")){
@@ -69,6 +70,10 @@
                 }else if(stat.equals("time")){
         %>
                     <h1>Time Slot is not available.</h1>
+        <%
+                }else if(stat.equals("delete")){
+        %>
+                    <h1>Delete Success</h1>
         <%
                 }
             }
@@ -245,7 +250,7 @@
                                 <td><%=rs.getString("date") %></td>
                                 <td><%=rs.getString("time") %></td>
                                 
-                                <td><a href="Delete.jsp?id=<%=aid%>" >Delete</a></td>
+                                <td><a href="Delete.jsp?tar=s&id=<%=aid%>" >Delete</a></td>
                             </tr>
                             <%
                                }  
