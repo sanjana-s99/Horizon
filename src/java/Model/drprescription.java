@@ -14,12 +14,13 @@ import java.sql.SQLException;
  */
 public class drprescription {
     dbCon con = new dbCon();
-    public boolean send(String pid, String did, String pres ) throws ClassNotFoundException, SQLException{
+    public boolean send(String cid, String pid, String did, String pres ) throws ClassNotFoundException, SQLException{
         try{
-            PreparedStatement ps = con.createConnection().prepareStatement("insert into drprescription(pid,did,pres) values (?,?,?)");
-            ps.setString(1, pid);
-            ps.setString(2, did);
-            ps.setString(3, pres);
+            PreparedStatement ps = con.createConnection().prepareStatement("insert into drprescription(cid,pid,did,pres) values (?,?,?,?)");
+            ps.setString(1, cid);
+            ps.setString(2, pid);
+            ps.setString(3, did);
+            ps.setString(4, pres);
 
             int i = ps.executeUpdate();
             return i>0;

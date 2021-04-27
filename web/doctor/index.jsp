@@ -51,6 +51,7 @@
 
                 <%
                     String pid = null;
+                    String cid = null;
                     try {
                         dbCon con = new dbCon();
                         Statement st = con.createConnection().createStatement();
@@ -84,11 +85,11 @@
                                
                             dbCon con = new dbCon();
                             String query1="select * from channeling WHERE d_id = " + did + " AND number = " + request.getParameter("no");
-                            System.out.println(query1);
                             Statement st1=con. createConnection().createStatement();
                             ResultSet rs2=st1.executeQuery(query1);
                             rs2.next();
                             pid = rs2.getString("p_id");
+                            cid = rs2.getString("id");
                             user data = new user();
                             ResultSet rs4 = data.udata(rs2.getString("p_id"));
                             rs4.next();
@@ -115,6 +116,7 @@
                         <textarea rows="4" cols="50" name="pres" form="usrform"></textarea>
                         <input type="hidden" name="pid" value="<%=pid%>"/>
                         <input type="hidden" name="did" value="<%=did%>"/>
+                        <input type="hidden" name="cid" value="<%=cid%>"/>
                         <br/>
                         <input type="submit" value="send"/>
                         <input type="reset" value="reset"/>

@@ -81,6 +81,7 @@ public class prescription extends HttpServlet {
         String pres = request.getParameter("pres");
         String pid = request.getParameter("pid");
         String did = request.getParameter("did");
+        String cid = request.getParameter("cid");
         try{
             user users = new user();
             ResultSet rslt = users.udata(pid);
@@ -93,7 +94,7 @@ public class prescription extends HttpServlet {
             String dname = rslt1.getString("name");
             
             drprescription pr = new drprescription();
-            if(pr.send(pid, did, pres)){
+            if(pr.send(cid, pid, did, pres)){
 
                 String message = "Dear "+name+",<br/> Here is the Presctiption sent by Dr. "+dname+".<br/>"+pres;
                 SendMail.send(email, "Prescription", message);
