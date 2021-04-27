@@ -9,10 +9,22 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.sql.*" %>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin page</title>
+        <script src="../scripts/nav.js"></script>
+        <link rel="stylesheet" href="../styles/staffchannel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+        </script>
         <style type="text/css">
             
                
@@ -48,19 +60,20 @@
                 }
             }
         %>
+
     <h1>Book Appointment by Admin</h1>
         
      <div class="main">
             <form method="post" action="../lab_add">   
                 <input type ="hidden" name="btype" value="a">
-            <table>
+                <table class="w3-table-all" style="width:60% !important">
                 <tr>
                     <td>Patient NIC:</td>
                     <td><input type="text" name="pid"></td>
                 </tr>
                 <tr>
                     <td>Doctor ID:</td>
-                    <td><select name="did">
+                    <td><select name="did" class="js-example-basic-single" style="width: 50%" >
 
                 <%
                     try {
@@ -83,7 +96,7 @@
                 </tr>
                 <tr>
                     <td>Select Appointment Type:</td>
-                    <td><select name="type">
+                    <td><select name="type"  class="js-example-basic-single" style="width: 50%" >
 
                 <%
                     try {
@@ -115,7 +128,7 @@
                
                 <tr>
                     <td></td>
-                    <td><input type="submit" name="submit" value="Book"/></td>
+                    <td><input type="submit" name="submit" value="Book" class="inputbutt"/></td>
                 </tr>
                 
                 
@@ -140,8 +153,8 @@
         
         <div>
             <h1>Appointment list</h1>
-            <table border="1">
-                <tr>
+            <table class="w3-table-all">
+                <tr class="tablehead">
                     <th>Patient Name</th>
                     <th>Doctor Name</th>
                     <th>Appointment type</th>
