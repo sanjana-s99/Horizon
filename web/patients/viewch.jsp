@@ -1,7 +1,7 @@
 <%-- 
     Document   : viewchannellinigs
     Created on : Mar 8, 2021, 10:48:32 PM
-    Author     : SHATTER
+    Author     : Kavindya
 --%>
 <%@page import="Model.user"%>
 <%@page import="Model.dbCon"%>
