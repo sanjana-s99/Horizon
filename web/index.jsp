@@ -28,7 +28,7 @@
             if(stat!=null){
                 if(stat.equals("lo")){
         %>
-                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Logged Out'})</script>
+                    <script>Swal.fire({icon: 'success',title: 'Successfully',text: 'Logged Out'})</script>
         <%
                 }
             }

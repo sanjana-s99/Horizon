@@ -8,6 +8,12 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    session.setMaxInactiveInterval(5000);
+    String id = (String)session.getAttribute("id");
+    String name = (String)session.getAttribute("name");
+    String type = (String)session.getAttribute("type");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,11 +21,31 @@
         <title>JSP Page</title>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE"></script>
         <script src="https://unpkg.com/location-picker/dist/location-picker.min.js"></script>
+        <link rel="stylesheet" href="styles/index.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+        </script>
         <style type="text/css">
             #map {
                 width: 100%;
                 height: 350px;
             }
+            input[type=text]{
+                width: 20%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+              }
         </style>
     </head>
     <body>
@@ -28,16 +54,15 @@
             if(stat!=null){
                 if(stat.equals("success")){
         %>
-                    compleated
+                    <script>Swal.fire({icon: 'success',title: 'Successful'})</script>
         <%
                 }else if(stat.equals("error")){
         %>
-                    error
+                    <script>Swal.fire({icon: 'error',title: 'Error'})</script>
         <%
                 }
             }
         %>
-        <h1>Hello World!</h1>
          <%
                     try {
                         dbCon con = new dbCon();
@@ -48,13 +73,44 @@
                         //get data one by 
                         rs.next();
         %>
-        <h1>Available Ambulance: <%=rs.getString("COUNT(number)")%></h1>
+        <div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="index.jsp">Home</a>
+            <a href="patients/">Channel</a>
+            <a href="Lab/">Lab</a>
+            <a href="phamacy/productsViews/">Pharmacy</a>
+            <%
+                if(type!=null){
+                    if(type.equals("S")){
+            %>
+            <a href="staff/">Staff Dashboard</a>
+            <%}else if(type.equals("W")){%>
+            <a href="staff/">Staff Dashboard</a>
+            <a href="admin/main.jsp">Admin Dashboard</a>
+            <%}}%>
+            <%if(id != null){
+                %>
+            <a style="float:right">Welcome <%=name%></a>
+            <a href="logout" style="float:right">Logout</a>
+            <%
+                }else{
+        %>
+            <a href="register.jsp" style="float:right">Register</a>
+            <a href="login.jsp" style="float:right">Login</a>
+            <%}%>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <h2>Available Ambulance: <%=rs.getString("COUNT(number)")%></h2>
         <%
                     }catch(Exception e){
                     }
          %>
         <form action="amb" method="post">
-            <select name="number">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name="number"  class="js-example-basic-single" style="width: 20%" >
                 <option>Select Ambulance</option>
 
                 <%
@@ -74,14 +130,14 @@
 
                     }
                 %>
-            </select>
-            Name : <input type="text" name="name">
-            Phone : <input type="text" name="phone">
+            </select><br/>
+            Name : <input type="text" name="name"><br/>
+            Phone : <input type="text" name="phone"><br/>
                     <label for="sel1">Mark Your Location :</label>
                     <div id="map"></div>
                     <input type="hidden" name="lat" id="lat">
                     <input type="hidden" name="lng" id="lng">
-            <input type="submit" value="request">
+                    <input type="submit" value="Request" class="abbutt">
         </form>
     <!--GMaps Script-->
     <script>
