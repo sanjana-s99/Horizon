@@ -3,12 +3,26 @@
     Created on : Mar 21, 2021, 3:10:08 PM
     Author     : Jayani
 --%>
-
 <%@page import="Model.user"%>
 <%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.sql.*" %>
+
+
+<% 
+    session.setMaxInactiveInterval(3000);
+    String type = (String)session.getAttribute("type");
+    if(type != null){
+        if(!type.equals("S") && !type.equals("W")){
+            response.sendRedirect("../index.jsp");
+        }
+    }else{
+        response.sendRedirect("../login.jsp");
+    }
+    String id = (String)session.getAttribute("id");
+    String name = (String)session.getAttribute("name");
+%>
 
 <html>
     <head>
@@ -57,10 +71,43 @@
         %>
                     <h1>Time Slot is not available.</h1>
         <%
+                }else if(stat.equals("delete")){
+        %>
+                    <h1>Delete Success</h1>
+        <%
                 }
             }
         %>
+ <div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="../index.jsp">Home</a>
+            <a href="channel.jsp">Channel</a>
+            <a href="../Lab/" class="active">Lab</a>
+            <a href="../phamacy/index.jsp">Pharmacy</a>
+            <%
+                if(type!=null){
+                    if(type.equals("S")){
+            %>
+            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <%}else if(type.equals("W")){%>
+            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../admin/main.jsp">Admin Dashboard</a>
+            <%}}%>
+            <%if(id != null){
+                %>
+            <a style="float:right">Welcome <%=name%></a>
+            <a href="../logout" style="float:right">Logout</a>
+            <%
+                }else{
+        %>
+            <a href="../register.jsp" style="float:right">Register</a>
+            <a href="../login.jsp" style="float:right">Login</a>
+            <%}%>
 
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
     <h1>Book Appointment by Admin</h1>
         
      <div class="main">
@@ -174,15 +221,15 @@
                               ResultSet rs=st.executeQuery(query);
                               
                               while(rs.next()){
-                                  String id=rs.getString("id");
+                                  String aid=rs.getString("id");
                               
-                                  String name = null, drname = null;
+                                  String aname = null, adrname = null;
                                   
                                     user userdata = new user();
                                     try{
                                         ResultSet rs1 = userdata.udata(rs.getString("pid"));
                                         rs1.next();
-                                        name = rs1.getString("name");
+                                        aname = rs1.getString("name");
                                     }catch(Exception e){
                                         out.println("Error");
                                     }
@@ -190,20 +237,20 @@
                                     try{
                                         ResultSet rs2 = userdata.udata(rs.getString("did"));
                                         rs2.next();
-                                        drname = rs2.getString("name");
+                                        adrname = rs2.getString("name");
                                     }catch(Exception e){
                                         out.println("Error");
                                     }
 
                             %>
                             <tr>
-                                <td><%=name %></td>
-                                <td><%=drname %></td>
+                                <td><%=aname %></td>
+                                <td><%=adrname %></td>
                                 <td><%=rs.getString("type") %></td>
                                 <td><%=rs.getString("date") %></td>
                                 <td><%=rs.getString("time") %></td>
                                 
-                                <td><a href="Delete.jsp?id=<%=id%>" >Delete</a></td>
+                                <td><a href="Delete.jsp?tar=s&id=<%=aid%>" >Delete</a></td>
                             </tr>
                             <%
                                }  

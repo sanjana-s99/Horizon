@@ -18,9 +18,6 @@
     }else{
         response.sendRedirect("../login.jsp");
     }
-%>
-<%
-    session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
 %>

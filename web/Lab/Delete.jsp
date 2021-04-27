@@ -10,6 +10,7 @@
     
    
         String id=request.getParameter("id");
+        String tar=request.getParameter("tar");
         
         dbCon con = new dbCon();
         PreparedStatement pst;
@@ -26,7 +27,11 @@
             
         </script>
         <%
-            response.sendRedirect("admin.jsp"); 
+            if(tar.equals("s")){
+                response.sendRedirect("admin.jsp?status=delete"); 
+            }else{
+                response.sendRedirect("myapo.jsp?status=delete"); 
+            }
             
 %>
         
