@@ -106,7 +106,7 @@
                     //get data one by one
                     rs.next();
             %>            
-            <h4 class="txtcent">Selected : <%=rs.getString("name")%>  <a href="channel.jsp">reset</a> </h4>
+            <h4 class="txtcent">Selected : <%=rs.getString("name")%>  <br><a href="channel.jsp">reset</a> </h4>
             <%
                 }catch (Exception e){
 
@@ -164,7 +164,7 @@
                     rs1.next();
 
             %>
-        <h4 class="txtcent">Selected : <%=rs1.getString("name")%>   <a href="channel.jsp">reset</a> </h4>
+            <h4 class="txtcent">Selected : <%=rs1.getString("name")%>   <br><a href="channel.jsp">reset</a> </h4>
         <form action="../book" method="post">
             <input type="hidden" name="doctor" value="<%=doc %>">
             <input type="hidden" name="patient" value="<%=id %>">
