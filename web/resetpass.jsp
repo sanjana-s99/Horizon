@@ -12,14 +12,50 @@
 <%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    session.setMaxInactiveInterval(5000);
+    String id = (String)session.getAttribute("id");
+    String name = (String)session.getAttribute("name");
+    String type = (String)session.getAttribute("type");
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="./fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" href="./styles/login.css">
     </head>
     <body>
+        <div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="index.jsp">Home</a>
+            <a href="patients/">Channel</a>
+            <a href="Lab/">Lab</a>
+            <a href="phamacy/productsViews/">Pharmacy</a>
+            <%
+                if(type!=null){
+                    if(type.equals("S")){
+            %>
+            <a href="staff/">Staff Dashboard</a>
+            <%}else if(type.equals("W")){%>
+            <a href="staff/">Staff Dashboard</a>
+            <a href="admin/main.jsp">Admin Dashboard</a>
+            <%}}%>
+            <%if(id != null){
+                %>
+            <a style="float:right">Welcome <%=name%></a>
+            <a href="logout" style="float:right">Logout</a>
+            <%
+                }else{
+        %>
+            <a href="register.jsp" style="float:right">Register</a>
+            <a href="login.jsp" style="float:right">Login</a>
+            <%}%>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
          <%
             String stat = request.getParameter("status");
             if(stat!=null){
@@ -48,13 +84,28 @@
                     
                     if(today.compareTo(expdate)<=0 && key.equals(dbkey)){
                         %>
-                        <form action="reset" method="post">
-                            Password:<input type="password" name="pass1"/>
-                            Re-Password:<input type="password" name="pass2"/>
-                            <input type="hidden" value="<%= key %>" name="key"/>
-                            <input type="hidden" value="<%= email %>" name="email"/>
-                            <input type="submit" value="reset"/>
-                        </form>
+                <div class="wrapper" style="background-image: url('images/bg-reset-form-1.jpg');">
+			<div class="inner">
+				<form method ="post" action="reset">
+					<h3>Reset Password</h3>
+					<div class="form-wrapper">
+						<input type="password" placeholder="Password:" class="form-control" name="pass1" id="email" required>
+						<i class="zmdi zmdi-eye-off"></i>
+					</div>
+                                        <div class="form-wrapper">
+						<input type="password" placeholder="Re-Password:" class="form-control" name="pass2" id="email" required>
+						<i class="zmdi zmdi-eye-off"></i>
+					</div>
+                                        <input type="hidden" value="<%= key %>" name="key"/>
+                                        <input type="hidden" value="<%= email %>" name="email"/>
+					<button type="submit" value="reset">Reset
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+                       
+                        
                         <%
                     }else{
 %>
