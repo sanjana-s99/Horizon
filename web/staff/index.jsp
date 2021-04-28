@@ -22,6 +22,20 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
+        <%
+            String stat = request.getParameter("status");
+            if(stat!=null){
+                if(stat.equals("error")){
+        %>
+                    <h1>Something went wrong!!</h1>
+        <%
+                }else if(stat.equals("sa")){
+        %>
+                    <h1>Patient Successfully Added!!</h1>
+        <%
+                }
+            }
+        %>
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>

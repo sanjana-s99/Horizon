@@ -70,9 +70,10 @@
             </a>
         </div>
             <% if(request.getParameter("spe")==null && request.getParameter("doc")==null){ %>
+            <br/><br/>
             <div class="flex-container">
             <select name="doc" onchange="GetSelectedValue()" id="doc" class="js-example-basic-single" style="width: 30%">
-                <option>Select Doctor</option>
+                <option>Select Specialized Area</option>
 
                 <%
                     try {
@@ -106,6 +107,7 @@
                     //get data one by one
                     rs.next();
             %>            
+            <br/><br/>
             <h4 class="txtcent">Selected : <%=rs.getString("name")%>  <br><a href="channel.jsp">reset</a> </h4>
             <%
                 }catch (Exception e){
@@ -164,6 +166,7 @@
                     rs1.next();
 
             %>
+            <br/><br/>
             <h4 class="txtcent">Selected : <%=rs1.getString("name")%>   <br><a href="channel.jsp">reset</a> </h4>
         <form action="../book" method="post">
             <input type="hidden" name="doctor" value="<%=doc %>">

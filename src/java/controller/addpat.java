@@ -5,7 +5,6 @@
  */
 package controller;
 
-import Model.SendMail;
 import Model.keygen;
 import Model.newuser;
 import Model.user;
@@ -87,7 +86,7 @@ public class addpat extends HttpServlet {
                     keygen key = new keygen();
                     String skey = key.verify(user.getEmail());
                     key.regverifyadd(String.valueOf(skey), user.getEmail());
-                    response.sendRedirect("staff/"); 
+                    response.sendRedirect("staff/index.jsp?status=sa"); 
                 }
             }else{
                 response.sendRedirect("staff/addpat.jsp?status=ue"); 
