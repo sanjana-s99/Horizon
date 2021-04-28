@@ -45,19 +45,27 @@
                             m.send(email, "Succesfully Verified!!", "Your Horizen Hospital User Account Is Successfully Verified!!");
                             response.sendRedirect("login.jsp?status=sv"); 
                         }else{
-                            out.println("error in verifing!!");
+                            %>
+                            <h1>Error IN Verifing</h1>
+                            <%
                         }
                     }else{
-                        out.println("Link Expired or invalid link!!");
+                        %>
+                        <h1>link expired OR Invalid</h1>
+                        <%
                     }
 
                 }catch(Exception e){ 
-                    out.println(e);
+                    %>
+                    <h1>link expired OR Invalid</h1>
+                    <%
                 }
                      
                 
             } else {
-                out.println("invalid link!!");
+%>
+                <h1>link Invalid</h1>
+                <%
             }
         %>
     </body>
