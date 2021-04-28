@@ -66,8 +66,13 @@ dbCon con = new dbCon();
         <title>JSP Page</title>
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="../styles/staffchannel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+        <script src="../scripts/nav.js"></script>
     </head>
     <body>
+        <!--NAV-->
         <h1>Add Drugs</h1>
         </br>
 
@@ -157,10 +162,10 @@ dbCon con = new dbCon();
                             
                             
                     <div alight="right" >
-                        <input type="submit" id="submit" value="submit" name="submit" class="btn btn-info">             
-                        <input type="reset" id="reset" value="reset" name="reset" class="btn btn-warning">  
+                        <input type="submit" id="submit" value="submit" name="submit" class="btn btn-info inputbutt">             
+                        <input type="reset" id="reset" value="reset" name="reset" class="btn btn-warning inputbutt">  
                             
-                    </div>
+                    </div><br/>
                               
                            
                            
@@ -176,9 +181,9 @@ dbCon con = new dbCon();
 
             <div class="col-sm-8">
                 <div class="panel-body">
-                    <table id="tbl-docter" class="table table-responsive table-bordered" cellpadding="0" width="100%">
+                    <table id="tbl-docter" class="table table-responsive table-bordered w3-table-all" cellpadding="0" width="100%">
                         <thead>
-                            <tr>
+                            <tr class="tablehead">
                             
 
                                 <th>ID</th>

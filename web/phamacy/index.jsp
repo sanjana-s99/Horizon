@@ -133,7 +133,7 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="bootstrap/css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
+<!--        <link href="bootstrap/css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap-grid.rtl.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap-grid.rtl.min.css" rel="stylesheet" type="text/css"/>
@@ -144,10 +144,18 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap.rtl.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css"/>
-        
+        <link href="bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css"/>-->
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
-        <script>
+        <link rel="stylesheet" href="../styles/staffchannel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="../scripts/nav.js"></script><script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
         var TDataCtrl = function ($scope) {
            
             $scope.tdata = [{'id': '0'}];
@@ -163,8 +171,11 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
         
     </head>
     <body data-ng-app>
+        
+<!--        NAV-->
+        
         <h3>Prescription</h3>
-        <a href="main.jsp">Add Drugs</a>
+        <a href="main.jsp" class="inputbutt">Add Drugs</a>
         <br/><br/>
         
         <div class="row">
@@ -174,7 +185,7 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                     <div alight="left">
                         
                          <label class="form-label">Doctor name</label>
-                       <select class="form-control" aria-label="Default select example" name="doc_name">  
+                       <select aria-label="Default select example" name="doc_name" class="form-control js-example-basic-single" style="width: 30%">  
                         
                          <%
                          ResultSet rss;
@@ -221,7 +232,7 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                         <label class="form-label">Patient name</label>
                 
                           
-                         <select class="form-control" aria-label="Default select example" name="pname"> 
+                         <select aria-label="Default select example" name="pname" class="form-control js-example-basic-single" style="width: 30%"> 
                          <%
                         
                          ResultSet rss1;
@@ -281,7 +292,7 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                             <td>Drug name</td>
                             
                             
-                  <td><select class="form-control"  name="drug_name"   size="" multiple="multiple" tabindex="1"> 
+                  <td><select name="drug_name"  class="form-control js-example-basic-single" style="width: 300%"> 
                          <%
                          ResultSet rss11;
 
@@ -357,10 +368,11 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                     
                   
                     <div alight="right">
-                        <input type="submit" value="submit" name="submit" class="btn btn-info" >
-                        <input type="reset" value="reset" name="reset" class="btn btn-warning" >
+                        <input type="submit" value="submit" name="submit" class="btn btn-info inputbutt" >
+                        <input type="reset" value="reset" name="reset" class="btn btn-warning inputbutt" >
                          
                     </div>
+                    <br/>
                     
                 </form>
                 
@@ -372,9 +384,9 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
             <div class="col-sm-8">
                 
                 <div class="panel-body">
-                    <table id="tbl-prescription" class="table table-responsive table-bordered" cellpadding="0" width="50%">
+                    <table id="tbl-prescription" class="table table-responsive table-bordered w3-table-all" cellpadding="0" width="50%">
                         <thead>
-                            <tr id="mac">
+                            <tr id="mac" class="tablehead">
                                 <th >Doctor name</th>
                                 
                                 <th>Patient name</th>
