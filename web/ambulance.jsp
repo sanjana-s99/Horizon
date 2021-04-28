@@ -34,7 +34,7 @@
         </script>
         <style type="text/css">
             #map {
-                width: 100%;
+                width: 70%;
                 height: 350px;
             }
             input[type=text]{
@@ -137,6 +137,7 @@
                     <div id="map"></div>
                     <input type="hidden" name="lat" id="lat">
                     <input type="hidden" name="lng" id="lng">
+                    <br/><br/>
                     <input type="submit" value="Request" class="abbutt">
         </form>
     <!--GMaps Script-->

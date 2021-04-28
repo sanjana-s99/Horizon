@@ -12,16 +12,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
     session.setMaxInactiveInterval(3000);
-    String uid = (String)session.getAttribute("id");
-    String uname = (String)session.getAttribute("name");
-    if(uid == null){
+    String id = (String)session.getAttribute("id");
+    String name = (String)session.getAttribute("name");
+    if(id == null){
         response.sendRedirect("../login.jsp");
-    }else{
-        //out.print("Welcome : " + uname );
     }
-%>
-<%
-    session.setMaxInactiveInterval(5000);
     String type = (String)session.getAttribute("type");
 %>
 <!DOCTYPE html>
@@ -101,12 +96,12 @@
                      try{
                              
                               dbCon con = new dbCon();
-                              String query="SELECT * FROM lab_apo WHERE pid = " + uid;
+                              String query="SELECT * FROM lab_apo WHERE pid = " + id;
                               Statement st=con.createConnection().createStatement();
                               ResultSet rs=st.executeQuery(query);
                               
                               while(rs.next()){
-                                  String id=rs.getString("id");
+                                  String uid=rs.getString("id");
                               
                                   String  drname = null;
                                   
@@ -127,7 +122,7 @@
                                 <td><%=rs.getString("date") %></td>
                                 <td><%=rs.getString("time") %></td>
                                 
-                                <td><a href="Delete.jsp?tar=u&id=<%=id%>" >Delete</a></td>
+                                <td><a href="Delete.jsp?tar=u&id=<%=uid%>" >Delete</a></td>
                             </tr>
                             <%
                                }  
