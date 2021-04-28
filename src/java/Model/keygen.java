@@ -43,7 +43,7 @@ public class keygen {
     }
     
     public void regverify(String key, String mail){
-        String msg = "<a href='http://localhost:8080/Horizon/verify.jsp?key="+key+"&mail="+mail+"' target='_blank'>click me</a>";
+        String msg = "Your Account Verification Link Is<br/><a href='http://localhost:8080/Horizon/verify.jsp?key="+key+"&mail="+mail+"' target='_blank'>click me</a>";
         SendMail.send(mail, "Verification", msg);
     }  
     
@@ -58,7 +58,7 @@ public class keygen {
     }  
     
     public void resetpass(String key, String mail){
-        String msg = "<a href='http://localhost:8080/Horizon/resetpass.jsp?key="+key+"&mail="+mail+"' target='_blank'>click me</a>";
+        String msg = "Your Password Reset Link Is<br/><a href='http://localhost:8080/Horizon/resetpass.jsp?key="+key+"&mail="+mail+"' target='_blank'>click me</a>";
         SendMail.send(mail, "Reset Password", msg);
     }  
 }
