@@ -71,6 +71,7 @@
                     i++;
                     String disease = rs.getString("disease");
                 %>
+                <br/>
                 <div class="flex-container">
                 <h2>Possible : <%=disease%></h2>
                 <%
@@ -83,7 +84,7 @@
                         if(rr.next()){
                             
                 %>
-                <h3>We recommend : Dr. <%=rr.getString("name")%> </h3><br> <a href='patients/channel.jsp?doc=<%=rr.getString("id")%>' class="inputbutt">Channel Doctor</a></div>
+                <h3>We recommend : Dr. <%=rr.getString("name")%> </h3><br> <a href='patients/channel.jsp?doc=<%=rr.getString("id")%>' class="inputbutt">Channel Doctor</a>
                 
                 <%
                             }
@@ -103,5 +104,6 @@ not found!!
                 System.out.println(ex);
             } 
         %>
+        </div>
     </body>
 </html>

@@ -106,7 +106,7 @@
                 <table class="w3-table-all" style="width:100% !important">
                 <tr>
                     <td>Doctor ID:</td>
-                    <td><select name="did"  class="js-example-basic-single" style="width: 50%" >
+                    <td><select name="did"  class="js-example-basic-single" style="width: 100%" >
 
                 <%
                     try {
@@ -129,7 +129,7 @@
                 </tr>
                 <tr>
                     <td>Select Appointment Type:</td>
-                    <td><select name="type"  class="js-example-basic-single" style="width: 50%" >
+                    <td><select name="type"  class="js-example-basic-single" style="width: 100%" >
 
                 <%
                     try {

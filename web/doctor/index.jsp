@@ -44,32 +44,35 @@
         </script>
     </head>
     <body>
+        <!--<marquee direction="left" scrollamount="4"></marquee>-->
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="channel.jsp">Channel</a>
+            <a href="../patients/">Channel</a>
             <a href="../Lab/">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
+            <a href="../phamacy/productsViews/">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
             %>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../staff/">Staff</a>
             <%}else if(type.equals("W")){%>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../staff/">Staff</a>
             <a href="../admin/main.jsp">Admin Dashboard</a>
+            <%}else if(type.equals("D")){%>
+            <a href="index.jsp" class="active">Doctor</a>
             <%}}%>
             <%if(id != null){
                 %>
             <a style="float:right">Welcome <%=name%></a>
-            <a href="../logout" style="float:right">Logout</a>
+            <a href="logout" style="float:right">Logout</a>
             <%
                 }else{
-        %>
+            %>
             <a href="../register.jsp" style="float:right">Register</a>
             <a href="../login.jsp" style="float:right">Login</a>
             <%}%>
-
+            
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                <i class="fa fa-bars"></i>
             </a>
@@ -89,7 +92,7 @@
         <%
             }}
         %>
-        <div>
+        <div class="flex-container">
             <%
                  if( request.getParameter("no")!=null){ 
             %>

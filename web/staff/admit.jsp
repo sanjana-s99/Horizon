@@ -91,6 +91,7 @@
         %>
         <div class="flex-container">
             <h1>Admission Type :  <%=request.getParameter("type")%></h1>
+            <a href="admit.jsp">Reset</a>
         </div>
         <br/>
         
@@ -147,7 +148,7 @@
                         
                         Name : <input type="text" name="gname">
                         telephone : <input type="text" name="gtp">
-                        <input type="submit" value="admit">
+                        <input type="submit" value="admit" class="inputbutt">
                     </form>
                     </div>
                     <%
@@ -184,8 +185,8 @@
 <br/>
 <div class="flex-container">
     <h1><%=request.getParameter("ward")%></h1>
-
-
+    <a href="admit.jsp?type=ward">Reset</a>
+<br/>
     <form action="../wadmit" method="post">
         
         <select name="bid"  class="js-example-basic-single" style="width: 30%">
@@ -210,7 +211,6 @@
             %>
         </select>
             Petient NIC : <input type="text" name ="nic">
-            <br/><br/>
         <select name="doc"  class="js-example-basic-single" style="width: 30%">
             <option>Select Doctor</option>
 
@@ -238,7 +238,7 @@
         
         Name : <input type="text" name="gname">
         telephone : <input type="text" name="gtp">
-        <input type="submit" value="admit">
+        <input type="submit" value="admit" class="inputbutt">
     </form>
 </div>
 <%
@@ -253,7 +253,6 @@
         </select>
         <%}%>
         <br/>
-        <a href="admit.jsp">reset</a>
         </div>
         
             
