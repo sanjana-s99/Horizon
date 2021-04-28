@@ -31,6 +31,7 @@
        pst.setString(6,	Mdate );
        
        pst.executeUpdate();
+       response.sendRedirect("main.jsp");  
        
        
        %>

@@ -69,26 +69,13 @@ pst = con.createConnection().prepareStatement("update prescription set doc_name 
         pst.setString(4,totalprice);
         pst.setString(5,id);
         pst.executeUpdate();
-
-
-
-
-        
-        
-        
-        
-        
- 
+        response.sendRedirect("index.jsp");   
 %>
 
           <script>
               alert("Record Updated");
     
-          </script>
-         
-
-    
-    
+          </script>    
 <% 
    
   }

@@ -97,9 +97,11 @@
                  if( request.getParameter("no")!=null){ 
             %>
             <br/>
+            <h1>Send Prescription</h1>
             <table class="w3-table-all" style="width:30%">
                         <tr>
                             <td>Patient</td>
+                            <td>Age</td>
                             <td>Number</td>
                         </tr>
                         <%
@@ -116,6 +118,7 @@
                             ResultSet rs4 = data.udata(rs2.getString("p_id"));
                             rs4.next();
                             String pat = rs4.getString("name");
+                            String age = rs4.getString("age");
                             String status = rs2.getString("status");
                             if("R".equals(rs2.getString("status"))){
                                 status = "Reserved";
@@ -126,6 +129,7 @@
                             %>
                         <tr>
                             <td><%=pat %></td>
+                            <td><%=age %></td>
                             <td><%=rs2.getString("number") %></td>
             </tr>
  <%    
@@ -135,6 +139,7 @@
 %>
                     </table><br/>
                     <a href="index.jsp">Reset</a>
+                    <br/>
                     <form action="../prescription" method="post" id="usrform">
                         <textarea rows="4" cols="50" name="pres" form="usrform"></textarea>
                         <input type="hidden" name="pid" value="<%=pid%>"/>

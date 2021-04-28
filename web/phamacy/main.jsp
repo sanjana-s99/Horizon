@@ -201,11 +201,6 @@ dbCon con = new dbCon();
                                 while (rs.next()) {
 
                                     String id = rs.getString("id");
-                                  
-
-                                    String drugsname = rs.getString("drugsname");
-                                    String price = rs.getString("price");
-                                    String date = rs.getString("date");
 
 
                             %>
@@ -243,5 +238,6 @@ dbCon con = new dbCon();
 
 
             </div>
+        </div>
     </body>
 </html>
