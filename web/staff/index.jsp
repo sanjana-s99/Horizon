@@ -49,12 +49,12 @@
             <a href="../index.jsp">Home</a>
             <a href="../patients/">Channel</a>
             <a href="../Lab/">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
+            <a href="../phamacy/productsViews/">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
             %>
-            <a href="../staff/index.jsp" class="active">Staff Dashboard</a>
+            <a href="index.jsp" class="active">Staff Dashboard</a>
             <%}else if(type.equals("W")){%>
             <a href="../staff/index.jsp">Staff Dashboard</a>
             <a href="../admin/main.jsp">Admin Dashboard</a>

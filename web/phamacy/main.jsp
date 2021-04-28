@@ -4,6 +4,8 @@
 <% 
     session.setMaxInactiveInterval(3000);
     String type = (String)session.getAttribute("type");
+    String uid = (String)session.getAttribute("id");
+    String uname = (String)session.getAttribute("name");
     if(type != null){
         if(!type.equals("S") && !type.equals("W")){
             response.sendRedirect("../index.jsp");
@@ -72,7 +74,36 @@ dbCon con = new dbCon();
         <script src="../scripts/nav.js"></script>
     </head>
     <body>
-        <!--NAV-->
+        <div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="../index.jsp">Home</a>
+            <a href="../patients/">Channel</a>
+            <a href="../Lab/">Lab</a>
+            <a href="../phamacy/productsViews/">Pharmacy</a>
+            <%
+                if(type!=null){
+                    if(type.equals("S")){
+            %>
+            <a href="index.jsp" class="active">Staff Dashboard</a>
+            <%}else if(type.equals("W")){%>
+            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../admin/main.jsp">Admin Dashboard</a>
+            <%}}%>
+            <%if(uid != null){
+                %>
+            <a style="float:right">Welcome <%=uname%></a>
+            <a href="../logout" style="float:right">Logout</a>
+            <%
+                }else{
+        %>
+            <a href="../register.jsp" style="float:right">Register</a>
+            <a href="../login.jsp" style="float:right">Login</a>
+            <%}%>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
         <h1>Add Drugs</h1>
         </br>
 

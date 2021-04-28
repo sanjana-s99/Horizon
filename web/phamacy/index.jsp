@@ -13,6 +13,8 @@
 <% 
     session.setMaxInactiveInterval(3000);
     String type = (String)session.getAttribute("type");
+    String uid = (String)session.getAttribute("id");
+    String uname = (String)session.getAttribute("name");
     if(type != null){
         if(!type.equals("S") && !type.equals("W")){
             response.sendRedirect("../index.jsp");
@@ -133,18 +135,6 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-<!--        <link href="bootstrap/css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-grid.rtl.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-grid.rtl.min.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-utilities.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-utilities.min.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-utilities.rtl.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap-utilities.rtl.min.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap.rtl.css" rel="stylesheet" type="text/css"/>
-        <link href="bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css"/>-->
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
         <link rel="stylesheet" href="../styles/staffchannel.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -172,7 +162,36 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
     </head>
     <body data-ng-app>
         
-<!--        NAV-->
+<div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="../index.jsp">Home</a>
+            <a href="../patients/">Channel</a>
+            <a href="../Lab/">Lab</a>
+            <a href="../phamacy/productsViews/">Pharmacy</a>
+            <%
+                if(type!=null){
+                    if(type.equals("S")){
+            %>
+            <a href="index.jsp" class="active">Staff Dashboard</a>
+            <%}else if(type.equals("W")){%>
+            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../admin/main.jsp">Admin Dashboard</a>
+            <%}}%>
+            <%if(uid != null){
+                %>
+            <a style="float:right">Welcome <%=uname%></a>
+            <a href="../logout" style="float:right">Logout</a>
+            <%
+                }else{
+        %>
+            <a href="../register.jsp" style="float:right">Register</a>
+            <a href="../login.jsp" style="float:right">Login</a>
+            <%}%>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
         
         <h3>Prescription</h3>
         <a href="main.jsp" class="inputbutt">Add Drugs</a>
@@ -227,8 +246,8 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                         
                     </div>
                     
-            
                     <div alight="left">
+                        <br/>
                         <label class="form-label">Patient name</label>
                 
                           
@@ -283,7 +302,7 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                         <input type="text" class="form-control" placeholder="" name="price" id="price[]" required required aria-labelledby='x' > 
                     </div>
                     </div> -->
-                  
+                  <br/>
                   <div data-ng-controller="TDataCtrl">
                     <table >
                         <tbody data-ng-repeat="thisrow in tdata">
@@ -353,7 +372,7 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                   
                   
                   
-                  
+                  <br/>
                   <div alight="left">
                         <label class="form-label">Total price</label>
                         <input type="text" class="form-control" name="totalprice" > 

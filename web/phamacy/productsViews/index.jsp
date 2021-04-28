@@ -2,16 +2,64 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%> 
 
+<% 
+    session.setMaxInactiveInterval(3000);
+    String type = (String)session.getAttribute("type");
+    String uid = (String)session.getAttribute("id");
+    String uname = (String)session.getAttribute("name");
+    if(type != null){
+        if(!type.equals("S") && !type.equals("W")){
+            response.sendRedirect("../index.jsp");
+        }
+    }else{
+        response.sendRedirect("../login.jsp");
+    }
+%>
+
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
   <title></title>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Slabo+27px|Yesteryear'>
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
-
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="../../styles/staffchannel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+        <script src="../../scripts/nav.js"></script>
 </head>
 <body>
-<!-- partial:index.partial.html -->
+<div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="../index.jsp">Home</a>
+            <a href="../patients/">Channel</a>
+            <a href="../Lab/">Lab</a>
+            <a href="../phamacy/productsViews/">Pharmacy</a>
+            <%
+                if(type!=null){
+                    if(type.equals("S")){
+            %>
+            <a href="index.jsp" class="active">Staff Dashboard</a>
+            <%}else if(type.equals("W")){%>
+            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../admin/main.jsp">Admin Dashboard</a>
+            <%}}%>
+            <%if(uid != null){
+                %>
+            <a style="float:right">Welcome <%=uname%></a>
+            <a href="../logout" style="float:right">Logout</a>
+            <%
+                }else{
+        %>
+            <a href="../register.jsp" style="float:right">Register</a>
+            <a href="../login.jsp" style="float:right">Login</a>
+            <%}%>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
 <div class="wrapper">
 
   <div class="header">
