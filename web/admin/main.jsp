@@ -27,8 +27,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../styles/admin.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="../scripts/nav.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+        </script>
     </head>
     <body>
         <%
@@ -54,67 +63,84 @@
             }
         %>
         <h1>Admin Panel</h1>
-        <div>
-             <form method ="post" action="../adduser">
-                 <h5>Add User</h5>
-                <hr>
+        <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'AddUser')">Add User</button>
+        <button class="tablinks" onclick="openCity(event, 'AddNewAmb')">Add New Ambulance</button>
+        <button class="tablinks" onclick="openCity(event, 'LabServices')">Lab Services</button>
+        <button class="tablinks" onclick="openCity(event, 'Channelings')">Channelings</button>
+        <button class="tablinks" onclick="openCity(event, 'Patients')">Patients</button>
+        <button class="tablinks" onclick="openCity(event, 'Doctors')">Doctors</button>
+        <button class="tablinks" onclick="openCity(event, 'Staff')">Staff</button>
+        <button class="tablinks" onclick="openCity(event, 'Rooms')">Rooms</button>
+        <button class="tablinks" onclick="openCity(event, 'Wards')">Wards</button>
+        </div>
+        
+        <div id="AddUser" class="tabcontent">
+        
+                <div>
+                     <form method ="post" action="../adduser">
+                         <h1>Add User</h1>
+                        <hr>
+                        <label for="name"><b>Name</b></label>
+                        <input type="text" placeholder="Enter Name" name="name" id="name" required><br/>
 
-                <label for="name"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="name" id="name" required>
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" id="email" required><br/>
 
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" id="email" required>
-                
-                <label for="tp"><b>telephone</b></label>
-                <input type="text" placeholder="Enter number" name="tp" id="tp" required>
-                
-                <label for="add"><b>address</b></label>
-                <input type="text" placeholder="Enter address" name="add" id="add" required>
-                
-                <label for="nic"><b>nic</b></label>
-                <input type="text" placeholder="Enter nic" name="nic" id="nic" required>
-                
-                <label for="type"><b>Account Type</b></label>
-                <select name="type">
-                    <option value="S">Staff</option>
-                    <option value="D">Doctor</option>
-                </select>
-                <label for="type"><b>Select Specilized Area</b></label>
-                <select name="spe">
+                        <label for="tp"><b>telephone</b></label>
+                        <input type="text" placeholder="Enter number" name="tp" id="tp" required><br/>
 
-                <%
-                    try {
-                        dbCon con = new dbCon();
-                        Statement st = con.createConnection().createStatement();
-                        String query = "SELECT id, name FROM specelist ";
-                        //get table data
-                        ResultSet rs = st.executeQuery(query);
-                        //get data one by one
-                        while(rs.next()){
-                            %>
-                            <option value="<%=rs.getInt("id")%>"><%=rs.getString("name")%></option>
+                        <label for="add"><b>address</b></label>
+                        <input type="text" placeholder="Enter address" name="add" id="add" required><br/>
 
-                            <% }
-                    }catch (Exception e){
+                        <label for="nic"><b>nic</b></label>
+                        <input type="text" placeholder="Enter nic" name="nic" id="nic" required><br/>
 
-                    }
-                %>
-            </select>
-                <button type="submit">Add User</button>
-              </form>
-            <hr/>
+                        <label for="type"><b>Account Type</b></label>
+                        <select name="type" class="js-example-basic-single" style="width: 30%">
+                            <option value="S">Staff</option>
+                            <option value="D">Doctor</option>
+                        </select><br/><br/>
+                        <label for="type"><b>Select Specilized Area</b></label>
+                        <select name="spe"  class="js-example-basic-single" style="width: 30%">
+
+                        <%
+                            try {
+                                dbCon con = new dbCon();
+                                Statement st = con.createConnection().createStatement();
+                                String query = "SELECT id, name FROM specelist ";
+                                //get table data
+                                ResultSet rs = st.executeQuery(query);
+                                //get data one by one
+                                while(rs.next()){
+                                    %>
+                                    <option value="<%=rs.getInt("id")%>"><%=rs.getString("name")%></option>
+
+                                    <% }
+                            }catch (Exception e){
+
+                            }
+                        %>
+                    </select>
+                    <button type="submit" class="inputbutt">Add User</button>
+                    </form>
+                    </div>
+            </div>
+            <div id="AddNewAmb" class="tabcontent">
             <h1>Add New Ambulance</h1>
             <form action="../add_amb" method="post">
             Vehicle number : <input type="text" name="number">
-            <input type="submit" value="add">
-        </form>
-            <hr/>
+            <input type="submit" value="add" class="inputbutt">
+            </form>
+            </div>
+            
+            <div id="LabServices" class="tabcontent">
             <h1>Lab Services</h1>
             <div>
-                <h6>Pirce Details</h6>
+<!--                <h6>Pirce Details</h6>-->
                     
-                    <table border='1'>
-                        <tr>
+                    <table class="w3-table-all">
+                        <tr class="tablehead">
                             <td>ID</td>
                             <td>Appointment Type</td>
                             <td>Price</td>
@@ -153,14 +179,15 @@ System.out.println(r.getMessage());
                     <form action="" method="post">
                         Service : <input type="text" name="type" >
                         Price : <input type="text" name="price">
-                        <input type="submit" value="add">
+                        <input type="submit" value="add"  class="inputbutt">
                     </form>
             </div>
-                    <div>
-                    <hr/>
+
+                    </div>
+                    <div id="Channelings" class="tabcontent">
                     <h1>Channelings</h1>
-        <table>
-                        <tr>
+                    <table class="w3-table-all">
+                        <tr class="tablehead">
                             <td>Patient</td>
                             <td>Doctor</td>
                             <td>Number</td>
@@ -223,11 +250,12 @@ System.out.println(r.getMessage());
                             %>
                     </table>
                     </div>
-                    <hr/>
+            
+                    <div id="Patients" class="tabcontent">
                     <div>
-                        <h1>patients</h1>
-                        <table border='1'>
-                        <tr>
+                        <h1>Patients</h1>
+                        <table class="w3-table-all">
+                            <tr class="tablehead">
                             <th>ID</th>
                             <th>Name</th>
                             <th>Address</th>
@@ -268,11 +296,12 @@ System.out.println(r.getMessage());
                         %>
                     </table>
                     </div>
-                                        <hr/>
+                    </div>
+                    <div id="Doctors" class="tabcontent">
                     <div>
                         <h1>Doctors</h1>
-                        <table border='1'>
-                        <tr>
+                        <table  class="w3-table-all">
+                            <tr class="tablehead">
                             <th>ID</th>
                             <th>Name</th>
                             <th>Address</th>
@@ -313,7 +342,7 @@ System.out.println(r.getMessage());
                             <td><%=rs.getString("age") %></td>
                             <td><%=spe %></td>
                             <td><form action="../changetime" method="post"><input type="text" value="<%=rs.getString("time") %>" name="time" pattern=".{5}"/><input type="hidden" name="id" value="<%=rs.getString("id")%>"/></td>
-                            <td><input type="submit" value="update time"/></form></td>
+                            <td><input type="submit" value="update time" class="inputbutt"/></form></td>
                             <td><a href="../deleteu?id=<%=rs.getString("id")%>">Remove</a></td>
                         </tr>
                         <%
@@ -325,11 +354,12 @@ System.out.println(r.getMessage());
                         %>
                     </table>
                     </div>
-                    <hr/>
-                                        <div>
+                    </div>
+                    <div id="Staff" class="tabcontent">
+                    <div>
                         <h1>Staff</h1>
-                        <table border='1'>
-                        <tr>
+                        <table  class="w3-table-all">
+                            <tr class="tablehead">
                             <th>ID</th>
                             <th>Name</th>
                             <th>Address</th>
@@ -370,10 +400,12 @@ System.out.println(r.getMessage());
                         %>
                     </table>
                     </div>
-                    <div>
+                    </div>
+                    <div id="Rooms" class="tabcontent">
+                    
                                 <h1>Rooms</h1>
-        <table border="1">
-            <tr>
+        <table  class="w3-table-all">
+            <tr class="tablehead">
                 <th>Room No</th>
                 <th>Patient</th>
                 <th>Doctor</th>
@@ -416,10 +448,11 @@ System.out.println(r.getMessage());
                 }
             %>
         </table>
-        <hr/>
+                    </div>
+        <div id="Wards" class="tabcontent">
         <h1>Wards</h1>
-        <table border="1">
-            <tr>
+        <table  class="w3-table-all">
+            <tr class="tablehead">
                 <th>ward</th>
                 <th>Bed No</th>
                 <th>Patient</th>
@@ -464,7 +497,21 @@ System.out.println(r.getMessage());
                 }
             %>
         </table>
-                    </div>
-        </div>
+        </div>  
+       <script>
+        function openCity(evt, cityName) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+        </script>
     </body>
 </html>
