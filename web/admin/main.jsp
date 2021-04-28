@@ -18,6 +18,9 @@
     }else{
         response.sendRedirect("../login.jsp");
     }
+    String uid = (String)session.getAttribute("id");
+    String uname = (String)session.getAttribute("name");
+
 %>
 
 
@@ -70,6 +73,37 @@
                 }
             }
         %>
+          
+        <div class="topnav" id="myTopnav">
+            <div class="toptitle">Horizon Hospitals</div>
+            <a href="../index.jsp">Home</a>
+            <a href="../patients/">Channel</a>
+            <a href="../Lab/">Lab</a>
+            <a href="../phamacy/index.jsp">Pharmacy</a>
+            <%
+                if(type!=null){
+                    if(type.equals("S")){
+            %>
+            <a href="../staff/index.jsp" class="active">Staff Dashboard</a>
+            <%}else if(type.equals("W")){%>
+            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="main.jsp" class="active">Admin Dashboard</a>
+            <%}}%>
+            <%if(uid != null){
+                %>
+            <a style="float:right">Welcome <%=uname%></a>
+            <a href="../logout" style="float:right">Logout</a>
+            <%
+                }else{
+        %>
+            <a href="../register.jsp" style="float:right">Register</a>
+            <a href="../login.jsp" style="float:right">Login</a>
+            <%}%>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+               <i class="fa fa-bars"></i>
+            </a>
+        </div>
         <h1>Admin Panel</h1>
         <div class="tab">
         <button class="tablinks" onclick="openCity(event, 'AddUser')">Add User</button>
@@ -351,7 +385,7 @@ System.out.println(r.getMessage());
                             <td><%=rs.getString("gender") %></td>
                             <td><%=rs.getString("age") %></td>
                             <td><%=spe %></td>
-                            <td><form action="../changetime" method="post"><input type="text" value="<%=rs.getString("time") %>" name="time" pattern=".{5}"/><input type="hidden" name="id" value="<%=rs.getString("id")%>"/></td>
+                            <td><%=rs.getString("time") %><form action="../changetime" method="post"><input type="text" value="<%=rs.getString("time") %>" name="time" pattern=".{5}"/><input type="hidden" name="id" value="<%=rs.getString("id")%>"/></td>
                             <td><input type="submit" value="update time" class="inputbutt"/></form></td>
                             <td><a href="../deleteu?id=<%=rs.getString("id")%>">Remove</a></td>
                         </tr>
