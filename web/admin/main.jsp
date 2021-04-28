@@ -36,7 +36,15 @@
         <script>
             $(document).ready(function() {
                 $('.js-example-basic-single').select2();
-            });
+                var type = jQuery('#type');
+                var select = this.value;
+                type.change(function () {
+                    if ($(this).val() == 'S') {
+                        $('.resources').show();
+                    }
+                    else $('.resources').hide();
+                });
+                });
         </script>
     </head>
     <body>
@@ -97,31 +105,33 @@
                         <input type="text" placeholder="Enter nic" name="nic" id="nic" required><br/>
 
                         <label for="type"><b>Account Type</b></label>
-                        <select name="type" class="js-example-basic-single" style="width: 30%">
-                            <option value="S">Staff</option>
-                            <option value="D">Doctor</option>
+                        <select name="type" id="type" class="js-example-basic-single" style="width: 30%">
+                            <option id="D" value="D">Doctor</option>
+                            <option id="S" value="S">Staff</option>
                         </select><br/><br/>
-                        <label for="type"><b>Select Specilized Area</b></label>
-                        <select name="spe"  class="js-example-basic-single" style="width: 30%">
+                        <div class="resources" style="display: none;">
+                            <label for="type"><b>Select Specilized Area</b></label>
+                            <select name="spe"  class="js-example-basic-single" style="width: 30%">
 
-                        <%
-                            try {
-                                dbCon con = new dbCon();
-                                Statement st = con.createConnection().createStatement();
-                                String query = "SELECT id, name FROM specelist ";
-                                //get table data
-                                ResultSet rs = st.executeQuery(query);
-                                //get data one by one
-                                while(rs.next()){
-                                    %>
-                                    <option value="<%=rs.getInt("id")%>"><%=rs.getString("name")%></option>
+                            <%
+                                try {
+                                    dbCon con = new dbCon();
+                                    Statement st = con.createConnection().createStatement();
+                                    String query = "SELECT id, name FROM specelist ";
+                                    //get table data
+                                    ResultSet rs = st.executeQuery(query);
+                                    //get data one by one
+                                    while(rs.next()){
+                                        %>
+                                        <option value="<%=rs.getInt("id")%>"><%=rs.getString("name")%></option>
 
-                                    <% }
-                            }catch (Exception e){
+                                        <% }
+                                }catch (Exception e){
 
-                            }
-                        %>
-                    </select>
+                                }
+                            %>
+                        </select>
+                    </div>
                     <button type="submit" class="inputbutt">Add User</button>
                     </form>
                     </div>
