@@ -141,7 +141,7 @@
                     <a href="index.jsp">Reset</a>
                     <br/>
                     <form action="../prescription" method="post" id="usrform">
-                        <textarea rows="4" cols="50" name="pres" form="usrform"></textarea>
+                        <textarea rows="7" cols="50" name="pres" form="usrform"></textarea>
                         <input type="hidden" name="pid" value="<%=pid%>"/>
                         <input type="hidden" name="did" value="<%=did%>"/>
                         <input type="hidden" name="cid" value="<%=cid%>"/>
