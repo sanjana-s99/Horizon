@@ -10,6 +10,19 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
+<% 
+    session.setMaxInactiveInterval(3000);
+    String type = (String)session.getAttribute("type");
+    if(type != null){
+        if(!type.equals("S") && !type.equals("W")){
+            response.sendRedirect("../index.jsp");
+        }
+    }else{
+        response.sendRedirect("../login.jsp");
+    }
+    String id = (String)session.getAttribute("id");
+    String name = (String)session.getAttribute("name");
+%>
 
 <%
     dbCon con = new dbCon();
