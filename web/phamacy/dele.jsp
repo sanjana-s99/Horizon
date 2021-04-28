@@ -13,6 +13,7 @@
       
        pst.setString(1,idx);
        pst.executeUpdate();
+       response.sendRedirect("main.jsp");  
        
        
        %>

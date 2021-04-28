@@ -1,6 +1,17 @@
 <%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%> 
+<% 
+    session.setMaxInactiveInterval(3000);
+    String type = (String)session.getAttribute("type");
+    if(type != null){
+        if(!type.equals("S") && !type.equals("W")){
+            response.sendRedirect("../index.jsp");
+        }
+    }else{
+        response.sendRedirect("../login.jsp");
+    }
+%>
 <%
 dbCon con = new dbCon();
     if (request.getParameter("submit") != null) {
@@ -201,11 +212,6 @@ dbCon con = new dbCon();
                                 while (rs.next()) {
 
                                     String id = rs.getString("id");
-                                  
-
-                                    String drugsname = rs.getString("drugsname");
-                                    String price = rs.getString("price");
-                                    String date = rs.getString("date");
 
 
                             %>
@@ -243,5 +249,6 @@ dbCon con = new dbCon();
 
 
             </div>
+        </div>
     </body>
 </html>

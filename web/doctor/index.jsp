@@ -44,32 +44,35 @@
         </script>
     </head>
     <body>
+        <!--<marquee direction="left" scrollamount="4"></marquee>-->
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="channel.jsp">Channel</a>
+            <a href="../patients/">Channel</a>
             <a href="../Lab/">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
+            <a href="../phamacy/productsViews/">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
             %>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../staff/">Staff</a>
             <%}else if(type.equals("W")){%>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../staff/">Staff</a>
             <a href="../admin/main.jsp">Admin Dashboard</a>
+            <%}else if(type.equals("D")){%>
+            <a href="index.jsp" class="active">Doctor</a>
             <%}}%>
             <%if(id != null){
                 %>
             <a style="float:right">Welcome <%=name%></a>
-            <a href="../logout" style="float:right">Logout</a>
+            <a href="logout" style="float:right">Logout</a>
             <%
                 }else{
-        %>
+            %>
             <a href="../register.jsp" style="float:right">Register</a>
             <a href="../login.jsp" style="float:right">Login</a>
             <%}%>
-
+            
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                <i class="fa fa-bars"></i>
             </a>
@@ -89,14 +92,16 @@
         <%
             }}
         %>
-        <div>
+        <div class="flex-container">
             <%
                  if( request.getParameter("no")!=null){ 
             %>
             <br/>
+            <h1>Send Prescription</h1>
             <table class="w3-table-all" style="width:30%">
                         <tr>
                             <td>Patient</td>
+                            <td>Age</td>
                             <td>Number</td>
                         </tr>
                         <%
@@ -113,6 +118,7 @@
                             ResultSet rs4 = data.udata(rs2.getString("p_id"));
                             rs4.next();
                             String pat = rs4.getString("name");
+                            String age = rs4.getString("age");
                             String status = rs2.getString("status");
                             if("R".equals(rs2.getString("status"))){
                                 status = "Reserved";
@@ -123,6 +129,7 @@
                             %>
                         <tr>
                             <td><%=pat %></td>
+                            <td><%=age %></td>
                             <td><%=rs2.getString("number") %></td>
             </tr>
  <%    
@@ -132,8 +139,9 @@
 %>
                     </table><br/>
                     <a href="index.jsp">Reset</a>
+                    <br/>
                     <form action="../prescription" method="post" id="usrform">
-                        <textarea rows="4" cols="50" name="pres" form="usrform"></textarea>
+                        <textarea rows="7" cols="50" name="pres" form="usrform"></textarea>
                         <input type="hidden" name="pid" value="<%=pid%>"/>
                         <input type="hidden" name="did" value="<%=did%>"/>
                         <input type="hidden" name="cid" value="<%=cid%>"/>

@@ -11,6 +11,7 @@ dbCon con = new dbCon();
         pst.setString(1,id);
         try{
             pst.executeUpdate();
+            response.sendRedirect("index.jsp");  
         }catch(Exception e){
             System.out.println(e);
         }

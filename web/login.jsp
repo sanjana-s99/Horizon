@@ -44,6 +44,10 @@
         %>
                     <script>Swal.fire({icon: 'success',text: 'Password Rest Complete!'})</script>
         <%
+                }else if(stat.equals("sr")){
+        %>
+                    <script>Swal.fire({icon: 'success',text: 'Successfully Registered!'})</script>
+        <%
                 }
             }
         %>

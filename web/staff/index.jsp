@@ -6,12 +6,20 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%
-    session.setMaxInactiveInterval(5000);
+<% 
+    session.setMaxInactiveInterval(3000);
+    String type = (String)session.getAttribute("type");
+    if(type != null){
+        if(!type.equals("S") && !type.equals("W")){
+            response.sendRedirect("../index.jsp");
+        }
+    }else{
+        response.sendRedirect("../login.jsp");
+    }
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
-    String type = (String)session.getAttribute("type");
 %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,6 +30,20 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
+        <%
+            String stat = request.getParameter("status");
+            if(stat!=null){
+                if(stat.equals("error")){
+        %>
+                    <h1>Something went wrong!!</h1>
+        <%
+                }else if(stat.equals("sa")){
+        %>
+                    <h1>Patient Successfully Added!!</h1>
+        <%
+                }
+            }
+        %>
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
@@ -66,6 +88,8 @@
         <a href="../Lab/admin.jsp" class="inputbutt">Lab</a>
         <br/>
         <a href="onamb.jsp" class="inputbutt">Active Ambulances</a>
+        <br/>
+        <a href="../phamacy" class="inputbutt">Pharmacy</a>
         </div>
     </body>
 </html>

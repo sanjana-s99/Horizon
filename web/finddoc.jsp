@@ -69,8 +69,10 @@ and open the template in the editor.
                <i class="fa fa-bars"></i>
             </a>
         </div>
+            <br/><br/>
         <form action="finddocchannel.jsp" method="post">
         <div class="flex-container">
+            <h1>Select Possible Symptoms To Find Doctor</h1>
             Enter symptom one :
             <select class="js-example-basic-single" name="symptom1" style="width: 30%" >
                 <option>Select Symptom</option>

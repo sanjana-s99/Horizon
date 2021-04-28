@@ -61,6 +61,7 @@
         // Send message
         Transport.send(message);
         result = "mail sent successfully from ...." ;
+        response.sendRedirect("index.jsp");  
     } catch (MessagingException mex) {
         mex.printStackTrace();
         result = "Error: unable to send mail....";

@@ -87,14 +87,12 @@ public class register extends HttpServlet {
                     keygen key = new keygen();
                     String skey = key.verify(user.getEmail());
                     key.regverify(String.valueOf(skey), user.getEmail());
-                    out.print("You are successfully registered!!");
-                    out.print("<br>Welcome, "+user.getName());
-                    request.getRequestDispatcher("login.html").include(request, response);
+                     response.sendRedirect("login.jsp?status=sr"); 
                 }
             }else{
                 response.sendRedirect("register.jsp?status=ue"); 
             }
-        }catch(IOException | ClassNotFoundException | NoSuchAlgorithmException | SQLException | ServletException e){
+        }catch(Exception e){
             response.sendRedirect("register.jsp?status=error"); 
         }
     }

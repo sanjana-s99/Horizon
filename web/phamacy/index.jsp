@@ -4,11 +4,23 @@
     Author     : Movini
 --%>
 
+<%@page import="Model.user"%>
 <%@page import="Model.dbCon"%>
 <%@page import="java.lang.String"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
+<% 
+    session.setMaxInactiveInterval(3000);
+    String type = (String)session.getAttribute("type");
+    if(type != null){
+        if(!type.equals("S") && !type.equals("W")){
+            response.sendRedirect("../index.jsp");
+        }
+    }else{
+        response.sendRedirect("../login.jsp");
+    }
+%>
 
 <%
     dbCon con = new dbCon();
@@ -152,7 +164,8 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
     </head>
     <body data-ng-app>
         <h3>Prescription</h3>
-        <br>
+        <a href="main.jsp">Add Drugs</a>
+        <br/><br/>
         
         <div class="row">
             <div class="col-sm-4">
@@ -418,56 +431,58 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                                 <td><a href="delete.jsp?id=<%=id%>">Delete</a></td>
                                 <td><a href="email.jsp?id=<%=id%>&username=<%=username%>&doctorname=<%=doctorname%>&drugs=<%=drugs%>&date=<%=date%>&price=<%=totalprice%> ">Email</a></td>
                                 
-                            </tr>
+                            </tr>                     
                             
-                           
-                            
-   
-                            
-                            
-                                                     
-                            
-                            
-                            <% }%>
-                        
-                        
-                  
-                        
-                    </table> 
-                           
-                    
-                    
+                            <% }%>                     
+                    </table>                     
                 </div>
                 
-                            <div>
-                                 <form method="get" action="doc">
-                                 <lable>Prescription list</lable>
-                                 <input type="submit" value="By Doctor" name="submit" >
+                <div>
+                     <%
+                        
+                            ResultSet rssx;
+
+                            String queryx ="select * from drprescription";
+                            Statement stx = con.createConnection().createStatement();
+
+                               rssx =stx.executeQuery( queryx);
+                                while(rssx.next()){                              
+                               String pres= rssx.getString("pres");
+                               String id=rssx.getString("id");
+                               String did=rssx.getString("did");
+                               String pid=rssx.getString("pid");
+                               String cid=rssx.getString("cno");
+                               
+                              user udata = new user();
+                              String doc = null, pat = null;
+                              try{
+                                ResultSet rsd = udata.udata(did);
+                                rsd.next();
+                                doc = rsd.getString("name");
+                                ResultSet rsp = udata.udata(pid);
+                                rsp.next();
+                                pat = rsp.getString("name");
                                 
-                                
-                            </div>
-                            
-                            
-                                   
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                         
-                
-                
-                
-            </div>
-            
-            
-            
-        </div>
-        
-        
+                              }catch(Exception e){
+                                  
+                              }
+
+
+                        %>
+                        <form>
+                        <p> Doctor Prescription <br>
+                          Number : <%=cid%> |
+                          Doctor : <%=doc%> |
+                          Patient :  <%=pat%> </p>
+                        <textarea  rows="4" readonly>
+                                  <%= pres %>
+                        </textarea>
+                        <a href="delete_prescrip.jsp?id=<%=id%>">Delete</a>
+                        </form>
+                                  
+                            <%    }  %>                       
+                </div>         
+            </div>     
+        </div> 
     </body>
 </html>

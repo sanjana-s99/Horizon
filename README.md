@@ -1,1 +1,3 @@
 # Horizon
+This Hospital Management System is designed to improve the quality and management of hospital processes. Effective management is critical to the hospital's performance. Our Hospital Management System can be entered using a username and password. It is accessible by an Admin, Doctor, Patient, and hospital staff. The Hospital Management System is designed and built to provide actual value to hospitals. It is efficient, scalable, and simple to use. This hospital management system can divide into four main categories.  .... 
+The system can keep all patient information, medical data, and patient bills. 
