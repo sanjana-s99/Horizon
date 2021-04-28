@@ -6,12 +6,20 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%
-    session.setMaxInactiveInterval(5000);
+<% 
+    session.setMaxInactiveInterval(3000);
+    String type = (String)session.getAttribute("type");
+    if(type != null){
+        if(!type.equals("S") && !type.equals("W")){
+            response.sendRedirect("../index.jsp");
+        }
+    }else{
+        response.sendRedirect("../login.jsp");
+    }
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
-    String type = (String)session.getAttribute("type");
 %>
+
 <!DOCTYPE html>
 <html>
     <head>
