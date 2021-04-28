@@ -80,6 +80,8 @@
         <a href="../Lab/admin.jsp" class="inputbutt">Lab</a>
         <br/>
         <a href="onamb.jsp" class="inputbutt">Active Ambulances</a>
+        <br/>
+        <a href="../phamacy" class="inputbutt">Pharmacy</a>
         </div>
     </body>
 </html>
