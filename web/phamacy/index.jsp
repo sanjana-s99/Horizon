@@ -20,8 +20,6 @@
     }else{
         response.sendRedirect("../login.jsp");
     }
-    String id = (String)session.getAttribute("id");
-    String name = (String)session.getAttribute("name");
 %>
 
 <%
@@ -166,7 +164,8 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
     </head>
     <body data-ng-app>
         <h3>Prescription</h3>
-        <br>
+        <a href="main.jsp">Add Drugs</a>
+        <br/><br/>
         
         <div class="row">
             <div class="col-sm-4">

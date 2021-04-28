@@ -11,8 +11,6 @@
     }else{
         response.sendRedirect("../login.jsp");
     }
-    String id = (String)session.getAttribute("id");
-    String name = (String)session.getAttribute("name");
 %>
 <%
 dbCon con = new dbCon();
