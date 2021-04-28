@@ -43,7 +43,7 @@
             if(stat!=null){
                 if(stat.equals("error")){
         %>
-                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Email Or/And Password is Wrong'})</script>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Somthing Went Wrong'})</script>
         <%
                 }else if(stat.equals("ue")){
         %>
