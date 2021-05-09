@@ -52,4 +52,22 @@ public class lab {
         }
         return true;
     }
+    
+    public boolean price(String id, String price){
+        try{
+            PreparedStatement ps=con.createConnection().prepareStatement("UPDATE lab SET Price = ? WHERE id = ?");
+
+            ps.setString(1, price);
+            ps.setString(2, id);
+System.out.println(ps);
+
+            int x=ps.executeUpdate();
+            return x>0;
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+
+  return false;
+    }
 }

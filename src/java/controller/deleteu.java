@@ -67,11 +67,11 @@ public class deleteu extends HttpServlet {
             
             if(users.remove(id)){
                 out.println("Removing Successfull!!");
-                response.sendRedirect("admin/main.jsp");
+                response.sendRedirect("admin/main.jsp?status=ur");
             }
         }catch(IOException e){
             out.println("NO User");
-            response.sendRedirect("admin/main.jsp");
+            response.sendRedirect("admin/main.jsp?status=error");
             
         }
     }

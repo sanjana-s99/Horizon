@@ -70,6 +70,18 @@
         %>
                     <h1>ambulance Added Successfully!!</h1>
         <%
+                }else if(stat.equals("lpu")){
+        %>
+                    <h1>Lab Price Updated!!</h1>
+        <%
+                }else if(stat.equals("ur")){
+        %>
+                    <h1>User Removed</h1>
+        <%
+                }else if(stat.equals("tc")){
+        %>
+                    <h1>Time Changed Successfull!!</h1>
+        <%
                 }
             }
         %>
@@ -207,7 +219,7 @@
                             <td><%=rs.getString("id") %></td>
                             <td><%=rs.getString("Atype") %></td>
                             <td><%=rs.getString("price") %></td>
-                            <td><a href="Update?id=<%=id%>">Update</a></td>
+                            <td><form action="../labp" method="post"><input type="hidden" name="id" value="<%=rs.getString("id") %>" ><input type="text" name="price">&nbsp;<input type="submit" value="add"  class="inputbutt"></form></td>
                         </tr>
                                                     <%
                                }  
@@ -217,14 +229,6 @@ System.out.println(r.getMessage());
 }
                             %>
                     </table>
-                         
-
-                    <br>
-                    <form action="" method="post">
-                        Service : <input type="text" name="type" >
-                        Price : <input type="text" name="price">
-                        <input type="submit" value="add"  class="inputbutt">
-                    </form>
             </div>
 
                     </div>

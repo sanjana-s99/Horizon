@@ -5,7 +5,7 @@
  */
 package controller;
 
-import Model.user;
+import Model.lab;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SHATTER
  */
-public class changetime extends HttpServlet {
+public class labp extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +36,10 @@ public class changetime extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet changetime</title>");            
+            out.println("<title>Servlet labp</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet changetime at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet labp at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,17 +72,23 @@ public class changetime extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();        
+        PrintWriter out = response.getWriter();
+
         String id = request.getParameter("id");
-        String time = request.getParameter("time");
-        System.out.println(time);
+        String price = request.getParameter("price");
+        System.out.println(id);
+        System.out.println(price);
+        
         try{
-            user u = new user();
-            if(u.settime(id,time)){
-                response.sendRedirect("admin/main.jsp?status=tc");  
-            }
+            lab lb = new  lab();
+            
+        if(lb.price(id, price)){
+            out.println("update Successfull!!");
+            response.sendRedirect("admin/main.jsp?=status=lpu");
+        }
         }catch(IOException e){
-            response.sendRedirect("admin/main.jsp?status=error");  
+            response.sendRedirect("admin/main.jsp?status=error");
+            
         }
     }
 
