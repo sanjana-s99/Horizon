@@ -6,6 +6,7 @@
 package controller;
 
 import Model.SendMail;
+import Model.channeling;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -79,33 +80,39 @@ public class book extends HttpServlet {
          response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
+        //assign parametes values in to string array
         String[] data = new String[3];
         String to = null, drname = null, drtime = null, newTime=null;
         data[0] = request.getParameter("doctor");
         data[1] = request.getParameter("patient");
         data[2] = request.getParameter("no");
+        //calculation for get patiets time. 15 min for each 
         int time = Integer.valueOf(data[2])*15;
         
         
         user userdata = new user();
+        channeling ch = new channeling();
+        
+        //get user email from user id
         try{
             ResultSet rs = userdata.udata(data[1]);
             rs.next();
             to = rs.getString("email");
             System.out.println(to);
         }catch(ClassNotFoundException | SQLException e){
-            out.println("Error");
+            response.sendRedirect("patients/viewch.jsp?status=error"); 
         }
         
+        //get doctor name from doctor id
         try{
             ResultSet rs = userdata.udata(data[0]);
             rs.next();
             drname = rs.getString("name");
         }catch(ClassNotFoundException | SQLException e){
-            out.println("Error");
-            System.out.println(e);
+            response.sendRedirect("patients/viewch.jsp?status=error"); 
         }
         
+        //calculate time from doctors arrival time
         try{
             ResultSet rs = userdata.drtime(data[0]);
             rs.next();
@@ -116,34 +123,31 @@ public class book extends HttpServlet {
             LocalTime lt = LocalTime.parse(drtime);
             newTime = df.format(lt.plusMinutes(time));
         }catch(ClassNotFoundException | SQLException e){
-            out.println("Error");
+            response.sendRedirect("patients/viewch.jsp?status=error"); 
         }
         
+        //email string
         String msg = "Your Channeling For Dr. " + drname + " is confirmed. Please make your payment. <br/> <b>Your Number Is :" + data[2] + "</b><br/>Time For Your Number : "+newTime+"<br/><hr/>Horizen Hospitals Channeling Team";
         
         try{
-            user users = new user();
-            Boolean status = users.book(data);
+            //make booking from channeling class
+            Boolean status = ch.book(data);
             
             if(status){
-                SendMail mail = new SendMail();
                 try {
+                    //send email
                     SendMail.send(to , "Chaneling Confirmation", msg);
                     out.print("Booked Successfull!!");
                 } catch (Exception e) {
-                    out.println("Error");
+                    response.sendRedirect("patients/viewch.jsp?status=error"); 
                 }
-                
-                        
-                //request.getRequestDispatcher("patients/viewch.jsp").include(request, response);
-                response.sendRedirect("patients/viewch.jsp");  
+                //if all done direct to channelings view page
+                response.sendRedirect("patients/viewch.jsp?status=success");  
             }else{
-                out.println("Error!!");
-                 //RequestDispatcher rs =  request.getRequestDispatcher("index.html");
-                 //rs.include(request, response);
+                response.sendRedirect("patients/viewch.jsp?status=error"); 
             }
         }catch(IOException | ClassNotFoundException | SQLException e){
-            out.println("error : " + e);
+            response.sendRedirect("patients/viewch.jsp?status=error"); 
             
         }
     }

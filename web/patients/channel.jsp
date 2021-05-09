@@ -9,15 +9,19 @@
 <%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*;" %>
-<% 
+ <%
+     //get sesstion data and check allow use for only patients. if other try to access direct they to index page
     session.setMaxInactiveInterval(3000);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
     String type = (String)session.getAttribute("type");
-    if(id == null){
-        response.sendRedirect("../login.jsp");
+    
+    if(type != null){
+        if(!type.equals("P")){
+            response.sendRedirect("../index.jsp");
+        }
     }else{
-        //out.print("Welcome : " + name );
+        response.sendRedirect("../login.jsp");
     }
 %>
 <!DOCTYPE html>
@@ -69,6 +73,7 @@
                <i class="fa fa-bars"></i>
             </a>
         </div>
+            <!--checking get parameters if it is null display specelist list for selection-->
             <% if(request.getParameter("spe")==null && request.getParameter("doc")==null){ %>
             <br/><br/>
             <div class="flex-container">
@@ -95,6 +100,7 @@
             </select>
             <br>
             <a href="channel.jsp">reset</a></div>
+            <!--if specelist already selected display posible doctors for selection-->
             <% }if(request.getParameter("spe")!=null){ %>
             <%
                 String sid = request.getParameter("spe");
@@ -145,6 +151,7 @@
                 %>
             </select>
             </div>
+            <!--if doctor is already selected user can make appoinment using chennel button-->
             <% } if(request.getParameter("doc")!=null){
                 String doc = request.getParameter("doc");
                 int no = 0;
@@ -200,7 +207,5 @@
                 window.location.replace("channel.jsp?doc="+result);
             }
         </script>
-            
-            
     </body>
 </html>

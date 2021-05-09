@@ -6,6 +6,7 @@
 package controller;
 
 import Model.SendMail;
+import Model.channeling;
 import Model.user;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -75,7 +76,6 @@ public class sbook extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
 
         String[] data = new String[3];
         String to = null, drname = null;
@@ -86,13 +86,13 @@ public class sbook extends HttpServlet {
         user userdata = new user();
         try{
             ResultSet rs = userdata.udatanic(data[1]);
+            //check user exist status. if not direct again for booking
             if(!rs.next()){
                 response.sendRedirect("staff/staffchannel.jsp?status=nouser&doc="+data[0]);
             }
             to = rs.getString("email");
             System.out.println(to);
         }catch(ClassNotFoundException | SQLException e){
-            out.println("Error");
         }
         
         try{
@@ -100,7 +100,6 @@ public class sbook extends HttpServlet {
             rs.next();
             drname = rs.getString("name");
         }catch(ClassNotFoundException | SQLException e){
-            out.println("Error");
         }
         
         String msg = "Your Channeling For Dr. " + drname + " is confirmed. Please make your payment. <br/> <b>Your Number Is :" + data[2] + "</b><br/><hr/>Horizen Hospitals Channeling Team";
@@ -110,28 +109,24 @@ public class sbook extends HttpServlet {
         try{
             user getdata = new user();
             ResultSet rs = getdata.udatanic(data[1]);
-            rs.next();
-            
+            rs.next();            
             data[1] = rs.getString("id");
         
-            user users = new user();
-            Boolean status = users.book(data);
+            channeling ch = new channeling();
+            Boolean status = ch.book(data);
             
             if(status){
                 try {
                     SendMail.send(to , "Chaneling Confirmation", msg);
                 } catch (Exception e) {
-                    out.println("Error");
                 }
-                        
-                 response.sendRedirect("staff/staffchannel.jsp?doc="+data[0]);
+                 
+                //is all done staff direct to doctors channeling page
+                 response.sendRedirect("staff/staffchannel.jsp?status=book&doc="+data[0]);
             }else{
-                out.println("Error!!");
-                 //RequestDispatcher rs =  request.getRequestDispatcher("index.html");
-                 //rs.include(request, response);
+                response.sendRedirect("staff/staffchannel.jsp?status=error&doc="+data[0]);
             }
         }catch(IOException | ClassNotFoundException | SQLException e){
-            out.println("error : " + e);
             
         }
     }

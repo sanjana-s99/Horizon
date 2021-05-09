@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
+    //sesstion data
     session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");

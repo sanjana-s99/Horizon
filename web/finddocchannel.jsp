@@ -9,6 +9,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
+    //check user logged in or not
     session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
     String type = (String)session.getAttribute("type");
@@ -58,11 +59,12 @@
             </a>
         </div>
         <%
+            //get values from form
             String symp_1=request.getParameter("symptom1");
             String symp_2=request.getParameter("symptom2");
             String symp_3=request.getParameter("symptom3");
 
-
+            //create doctor finder object
             dfind con = new dfind();
             try {
                 ResultSet rs = con.symptomCheck(symp_1, symp_2,symp_3);
@@ -75,6 +77,7 @@
                 <div class="flex-container">
                 <h2>Possible : <%=disease%></h2>
                 <%
+                    //find doctors details using specialist if
                     String sid = rs.getString("specialist_id");
                     ResultSet r=con.getDoctor(sid);
                     while(r.next()){
@@ -88,12 +91,7 @@
                 
                 <%
                             }
-
                     }
-
-
-
-
                 }
 if(i==0){
 %>

@@ -4,6 +4,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 <% 
+    //to check user logged in or not
     session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
     String type = (String)session.getAttribute("type");
@@ -12,14 +13,8 @@
         response.sendRedirect("login.jsp");
     }
     
-
 %>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -70,6 +65,7 @@ and open the template in the editor.
             </a>
         </div>
             <br/><br/>
+            <!--send possible sympotoms to jsp -->
         <form action="finddocchannel.jsp" method="post">
         <div class="flex-container">
             <h1>Select Possible Symptoms To Find Doctor</h1>
@@ -78,7 +74,9 @@ and open the template in the editor.
                 <option>Select Symptom</option>
 
                 <%
+                    //create database connection
                     dbCon con = new dbCon();
+                    //load possible symptoms from database
                     try {
                         Statement st = con.createConnection().createStatement();
                         String query = "SELECT symptom FROM symptoms ";
@@ -101,6 +99,7 @@ and open the template in the editor.
             <select class="js-example-basic-single" name="symptom2" style="width: 30%" >
                 <option>Select Symptom</option>
                 <%
+                    //load possible symptoms from database
                     try {
                         Statement st = con.createConnection().createStatement();
                         String query = "SELECT symptom FROM symptoms ";
@@ -123,6 +122,7 @@ and open the template in the editor.
             <select class="js-example-basic-single" style="width: 30%" name="symptom3">
                 <option>Select Symptom</option>
                 <%try{
+                    //load possible symptoms from database
                         Statement st = con.createConnection().createStatement();
                         String query = "SELECT symptom FROM symptoms ";
                         //get table data

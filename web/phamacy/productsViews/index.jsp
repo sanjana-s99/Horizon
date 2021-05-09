@@ -8,12 +8,6 @@
     String uid = (String)session.getAttribute("id");
     String uname = (String)session.getAttribute("name");
     if(type != null){
-        if(!type.equals("S") && !type.equals("W")){
-            response.sendRedirect("../index.jsp");
-        }
-    }else{
-        response.sendRedirect("../login.jsp");
-    }
 %>
 
 <html lang="en" >
@@ -61,36 +55,21 @@
             </a>
         </div>
 <div class="wrapper">
-
-  <div class="header">
-    <h1 class="header__title">Horizon </h1>
-    <h2 class="header__subtitle">Pharmacy</h2>
-  </div>
-    
-    
-    
-    
+    <h1 style="padding: 2px 16px;">Product List</h1>
       <%   
           dbCon con = new dbCon();
                                 
-                                ResultSet rs;
+            ResultSet rs;
 
-                                String query = "select * from drugs";
-                                Statement st = con.createConnection().createStatement();
+            String query = "select * from drugs";
+            Statement st = con.createConnection().createStatement();
 
-                                rs = st.executeQuery(query);
-                                while (rs.next()) {
+            rs = st.executeQuery(query);
+            while (rs.next()) {
 
-                                    String id = rs.getString("id");
-                                  
-
-                                    String drugsname = rs.getString("drugsname");
-                                    String price = rs.getString("price");
-                                    String date = rs.getString("date");
 
 
          %>
-
 
                     
                             <div class="card">
@@ -106,30 +85,11 @@
                                         
                                         
                                         <a href="checkout/index.jsp?id=<%=rs.getString("id")%>&deugsname=<%=rs.getString("drugsname")%>&exp=<%=rs.getString("expdate")%>&price=<%=rs.getString("price")%>" class="myButton">BUY</a>
-                                       
-    
-                                    
-    
-    
-    
-    
+
     
   </div>
 </div>
-                          
-
-                                
-                             
-                                    
-                                    
-      
-                               
-    
-
-                                
-                                
-                              
-                                
+ 
                            
                             <%
 
@@ -137,13 +97,6 @@
 
                             %>
 
- 
-    
-    
-    
-    
-
-  
     
 
 </div>
@@ -159,7 +112,7 @@
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 40%;
+  width: 30%;
   float: left;
 }
 
@@ -199,3 +152,9 @@
 
 
 </style>
+
+<%
+    }else{
+        response.sendRedirect("../../login.jsp");
+    }
+%>

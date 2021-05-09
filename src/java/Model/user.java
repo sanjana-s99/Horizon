@@ -137,21 +137,6 @@ public class user {
         return rs;
     }
      
-    public boolean book(String[] d ) throws ClassNotFoundException, SQLException{
-        try{
-            PreparedStatement ps = con.createConnection().prepareStatement("insert into channeling(d_id,p_id,number) values (?,?,?)");
-            ps.setString(1, d[0]);
-            ps.setString(2, d[1]);
-            ps.setString(3, d[2]);
-
-            int i = ps.executeUpdate();
-            return i>0;
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        return false;
-    }
-     
     public boolean adduser(newstaff d ) throws ClassNotFoundException, SQLException{
         String nic = d.getNic(), gender;
         int year, daytext;

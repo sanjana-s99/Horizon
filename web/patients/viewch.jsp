@@ -8,7 +8,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*;" %>
  <%
-    session.setMaxInactiveInterval(3000);
+     //get sesstion data and check allow use for only patients. if other try to access direct they to index page
+    session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
     String type = (String)session.getAttribute("type");
@@ -16,9 +17,7 @@
     if(type != null){
         if(!type.equals("P")){
             response.sendRedirect("../index.jsp");
-        }else{
-        //out.print("Welcome : " + name );
-    }
+        }
     }else{
         response.sendRedirect("../login.jsp");
     }
@@ -38,6 +37,20 @@
         <script src="../scripts/nav.js"></script>
     </head>
     <body>
+                <%
+            String stat = request.getParameter("status");
+            if(stat!=null){
+                if(stat.equals("error")){
+        %>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Somthing Went Wrong'})</script>
+        <%
+                }else if(stat.equals("success")){
+        %>
+                    <script>Swal.fire({icon: 'success',title: 'success',text: 'Appoinment Making Successfull'})</script>
+        <%
+                }
+            }
+        %>
                 <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>

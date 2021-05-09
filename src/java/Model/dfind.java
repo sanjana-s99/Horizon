@@ -14,8 +14,10 @@ import java.sql.SQLException;
  * @author SHATTER
  */
 public class dfind {
+    //create database connection
     dbCon con = new dbCon();
     
+    //check possible disease for sympoms
     public ResultSet symptomCheck(String symptom1, String symptom2, String symptom3) throws SQLException, ClassNotFoundException{
         
         ResultSet rs = null;
@@ -41,7 +43,7 @@ public class dfind {
         return rs;
     }
 
-    
+    //get doctor data using specialist id
     public ResultSet getDoctor(String id){
        ResultSet rs = null;
         

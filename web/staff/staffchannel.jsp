@@ -3,23 +3,25 @@
     Created on : Mar 8, 2021, 9:57:02 PM
     Author     : Kavindya
 --%>
-
+<!--allow staff to make appoinment for patients-->
 
 <%@page import="Model.user"%>
 <%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*;" %>
 <% 
-    session.setMaxInactiveInterval(5000);
+    //get session data and allow access to staff and webadmin
+    session.setMaxInactiveInterval(3000);
     String type = (String)session.getAttribute("type");
+    String id = (String)session.getAttribute("id");
+    String name = (String)session.getAttribute("name");
     if(type != null){
+        if(!type.equals("S") && !type.equals("W")){
+            response.sendRedirect("../index.jsp");
+        }
     }else{
         response.sendRedirect("../login.jsp");
     }
-%>
-<%
-    String id = (String)session.getAttribute("id");
-    String name = (String)session.getAttribute("name");
 %>
 <!DOCTYPE html>
 <html>
@@ -40,6 +42,20 @@
         </script>
     </head>
     <body>
+        <%
+            String ste = request.getParameter("status");
+            if(ste!=null){
+                if(ste.equals("error")){
+        %>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Somthing Went Wrong'})</script>
+        <%
+                }else if(ste.equals("book")){
+        %>
+                    <script>Swal.fire({icon: 'success',title: 'success',text: 'Appoinment Making Successfull'})</script>
+        <%
+                }
+            }
+        %>
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
