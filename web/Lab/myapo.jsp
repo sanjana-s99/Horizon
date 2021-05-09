@@ -11,13 +11,17 @@
 <%@page import="Model.dbCon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
-    session.setMaxInactiveInterval(3000);
+    session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
     String name = (String)session.getAttribute("name");
-    if(id == null){
+    String type = (String)session.getAttribute("type");
+    if(type != null){
+        if(!type.equals("P")){
+            response.sendRedirect("../index.jsp");
+        }
+    }else{
         response.sendRedirect("../login.jsp");
     }
-    String type = (String)session.getAttribute("type");
 %>
 <!DOCTYPE html>
 <html>

@@ -9,8 +9,16 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="Model.user"%>
 <% 
-    session.setMaxInactiveInterval(3000);
+    session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
+    String type = (String)session.getAttribute("type");
+    if(type != null){
+        if(!type.equals("P")){
+            response.sendRedirect("../index.jsp");
+        }
+    }else{
+        response.sendRedirect("../login.jsp");
+    }
     String nic = null;
     user userdata = new user();
         try{
@@ -20,18 +28,8 @@
         }catch(Exception e){
             out.println("Error");
     }
-        System.out.println(nic);
-    String name = (String)session.getAttribute("name");
-    if(id == null){
-        response.sendRedirect("../login.jsp");
-    }else{
-        //out.print("Welcome : " + name );
-    }
 %>
-<%
-    session.setMaxInactiveInterval(5000);
-    String type = (String)session.getAttribute("type");
-%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
