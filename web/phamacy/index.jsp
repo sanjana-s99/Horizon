@@ -97,38 +97,17 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
         pst.setString(4,totalprice);
         pst.executeUpdate();
 
-
-
-
-        
-        
-        
-        
         
  
 %>
-          <script>
-              alert("Record Added");
+              <script>Swal.fire({icon: 'success',title: 'Success',text: 'Record Added'})</script>
     
-          </script>
-    
-    
-    
-    
+
 <% 
    
   }
 
 %>
-
-
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html >
@@ -165,9 +144,6 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
 <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="../patients/">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/productsViews/">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
@@ -336,10 +312,6 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                          <option selected  value="<%=drugsname%> /-<%=price%>"><%=drugsname%> </option>
                          
                          
-                             
-                              
-                          
-                         
                        
                         <%
                           
@@ -347,45 +319,19 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                         
                         %> 
                          </select></td>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
                         </tr>
                         </tbody>
                     </table>
                     
                     </div>
-                  
 
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
                   
                   <br/>
                   <div alight="left">
                         <label class="form-label">Total price</label>
                         <input type="text" class="form-control" name="totalprice" > 
                     </div><br>
-                  
-                  
-                  
-                  
-                    
 
-                    
-                    
-                  
                     <div alight="right">
                         <input type="submit" value="submit" name="submit" class="btn btn-info inputbutt" >
                         <input type="reset" value="reset" name="reset" class="btn btn-warning inputbutt" >

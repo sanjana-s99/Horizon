@@ -46,9 +46,6 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="channel.jsp">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
@@ -78,7 +75,7 @@
             if(stat!=null){
                 if(stat.equals("success")){
         %>
-                    <script>Swal.fire({icon: 'success',title: 'Completed'})</script>
+                    <script>Swal.fire({icon: 'success',title: 'Ambulance will Arrive Soon!!'})</script>
         <%
                 }else if(stat.equals("error")){
         %>

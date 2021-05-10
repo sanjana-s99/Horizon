@@ -71,38 +71,12 @@ pst = con.createConnection().prepareStatement("update prescription set doc_name 
         pst.executeUpdate();
         response.sendRedirect("index.jsp");   
 %>
-
-          <script>
-              alert("Record Updated");
-    
-          </script>    
+<script>Swal.fire({icon: 'info',title: 'Update',text: 'Record Updated'})</script>
 <% 
    
   }
 
 %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html>

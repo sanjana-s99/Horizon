@@ -17,7 +17,4 @@ dbCon con = new dbCon();
         }
  
 %>
-          <script>
-              alert("Record Deleted");
-    
-          </script>
+<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Record Deleted'})</script>

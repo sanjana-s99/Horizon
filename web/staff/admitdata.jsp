@@ -38,19 +38,19 @@
             if(stat!=null){
                 if(stat.equals("dis")){
         %>
-                    <h1>Successfully Discharged!!</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Done',text: 'Successfully Discharged'})</script>
         <%
                 }else if(stat.equals("success")){
         %>
-                    <h1>Successfully Addmited!!</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Done',text: 'Successfully Admited'})</script>
         <%
                 }else if(stat.equals("error")){
         %>
-                    <h1>Something Went Wrong!!</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Somethong Went Wrong'})</script>
         <%
                 }else if(stat.equals("sc")){
         %>
-                    <h1>Successfully room changed!!</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Done',text: 'Room Changed'})</script>
         <%
                 }
             }
@@ -58,9 +58,6 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="channel.jsp">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){

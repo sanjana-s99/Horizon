@@ -42,7 +42,7 @@
                 var type = jQuery('#type');
                 var select = this.value;
                 type.change(function () {
-                    if ($(this).val() == 'S') {
+                    if ($(this).val() == 'D') {
                         $('.resources').show();
                     }
                     else $('.resources').hide();
@@ -56,31 +56,31 @@
             if(stat!=null){
                 if(stat.equals("error")){
         %>
-                    <h1>Something Went Wrong!!</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Something Went Wrong'})</script>
         <%
                 }else if(stat.equals("addedsuccess")){
         %>
-                    <h1>Successfully Added User!!</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Success',text: 'Staff Member Registering Successfull'})</script>
         <%
                 }else if(stat.equals("ue")){
         %>
-                    <h1>User Exists PLease Recheck!!</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'User Exists'})</script>
         <%
                 }else if(stat.equals("ambsuc")){
         %>
-                    <h1>ambulance Added Successfully!!</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Success',text: 'Ambulance Addition Successfull'})</script>
         <%
                 }else if(stat.equals("lpu")){
         %>
-                    <h1>Lab Price Updated!!</h1>
+                    <script>Swal.fire({icon: 'info',title: 'Success',text: 'Price Updated!!'})</script>
         <%
                 }else if(stat.equals("ur")){
         %>
-                    <h1>User Removed</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Success',text: 'User Removing Successfull'})</script>
         <%
                 }else if(stat.equals("tc")){
         %>
-                    <h1>Time Changed Successfull!!</h1>
+                    <script>Swal.fire({icon: 'info',title: 'Success',text: 'Time Changed!!'})</script>
         <%
                 }
             }
@@ -89,9 +89,6 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="../patients/">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
@@ -152,8 +149,8 @@
 
                         <label for="type"><b>Account Type</b></label>
                         <select name="type" id="type" class="js-example-basic-single" style="width: 30%">
-                            <option id="D" value="D">Doctor</option>
                             <option id="S" value="S">Staff</option>
+                            <option id="D" value="D">Doctor</option>
                         </select><br/><br/>
                         <div class="resources" style="display: none;">
                             <label for="type"><b>Select Specilized Area</b></label>
@@ -219,7 +216,7 @@
                             <td><%=rs.getString("id") %></td>
                             <td><%=rs.getString("Atype") %></td>
                             <td><%=rs.getString("price") %></td>
-                            <td><form action="../labp" method="post"><input type="hidden" name="id" value="<%=rs.getString("id") %>" ><input type="text" name="price">&nbsp;<input type="submit" value="add"  class="inputbutt"></form></td>
+                            <td><form action="../labp" method="post"><input type="hidden" name="id" value="<%=rs.getString("id") %>" ><input type="text" name="price">&nbsp;<input type="submit" value="Update"  class="inputbutt"></form></td>
                         </tr>
                                                     <%
                                }  
@@ -277,18 +274,18 @@ System.out.println(r.getMessage());
             <%
                 if("R".equals(rs.getString("status"))){
             %>
-                    <td><a href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=in">Checked In</a></td>
-                    <td><a href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=can">Cancel</a></td>
+                    <td><a class="inputbutt" href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=in">Checked In</a></td>
+                    <td><a class="inputbutt" href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=can">Cancel</a></td>
                 </tr>
             <%
                 }else if("C".equals(rs.getString("status"))){
             %>
-                <td><a href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=com">Complete</a></td>
-                <td><a href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=can">Cancel</a></td>
+                <td><a class="inputbutt" href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=com">Complete</a></td>
+                <td><a class="inputbutt" href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=can">Cancel</a></td>
             </tr>
             <% }else if("D".equals(rs.getString("status"))){
             %>
-                <td> <a href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=com">Complete</a></td>
+                <td> <a class="inputbutt" href="../cact?pid=<%=rs.getString("p_id")%>&did=<%=rs.getString("d_id")%>&no=<%=rs.getInt("number")%>&action=com">Complete</a></td>
             </tr>
             <% }
                 }        
@@ -333,7 +330,7 @@ System.out.println(r.getMessage());
                             <td><%=rs.getString("nic") %></td>
                             <td><%=rs.getString("gender") %></td>
                             <td><%=rs.getString("age") %></td>
-                            <td><a href="../deleteu?id=<%=rs.getString("id")%>">Remove</a></td>
+                            <td><a class="inputbutt" href="../deleteu?id=<%=rs.getString("id")%>">Remove</a></td>
                         </tr>
                         <%
                                 }  
@@ -391,7 +388,7 @@ System.out.println(r.getMessage());
                             <td><%=spe %></td>
                             <td><%=rs.getString("time") %><form action="../changetime" method="post"><input type="text" value="<%=rs.getString("time") %>" name="time" pattern=".{5}"/><input type="hidden" name="id" value="<%=rs.getString("id")%>"/></td>
                             <td><input type="submit" value="update time" class="inputbutt"/></form></td>
-                            <td><a href="../deleteu?id=<%=rs.getString("id")%>">Remove</a></td>
+                            <td><a class="inputbutt" href="../deleteu?id=<%=rs.getString("id")%>">Remove</a></td>
                         </tr>
                         <%
                                 }  
@@ -437,7 +434,7 @@ System.out.println(r.getMessage());
                             <td><%=rs.getString("nic") %></td>
                             <td><%=rs.getString("gender") %></td>
                             <td><%=rs.getString("age") %></td>
-                            <td><a href="../deleteu?id=<%=rs.getString("id")%>">Remove</a></td>
+                            <td><a class="inputbutt" href="../deleteu?id=<%=rs.getString("id")%>">Remove</a></td>
                         </tr>
                         <%
                                 }  
@@ -487,7 +484,7 @@ System.out.println(r.getMessage());
                 <td><%=rs.getString("gname")%></td>
                 <td><%=rs.getString("gtp")%></td>
                 <td><%=rs.getString("time")%></td>
-                <th><a href="discharge.jsp?type=room&id=<%=rs.getInt("id")%>">Discharge</a></th>
+                <th><a class="inputbutt" href="discharge.jsp?type=room&id=<%=rs.getInt("id")%>">Discharge</a></th>
             </tr>
             <% 
                 }
@@ -536,7 +533,7 @@ System.out.println(r.getMessage());
                 <td><%=rs.getString("gname")%></td>
                 <td><%=rs.getString("gtp")%></td>
                 <td><%=rs.getString("time")%></td>
-                <th><a href="discharge.jsp?type=ward&id=<%=rs.getInt("id")%>">Discharge</a></th>
+                <th><a class="inputbutt" href="discharge.jsp?type=ward&id=<%=rs.getInt("id")%>">Discharge</a></th>
             </tr>
             <% 
                 }

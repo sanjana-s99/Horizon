@@ -35,11 +35,11 @@
             if(stat!=null){
                 if(stat.equals("error")){
         %>
-                    <h1>Something went wrong!!</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Something Went Wrong'})</script>
         <%
                 }else if(stat.equals("sa")){
         %>
-                    <h1>Patient Successfully Added!!</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Success',text: 'Patient Registering Successfull'})</script>
         <%
                 }
             }
@@ -47,12 +47,15 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="../patients/">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/productsViews/">Pharmacy</a>
-            <%
+             <%
                 if(type!=null){
-                    if(type.equals("S")){
+                    if(type.equals("P")){
+            %>
+            <a href="patients/">Channel</a>
+            <a href="Lab/">Lab</a>
+            <a href="phamacy/productsViews/">Pharmacy</a>
+            <%
+                    }else if(type.equals("S")){
             %>
             <a href="index.jsp" class="active">Staff Dashboard</a>
             <%}else if(type.equals("W")){%>

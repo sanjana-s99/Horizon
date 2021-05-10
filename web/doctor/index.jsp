@@ -48,9 +48,6 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="../patients/">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/productsViews/">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
@@ -138,7 +135,7 @@
                 } 
 %>
                     </table><br/>
-                    <a href="index.jsp">Reset</a>
+                    <a class="inputbutt"  href="index.jsp">Back</a>
                     <br/>
                     <form action="../prescription" method="post" id="usrform">
                         <textarea rows="7" cols="50" name="pres" form="usrform"></textarea>

@@ -35,22 +35,11 @@
        
        
        %>
-       
-       <script>
-           alert("Record Updated");
-       </script>
-       
-       
-       
-       
+<script>Swal.fire({icon: 'info',title: 'Update',text: 'Record Updated'})</script>
+
        <%
-   
-   
-   
-   
+
    }
-
-
 
 %>
 

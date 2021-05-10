@@ -37,12 +37,15 @@
         <h3 class="title">Horizon Hospitals</h3>
         <div class="topnav" id="myTopnav">
             <a href="index.jsp" class="active">Home</a>
+            <%
+                if(type!=null){
+                    if(type.equals("P")){
+            %>
             <a href="patients/">Channel</a>
             <a href="Lab/">Lab</a>
             <a href="phamacy/productsViews/">Pharmacy</a>
             <%
-                if(type!=null){
-                    if(type.equals("S")){
+                    }else if(type.equals("S")){
             %>
             <a href="staff/">Staff</a>
             <%}else if(type.equals("W")){%>

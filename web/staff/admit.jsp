@@ -43,9 +43,6 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="channel.jsp">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
@@ -76,12 +73,11 @@
             if(stat!=null){
                 if(stat.equals("nouser")){
         %>
-                    <h1>No user found!!</h1>
-                    <p>User Different NIC or <a href="addpat.jsp">add user</a> </p>
+                    <script>Swal.fire({icon: 'error',title: 'No user found!!',html: 'User Different NIC or <a href="addpat.jsp">Add User</a> '})</script>
         <%
                 }else if(stat.equals("error")){
         %>
-                    <h1>Something Went Wrong!!</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Something Went Wrong'})</script>
         <%
                 }
             }

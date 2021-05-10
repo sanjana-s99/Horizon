@@ -45,9 +45,6 @@
                 <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="channel.jsp">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
@@ -77,11 +74,11 @@
             if(stat!=null){
                 if(stat.equals("error")){
         %>
-                    <h1>Something went wrong!!</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Something Went Wrong'})</script>
         <%
                 }else if(stat.equals("ue")){
         %>
-                    <h1>User Exists!!</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'User Exists'})</script>
         <%
                 }
             }

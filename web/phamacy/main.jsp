@@ -46,9 +46,7 @@ dbCon con = new dbCon();
 
 %>
 
-<script>
-    alert("Record Adddedddd");
-</script>
+    <script>Swal.fire({icon: 'success',title: 'Success',text: 'Record Added'})</script>
 
 
 
@@ -57,9 +55,6 @@ dbCon con = new dbCon();
 
 
 %>
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -77,9 +72,6 @@ dbCon con = new dbCon();
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="../patients/">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/productsViews/">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
@@ -197,14 +189,6 @@ dbCon con = new dbCon();
                         <input type="reset" id="reset" value="reset" name="reset" class="btn btn-warning inputbutt">  
                             
                     </div><br/>
-                              
-                           
-                           
-                        
-                        
-
-
-
 
                 </form>
 

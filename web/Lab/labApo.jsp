@@ -54,15 +54,15 @@
             if(stat!=null){
                 if(stat.equals("success")){
         %>
-                    <h1>Successfully Booked!</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Success',text: 'Appoinment Making Successfull'})</script>
         <%
                 }else if(stat.equals("error")){
         %>
-                    <h1>Something Went Wrong!!</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Something Went Wrong'})</script>
         <%
                 }else if(stat.equals("time")){
         %>
-                    <h1>Time Slot is not available.</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Time Slot Not Available'})</script>
         <%
                 }
             }

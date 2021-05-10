@@ -47,24 +47,23 @@
             if(stat!=null){
                 if(stat.equals("nu")){
         %>
-                   <h1>No user found!!</h1>
-                    <p>User Different NIC or <a href="../staff/addpat.jsp">add user</a> </p>
+                   <script>Swal.fire({icon: 'error',title: 'No user found!!',html: 'User Different NIC or <a href="../staff/addpat.jsp">Add User</a> '})</script>
         <%
                 }else if(stat.equals("success")){
         %>
-                    <h1>Successfully Booked!</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Success',text: 'Appoinment Making Successfull'})</script>
         <%
                 }else if(stat.equals("error")){
         %>
-                    <h1>Something Went Wrong!!</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Something Went Wrong'})</script>
         <%
                 }else if(stat.equals("time")){
         %>
-                    <h1>Time Slot is not available.</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Time Slot Not Available'})</script>
         <%
                 }else if(stat.equals("delete")){
         %>
-                    <h1>Delete Success</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Success',text: 'Deletion Successfull'})</script>
         <%
                 }
             }
@@ -72,9 +71,6 @@
  <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="channel.jsp">Channel</a>
-            <a href="../Lab/" class="active">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){

@@ -38,15 +38,15 @@
             if(stat!=null){
                 if(stat.equals("success")){
         %>
-                    <h1>Successfully Booked!</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Success',text: 'Appoinment Making Successfull'})</script>
         <%
                 }else if(stat.equals("error")){
         %>
-                    <h1>Something Went Wrong!!</h1>
+                    <script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Something Went Wrong'})</script>
         <%
                 }else if(stat.equals("delete")){
         %>
-                    <h1>Delete Success!!</h1>
+                    <script>Swal.fire({icon: 'success',title: 'Success',text: 'Deletion Successfull'})</script>
         <%
                 }
             }

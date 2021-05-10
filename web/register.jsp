@@ -56,18 +56,6 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="index.jsp">Home</a>
-            <a href="patients/">Channel</a>
-            <a href="Lab/">Lab</a>
-            <a href="phamacy/productsViews/">Pharmacy</a>
-            <%
-                if(type!=null){
-                    if(type.equals("S")){
-            %>
-            <a href="staff/">Staff Dashboard</a>
-            <%}else if(type.equals("W")){%>
-            <a href="staff/">Staff Dashboard</a>
-            <a href="admin/main.jsp">Admin Dashboard</a>
-            <%}}%>
             <%if(id != null){
                 %>
             <a style="float:right">Welcome <%=name%></a>
