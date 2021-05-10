@@ -75,7 +75,7 @@
             if(stat!=null){
                 if(stat.equals("success")){
         %>
-                    <script>Swal.fire({icon: 'success',title: 'Ambulance will Arrive Soon!!'})</script>
+                    <script>Swal.fire({icon: 'success',title: 'successfull'})</script>
         <%
                 }else if(stat.equals("error")){
         %>
