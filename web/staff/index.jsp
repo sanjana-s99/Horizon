@@ -83,7 +83,7 @@
         <div class="flex-container">
         <a href="admit.jsp" class="inputbutt">Admit</a>
         <br/>
-        <a href="admitdata.jsp" class="inputbutt">View Admit</a>
+        <a href="admitdata.jsp" class="inputbutt">View Admitions</a>
         <br/>
         <a href="staffchannel.jsp" class="inputbutt">Staff Channel</a>
         <br/>

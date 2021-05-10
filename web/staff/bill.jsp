@@ -25,9 +25,6 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="channel.jsp">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
@@ -87,7 +84,7 @@
             <br/>
             Ward : <%=ward%>
             <br/>
-            <%=bed%>
+            Bed : <%=bed%>
             <br/>
             Patient : <%=pat%>
             <br/>
@@ -124,7 +121,7 @@
 %>
             Admition id : <%=index%>
             <br/>
-            <%=bed%>
+            Room : <%=bed%>
             <br/>
             Patient : <%=pat%>
             <br/>

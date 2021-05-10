@@ -37,9 +37,6 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="channel.jsp">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
@@ -109,7 +106,7 @@
             <br/>
             Discharge Time : <%=time2%>
             <br/>
-            Price : <%=price%>
+            Room Fee : <%=price%>
             <br/>
             Guardians Details: <br/>
             Name : <%=rs.getString("gname")%>
@@ -174,7 +171,7 @@
             <br/>
             Discharge Time : <%=time2%>
             <br/>
-            Price : <%=price%>
+            Room Fee : <%=price%>
             <br/>
             Guardians Details: <br/>
             Name : <%=rs.getString("gname")%>

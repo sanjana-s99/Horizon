@@ -12,6 +12,7 @@
     session.setMaxInactiveInterval(5000);
     String id = (String)session.getAttribute("id");
     String type = (String)session.getAttribute("type");
+    String name = (String)session.getAttribute("name");
     if(type != null){
         if(!type.equals("P")){
             response.sendRedirect("../index.jsp");

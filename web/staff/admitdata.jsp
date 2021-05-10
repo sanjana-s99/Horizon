@@ -121,7 +121,7 @@
                 <td><%=rs.getString("time")%></td>
                 <td><%=rs.getString("bno")%></td>
                 <td><form action="../changeroom" method="post"><input type="text" name="nbno" value="<%=rs.getInt("bno")%>"><input type="hidden" name="id" value="<%=rs.getInt("id")%>"><input type="hidden" name="bno" value="<%=rs.getInt("bno")%>"><input type="submit" value="Update" class="inputbutt"></form></td>
-                <th><a href="discharge.jsp?type=room&id=<%=rs.getInt("id")%>">Discharge</a></th>
+                <th><a class="inputbutt" href="discharge.jsp?type=room&id=<%=rs.getInt("id")%>">Discharge</a></th>
             </tr>
             <% 
                 }
@@ -169,7 +169,7 @@
                 <td><%=rs.getString("gname")%></td>
                 <td><%=rs.getString("gtp")%></td>
                 <td><%=rs.getString("time")%></td>
-                <th><a href="discharge.jsp?type=ward&id=<%=rs.getInt("id")%>">Discharge</a></th>
+                <th><a class="inputbutt" href="discharge.jsp?type=ward&id=<%=rs.getInt("id")%>">Discharge</a></th>
             </tr>
             <% 
                 }
