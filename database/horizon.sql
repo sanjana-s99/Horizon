@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 27, 2021 at 11:46 AM
+-- Generation Time: May 11, 2021 at 04:35 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -43,9 +43,9 @@ CREATE TABLE `admit` (
 --
 
 INSERT INTO `admit` (`id`, `nic`, `did`, `type`, `bno`, `gname`, `gtp`, `time`) VALUES
-(20, '993581089V', 4, 'room', 1, 'SANJANA', 771994147, '2021-04-21 10:31:28'),
-(21, '993581089V', 5, 'room', 4, 'SANJANA', 771994147, '2021-04-24 15:34:11'),
-(22, '993581089V', 4, 'ward', 4, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, '2021-04-25 08:54:36');
+(21, '993581089V', 5, 'room', 4, 'Malani Fonseka', 771994147, '2021-04-24 15:34:11'),
+(22, '997581089V', 4, 'ward', 4, 'Dammika Plliyaguru', 771994147, '2021-04-25 08:54:36'),
+(24, '993581089V', 5, 'room', 3, 'kasun', 771994147, '2021-05-10 11:16:50');
 
 -- --------------------------------------------------------
 
@@ -63,11 +63,11 @@ CREATE TABLE `ambulance` (
 --
 
 INSERT INTO `ambulance` (`number`, `status`) VALUES
-('CAM-8811', 'A'),
-('HU-5690', 'A'),
-('KA-8841', 'A'),
+('CAM-8811', 'N'),
+('HU-5690', 'N'),
+('KA-8841', 'N'),
 ('KD-8841', 'N'),
-('KK-8841', 'N');
+('KK-8841', 'A');
 
 -- --------------------------------------------------------
 
@@ -111,28 +111,10 @@ CREATE TABLE `channeling` (
 --
 
 INSERT INTO `channeling` (`p_id`, `d_id`, `number`, `status`, `timestamp`) VALUES
-(0, 0, 0, 'S', '2021-03-25 13:59:43'),
-(3, 4, 5, 'R', '2021-03-23 15:40:21'),
-(3, 4, 6, 'R', '2021-03-25 15:12:14'),
-(3, 4, 7, 'R', '2021-03-25 16:08:15'),
-(3, 5, 3, 'C', '2021-03-08 16:57:19'),
-(3, 5, 4, 'C', '2021-03-08 16:58:08'),
-(3, 5, 5, 'C', '2021-03-14 16:10:37'),
-(3, 5, 6, 'C', '2021-03-14 16:11:39'),
-(3, 5, 7, 'R', '2021-03-14 16:47:55'),
-(3, 5, 8, 'R', '2021-03-14 16:50:55'),
-(3, 5, 9, 'R', '2021-03-14 17:06:15'),
-(3, 5, 10, 'R', '2021-03-14 17:08:46'),
-(3, 5, 11, 'R', '2021-03-14 17:10:56'),
-(3, 5, 13, 'C', '2021-03-19 07:54:18'),
-(3, 5, 14, 'R', '2021-03-19 07:56:30'),
-(3, 5, 15, 'R', '2021-03-19 07:59:47'),
-(3, 5, 16, 'R', '2021-03-20 14:01:59'),
-(3, 5, 17, 'R', '2021-03-25 15:29:31'),
-(3, 5, 18, 'R', '2021-04-21 11:20:45'),
-(3, 5, 19, 'R', '2021-04-21 11:24:56'),
-(3, 6, 1, 'R', '2021-04-27 07:51:13'),
-(3, 6, 2, 'R', '2021-04-27 07:57:33');
+(3, 6, 1, 'R', '2021-05-11 13:58:02'),
+(44, 6, 2, 'R', '2021-05-11 13:58:21'),
+(52, 6, 4, 'R', '2021-05-11 13:59:54'),
+(63, 6, 3, 'R', '2021-05-11 13:59:10');
 
 -- --------------------------------------------------------
 
@@ -199,8 +181,8 @@ INSERT INTO `doctor` (`id`, `nic`, `time`, `s_id`) VALUES
 (9, '821048012v', '16:00', 3),
 (33, '981372940v', '20:30', 2),
 (35, '883581099v', '16:00', 2),
-(45, '993581089V', '15:30', 4),
-(53, '728131048v', '16:00', 6);
+(53, '728131048v', '16:00', 6),
+(54, '843581089V', '16:00', 3);
 
 -- --------------------------------------------------------
 
@@ -215,13 +197,6 @@ CREATE TABLE `drprescription` (
   `pres` text NOT NULL,
   `cno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `drprescription`
---
-
-INSERT INTO `drprescription` (`id`, `pid`, `did`, `pres`, `cno`) VALUES
-(1, 3, 4, 'drug 1\r\ndrug 2', 0);
 
 -- --------------------------------------------------------
 
@@ -245,8 +220,11 @@ CREATE TABLE `drugs` (
 --
 
 INSERT INTO `drugs` (`id`, `drugsname`, `price`, `date`, `expdate`, `brands`, `country`, `Mdate`) VALUES
-(2, 'Atovaquone', '300', '2021-03-25 15:04:00', '13/03/2021', 'Sun Text', 'Japan', '13/03/2021'),
-(4, 'test2', '70,000', '2021-04-03 04:30:10', '2021-04-03T09:57', 'Test', 'Sri Lanka', '2021-04-03T09:57');
+(1, 'Atovaquone', '300', '2021-03-25 15:04:00', '13/03/2021', 'Sun Text', 'Japan', '13/03/2021'),
+(2, 'Acetaminophen', '500', '2021-04-03 04:30:10', '2021-04-03T09:57', 'Cylon Med', 'Sri Lanka', '2021-04-03T09:57'),
+(6, 'Amoxicillin', '100', '2021-05-11 13:48:43', '2021-05-04T19:20', 'Ceylon Med', 'Sri Lanka', '2021-03-16T07:20'),
+(7, 'Atorvastatin', '290', '2021-05-11 13:49:22', '2021-10-21T19:19', 'Helis', 'India', '2021-01-14T19:22'),
+(8, 'Zestril', '190', '2021-05-11 13:50:15', '2022-03-17T19:20', 'Helis', 'India', '2020-11-26T19:20');
 
 -- --------------------------------------------------------
 
@@ -265,8 +243,8 @@ CREATE TABLE `lab` (
 --
 
 INSERT INTO `lab` (`id`, `Atype`, `Price`) VALUES
-(1, 'ECG', '1000'),
-(2, 'Lab Test(Blood or Urine)', '2000'),
+(1, 'ECG', '4000'),
+(2, 'Lab Test(Blood or Urine)', '3000'),
 (3, 'Container Pickup / Specimens Drop Off', '5000'),
 (4, 'Lab Test & ECG', '1000'),
 (5, 'Lab Test Pediatric', '6000');
@@ -291,23 +269,10 @@ CREATE TABLE `lab_apo` (
 --
 
 INSERT INTO `lab_apo` (`id`, `pid`, `did`, `type`, `date`, `time`) VALUES
-(6, 3, 4, 'Lab Test(blood or urine)', '2021-03-24', '00:18:00'),
-(7, 3, 5, 'Container Pick Up/Specimen Drop Off', '2021-03-24', '00:18:00'),
-(9, 3, 5, 'Lab Test Pediatric', '2021-03-24', '00:18:00'),
-(13, 3, 33, 'ECG', '2021-03-24', '18:01:00'),
-(16, 3, 33, 'Lab Test(blood or urine)', '2021-03-25', '19:35:00'),
-(18, 3, 33, 'Lab Test(blood or urine)', '2021-03-24', '19:35:00'),
-(19, 3, 33, 'Container Pick Up/Specimen Drop Off', '2021-03-24', '19:45:00'),
-(20, 3, 35, 'Lab Test & ECG', '2021-04-19', '10:44:00'),
-(21, 3, 35, 'Lab Test & ECG', '2021-04-19', '10:44:00'),
-(22, 3, 35, 'Container Pickup / Specimens Drop Off', '2021-04-06', '13:50:00'),
-(23, 3, 33, 'ECG', '2021-03-24', '18:01:00'),
-(24, 1, 5, 'Lab Test(Blood or Urine)', '2021-04-25', '23:45:00'),
-(25, 1, 5, 'Lab Test(Blood or Urine)', '2021-04-25', '23:47:00'),
-(26, 1, 4, 'ECG', '2021-04-25', '12:03:00'),
-(27, 3, 5, 'ECG', '2021-03-24', '18:01:00'),
-(28, 3, 5, 'ECG', '2021-03-24', '18:01:00'),
-(29, 3, 5, 'ECG', '2021-03-24', '18:01:00');
+(31, 3, 4, 'ECG', '2021-05-04', '11:13:00'),
+(33, 3, 5, 'Container Pickup / Specimens Drop Off', '2021-03-24', '00:18:00'),
+(34, 44, 5, 'ECG', '2021-03-24', '00:18:00'),
+(35, 3, 6, 'Lab Test(Blood or Urine)', '2021-05-12', '19:34:00');
 
 -- --------------------------------------------------------
 
@@ -351,10 +316,8 @@ CREATE TABLE `prescription` (
 --
 
 INSERT INTO `prescription` (`id`, `doc_name`, `pname`, `drug_name`, `tdate`, `totalprice`) VALUES
-(1, 'SANJANA SULAKSHANA WITHARANAGE', 'Kavindya', 'Abacavir /-225,Atovaquone /-300,test2 /-70,000,test1 /-70,000', '2021-04-03 05:52:00', 550),
-(2, 'SANJANA SULAKSHANA WITHARANAGE', 'Kavindya', 'Abacavir /-225,Atovaquone /-300', '2021-04-03 04:04:14', 100),
-(5, 'M Rajapakshe', 'SANJANA SULAKSHANA WITHARANAGE', 'Abacavir /-225,Atovaquone /-300,test2 /-70,000,test1 /-70,000', '2021-04-03 04:49:01', 334),
-(6, 'M Rajapakshe', 'SANJANA SULAKSHANA WITHARANAGE', 'Abacavir /-220,Atovaquone /-300,test2 /-70,000,test1 /-70,000', '2021-04-06 05:05:06', 500);
+(1, 'Dayamanthi Pieris', 'SANJANA SULAKSHANA WITHARANAGE', 'Atovaquone /-300,test2 /-70,000', '2021-04-03 05:52:00', 5500),
+(2, 'SANJANA SULAKSHANA WITHARANAGE', 'Kavindya', 'Abacavir /-225,Atovaquone /-300', '2021-04-03 04:04:14', 100);
 
 -- --------------------------------------------------------
 
@@ -375,9 +338,7 @@ CREATE TABLE `provide_amb` (
 --
 
 INSERT INTO `provide_amb` (`number`, `name`, `phone`, `lan`, `lat`) VALUES
-('CAM-8811', 'SANJANA', 771994147, 80.1444, 6.81981),
-('HU-5690', 'SANJANA', 771994147, 10, 22),
-('KA-8841', 'SANJANA', 771994147, 80.0331, 6.827);
+('KK-8841', 'Indula', 771191191, 80.0331, 6.83414);
 
 -- --------------------------------------------------------
 
@@ -396,9 +357,9 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`id`, `price`, `status`) VALUES
-(1, 7500, 'B'),
+(1, 7500, 'F'),
 (2, 7500, 'F'),
-(3, 7500, 'F'),
+(3, 7500, 'B'),
 (4, 10000, 'B'),
 (5, 10000, 'F'),
 (6, 10000, 'F'),
@@ -548,8 +509,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `telephone`, `email`, `password`, `nic`, `gender`, `age`, `address`, `type`, `status`) VALUES
 (1, 'webmaster', 0, 'webmaster@horizen.lk', '21232F297A57A5A743894A0E4A801FC3', '0', 'M', 0, '0', 'W', 'A'),
-(2, 'manuja', 777833833, 'manuja@gmail.com', 'A6A279ABE0B97FF31094A6B074DAFBC5', '997603346V', 'M', 22, '15/1, Sellige Watta, Ampitiya, Kandy, Sri Lanka.', 'S', 'N'),
-(3, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 'sanjanasulakshanawitharanage@gmail.com', '47E68A6A7F8C3F0589C37C68237880EB', '993581089V', 'M', 22, '15/1, Sellige Wattha', 'P', 'A'),
+(2, 'manuja Mallikarachchi', 777833833, 'manuja@gmail.com', 'A6A279ABE0B97FF31094A6B074DAFBC5', '997603346V', 'M', 22, '15/1, Sellige Watta, Ampitiya, Kandy, Sri Lanka.', 'S', 'N'),
+(3, 'Sanjana Sulakshana', 771994147, 'sanjanasulakshanawitharanage@gmail.com', '47E68A6A7F8C3F0589C37C68237880EB', '993581089V', 'M', 22, '15/1, Sellige Wattha', 'P', 'A'),
 (4, 'Damitha Munasinghe', 778162644, 'munasinge@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '40000000000', 'M', 37, 'lovers steet, peradeniya', 'D', 'A'),
 (5, 'Mahinda Rajapakshe', 0, 'mahinda@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '00000000000', 'M', 78, 'hambanthota', 'D', 'A'),
 (6, 'Pavithra Wanniarchchi', 778389389, 'pavithra@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '721048012v', 'F', 60, '712/4, cross street, eheliyagoda.', 'D', 'A'),
@@ -558,12 +519,14 @@ INSERT INTO `users` (`id`, `name`, `telephone`, `email`, `password`, `nic`, `gen
 (9, 'Hirunika Premachandra', 775628261, 'hirunka@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '821048012v', 'F', 36, '93, bakers street, colombo', 'D', 'A'),
 (33, 'Indula Bandara', 771876223, 'indulabandara73@gmail.com', 'C01DAE268A171DEF88259463739BD8FE', '981372940v', 'M', 23, '1st lane, kurunagala.', 'D', 'N'),
 (35, 'Namal Rajapaksha', 771191191, 'namal@gmail.com', '21232F297A57A5A743894A0E4A801FC3', '883581099v', 'M', 39, '1st lane, madamulana, hambanthota', 'D', 'A'),
-(44, 'Sulakshana Witharanage', 771994147, 's.witharanddage@yahoo.com', '2DE5BC15BD50896C961E6C0246675E65', '993581049V', 'M', 22, '15/1, Sellige Wattha', 'P', 'A'),
-(45, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 'sswitharanage@students.nsbm.lk', '21232F297A57A5A743894A0E4A801FC3', '897603346V', 'M', 32, '15/1, Sellige Wattha', 'D', 'N'),
-(46, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 'sswitharanage@students.nsbm.ac.lk', '21232F297A57A5A743894A0E4A801FC3', '899603346V', 'M', 32, '15/1, Sellige Wattha', 'S', 'N'),
-(48, 'Kavindya', 771994147, 'kavindyasandeepani1999@gmail.com', '82D747399B8A509BC86A01F2DF898755', '997581089V', 'M', 22, '1st lane, aswaddum uyana, millavitiya', 'P', 'N'),
-(52, 'SANJANA SULAKSHANA WITHARANAGE', 771994147, 's.witharanage@yahoo.com', '0354D89C28EC399C00D3CB2D094CF093', '993566089V', 'M', 22, '15/1', 'P', 'A'),
-(53, 'Dayamanthi Pieris', 771364147, 'dayamanthi@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '728131048v', 'M', 49, '1st lane, pallegama para ,galagedara', 'D', 'N');
+(44, 'Kadun Bandara', 771994147, 's.witharanddage@yahoo.com', '2DE5BC15BD50896C961E6C0246675E65', '993581049V', 'M', 22, '15/1, Sellige Wattha', 'P', 'A'),
+(46, 'Sandun Bandara', 771994147, 'sswitharanage@students.nsbm.ac.lk', '21232F297A57A5A743894A0E4A801FC3', '899603346V', 'M', 32, '15/1, Sellige Wattha', 'S', 'N'),
+(48, 'Kavindya Sandeepanie', 771994147, 'kavindyasandeepani1999@gmail.com', '82D747399B8A509BC86A01F2DF898755', '997581089V', 'M', 22, '1st lane, aswaddum uyana, millavitiya', 'P', 'N'),
+(52, 'Sulakshana Rajapaksha', 771994147, 's.wiitharanage@yahoo.com', '0354D89C28EC399C00D3CB2D094CF093', '993566089V', 'M', 22, '15/1', 'P', 'A'),
+(53, 'Dayamanthi Pieris', 771364147, 'dayamanthi@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '728131048v', 'M', 49, '1st lane, pallegama para ,galagedara', 'D', 'N'),
+(54, 'Harin Fernando', 771882728, 'harin@horizon.lk', '21232F297A57A5A743894A0E4A801FC3', '843581089V', 'M', 37, '1st lane, new town, badulla', 'D', 'A'),
+(63, 'Sanjula Ranasinghe', 771994147, 's.witharanage@yahoo.com', '0B3E0DD95F943F51B85555ABD36B9462', '981581089V', 'M', 23, '15/1, Sellige Wattha', 'P', 'N'),
+(64, 'Sajana Perera', 771994147, 'sanjansanjanaa@gmail.com', 'FCE3A80DCF6E6900F5F8C992043E81F2', '983582089V', 'M', 23, '15/1', 'P', 'N');
 
 --
 -- Triggers `users`
@@ -605,7 +568,13 @@ CREATE TABLE `verify` (
 
 INSERT INTO `verify` (`email`, `key`, `exp`) VALUES
 ('sanjanaefeflakshanawitharanage@gmail.com', '88A591C87D5582F725FC031A71270096', '2021-04-22'),
-('dayamanthi@horizon.lk', '5179A34444AEBB8F3E77079212E6E3DA', '2021-04-26');
+('dayamanthi@horizon.lk', '5179A34444AEBB8F3E77079212E6E3DA', '2021-04-26'),
+('sanjanasulakshanawitharanage@gmail.com', '4FE87BDA579E7C5ED24F4BF3D8B7C278', '2021-04-28'),
+('s.witharanage@yahoo.com', 'D7843F6972776C5EF1FA065CD90DC08C', '2021-04-29'),
+('s.witharanage@yahoo.com', 'D7843F6972776C5EF1FA065CD90DC08C', '2021-04-29'),
+('s.witharanage@yahoo.com', 'D7843F6972776C5EF1FA065CD90DC08C', '2021-04-29'),
+('s.witharanage@yahoo.com', 'D7843F6972776C5EF1FA065CD90DC08C', '2021-04-29'),
+('sanjansanjanaa@gmail.com', '4DFA08A06B43DADAB9BA75A9F5F8A5FD', '2021-04-29');
 
 -- --------------------------------------------------------
 
@@ -760,7 +729,7 @@ ALTER TABLE `ward_types`
 -- AUTO_INCREMENT for table `admit`
 --
 ALTER TABLE `admit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `beds`
@@ -772,25 +741,25 @@ ALTER TABLE `beds`
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `drprescription`
 --
 ALTER TABLE `drprescription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `drugs`
 --
 ALTER TABLE `drugs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `lab_apo`
 --
 ALTER TABLE `lab_apo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `payment`
@@ -820,7 +789,7 @@ ALTER TABLE `specelist`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `ward_types`
