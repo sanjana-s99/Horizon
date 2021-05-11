@@ -88,7 +88,7 @@
             <% if(request.getParameter("spe")==null && request.getParameter("doc")==null){ %>
             <div class="flex-container">
             <select  class="js-example-basic-single" style="width: 50%" name="doc" onchange="GetSelectedValue()" id="doc">
-                <option>Select Doctor</option>
+                <option>Select Speciality</option>
 
                 <%
                     try {
