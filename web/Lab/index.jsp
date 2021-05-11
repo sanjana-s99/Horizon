@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Horizen - Lab</title>
         <link rel="stylesheet" href="../styles/finddoc.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="../scripts/nav.js"></script>
@@ -25,9 +25,9 @@
         <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
             <a href="../index.jsp">Home</a>
-            <a href="channel.jsp">Channel</a>
-            <a href="../Lab/" class="active">Lab</a>
-            <a href="../phamacy/index.jsp">Pharmacy</a>
+            <a href="../patients/">Channel</a>
+            <a href="index.jsp" class="active">Lab</a>
+            <a href="../phamacy/productsViews/">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){

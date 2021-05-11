@@ -60,7 +60,7 @@ dbCon con = new dbCon();
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Staff - Add Drugs</title>
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="../styles/staffchannel.css">
@@ -76,9 +76,9 @@ dbCon con = new dbCon();
                 if(type!=null){
                     if(type.equals("S")){
             %>
-            <a href="index.jsp" class="active">Staff Dashboard</a>
+            <a href="../staff/index.jsp" class="active">Staff Dashboard</a>
             <%}else if(type.equals("W")){%>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../staff/index.jsp" class="active">Staff Dashboard</a>
             <a href="../admin/main.jsp">Admin Dashboard</a>
             <%}}%>
             <%if(uid != null){

@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Registration</title>
+        <title>Horizen - Registration</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
@@ -63,7 +63,7 @@
             <%
                 }else{
         %>
-            <a href="register.jsp" style="float:right">Register</a>
+            <a href="register.jsp"  class="active"style="float:right">Register</a>
             <a href="login.jsp" style="float:right">Login</a>
             <%}%>
 

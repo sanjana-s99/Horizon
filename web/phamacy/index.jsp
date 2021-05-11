@@ -113,7 +113,7 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
 <html >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Staff - Pharmacy</title>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
         <link rel="stylesheet" href="../styles/staffchannel.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -148,9 +148,9 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                 if(type!=null){
                     if(type.equals("S")){
             %>
-            <a href="index.jsp" class="active">Staff Dashboard</a>
+            <a href="../staff.index.jsp" class="active">Staff Dashboard</a>
             <%}else if(type.equals("W")){%>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="../staff/index.jsp" class="active">Staff Dashboard</a>
             <a href="../admin/main.jsp">Admin Dashboard</a>
             <%}}%>
             <%if(uid != null){

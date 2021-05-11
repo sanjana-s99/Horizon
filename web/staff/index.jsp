@@ -52,15 +52,15 @@
                 if(type!=null){
                     if(type.equals("P")){
             %>
-            <a href="patients/">Channel</a>
-            <a href="Lab/">Lab</a>
-            <a href="phamacy/productsViews/">Pharmacy</a>
+            <a href="../patients/">Channel</a>
+            <a href="../Lab/">Lab</a>
+            <a href="../phamacy/productsViews/">Pharmacy</a>
             <%
                     }else if(type.equals("S")){
             %>
             <a href="index.jsp" class="active">Staff Dashboard</a>
             <%}else if(type.equals("W")){%>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="index.jsp" class="active">Staff Dashboard</a>
             <a href="../admin/main.jsp">Admin Dashboard</a>
             <%}}%>
             <%if(id != null){

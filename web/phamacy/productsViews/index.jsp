@@ -13,7 +13,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>Pharmacy</title>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Slabo+27px|Yesteryear'>
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
@@ -26,28 +26,28 @@
 <body>
 <div class="topnav" id="myTopnav">
             <div class="toptitle">Horizon Hospitals</div>
-            <a href="../index.jsp">Home</a>
-            <a href="../patients/">Channel</a>
-            <a href="../Lab/">Lab</a>
-            <a href="../phamacy/productsViews/">Pharmacy</a>
+            <a href="../../index.jsp">Home</a>
+            <a href="../../patients/">Channel</a>
+            <a href="../../Lab/">Lab</a>
+            <a href="index.jsp" class="active">Pharmacy</a>
             <%
                 if(type!=null){
                     if(type.equals("S")){
             %>
-            <a href="index.jsp" class="active">Staff Dashboard</a>
+            <a href="../../staff/index.jsp">Staff Dashboard</a>
             <%}else if(type.equals("W")){%>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
-            <a href="../admin/main.jsp">Admin Dashboard</a>
+            <a href="../../staff/index.jsp">Staff Dashboard</a>
+            <a href="../../admin/main.jsp">Admin Dashboard</a>
             <%}}%>
             <%if(uid != null){
                 %>
             <a style="float:right">Welcome <%=uname%></a>
-            <a href="../logout" style="float:right">Logout</a>
+            <a href="../../logout" style="float:right">Logout</a>
             <%
                 }else{
         %>
-            <a href="../register.jsp" style="float:right">Register</a>
-            <a href="../login.jsp" style="float:right">Login</a>
+            <a href="../../register.jsp" style="float:right">Register</a>
+            <a href="../../login.jsp" style="float:right">Login</a>
             <%}%>
 
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -76,7 +76,7 @@
  
   <div class="container">
       <img src="download.png"  style="width:100%">
-                                      <h1> drugsName - <%=rs.getString("drugsname")%></h1>
+                                      <h1><%=rs.getString("drugsname")%></h1>
                                       <h4>Price -<%=rs.getString("price")%></h4>
                                       <h4>ExpireDate -<%=rs.getString("expdate")%></h4>
                                       <h4>BrandsName -<%=rs.getString("brands")%></h4>

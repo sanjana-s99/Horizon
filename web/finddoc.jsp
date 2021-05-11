@@ -9,9 +9,6 @@
     String id = (String)session.getAttribute("id");
     String type = (String)session.getAttribute("type");
     String name = (String)session.getAttribute("name");
-    if(id == null){
-        response.sendRedirect("login.jsp");
-    }
     
 %>
 <!DOCTYPE html>

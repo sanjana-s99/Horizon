@@ -26,7 +26,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Staff - Discharge</title>
         <link rel="stylesheet" href="../styles/staffchannel.css">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -63,9 +63,9 @@
                 if(type!=null){
                     if(type.equals("S")){
             %>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="index.jsp" class="active">Staff Dashboard</a>
             <%}else if(type.equals("W")){%>
-            <a href="../staff/index.jsp">Staff Dashboard</a>
+            <a href="index.jsp" class="active">Staff Dashboard</a>
             <a href="../admin/main.jsp">Admin Dashboard</a>
             <%}}%>
             <%if(id != null){
@@ -90,7 +90,7 @@
                 <th>Doctor</th>
                 <th>Guardians Name</th>
                 <th>Guardians Telephone</th>
-                <th>Admition Time</th>
+                <th>Admittion Time</th>
                 <th>Room No</th>
                 <th>Change Room</th>
                 <th>action</th>
