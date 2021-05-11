@@ -287,7 +287,7 @@ pst = con.createConnection().prepareStatement("insert into prescription(doc_name
                             <td>Drug name</td>
                             
                             
-                  <td><select name="drug_name"  class="form-control js-example-basic-single" style="width: 300%"> 
+                  <td><select name="drug_name"  class="form-control js-example-basic-single" style="width: 500px" size="10" multiple="multiple" tabindex="1"> 
                          <%
                          ResultSet rss11;
 
